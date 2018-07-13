@@ -1,5 +1,7 @@
 
--- occurrences
+-- occurrences/distribution records (!!! spelling oCCuRRence)
+
+DROP TABLE IF EXISTS occurrences ;
 
 CREATE TABLE occurrences (
 	id_uuid numeric PRIMARY KEY,
@@ -26,13 +28,20 @@ CREATE TABLE occurrences (
 	doi text, -- OPTIONAL: doi for the literature reference
 	associated_Media text, -- OPTIONAL: upload images to flickr (upload API) then put the link here OR let people add the url to the image
 	habitat text,-- vocabulary ???? EMODNet
+	minimum_depth_in_meters numeric,
+	maximum_depth_in_meters numeric,
     created_by_user numeric NOT NULL,
 	creation_date timestamp NOT NULL,
 	validated_by_user numeric,
 	validation_date timestamp,
 	last_modified_by_user numeric,
 	last_modification_date timestamp
-)
+);
+
+-- users and logins (normalization and several tables needed, with encrytion,...)
+
+DROP TABLE IF EXISTS users;
+
 
 CREATE TABLE users (
 	id numeric PRIMARY KEY,
@@ -40,12 +49,14 @@ CREATE TABLE users (
 	first_name text NOT NULL,
 	username text NOT NULL,
 	password text NOT NULL,
-)
+	email text NOT NULL,
+	institution text,
+	scope_of_expertise text
+);
 
 
 
 
-)
 
 
--- logins
+
