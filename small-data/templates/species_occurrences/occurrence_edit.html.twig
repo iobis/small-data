@@ -1,31 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Create a new occurrence for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
-    {% form_theme formOccurrence 'bootstrap_4_layout.html.twig' %}
+    <h1>Edit</i></h1>
+    {% form_theme formOccurrenceEdit 'bootstrap_4_layout.html.twig' %}
 
-    {{ form_start(formOccurrence) }}
+    {{ form_start(formOccurrenceEdit) }}
 
-    {{ form_row(formOccurrence.eventDate) }}
-    {{ form_row(formOccurrence.vernacularName,
+    {{ form_row(formOccurrenceEdit.eventDate) }}
+    {{ form_row(formOccurrenceEdit.species) }}
+    {{ form_row(formOccurrenceEdit.vernacularName,
         {'attr':{'placeholder': "Given name at collection(optional)"}}) }}
-    {{ form_row(formOccurrence.scientificNameAtCollection,
+    {{ form_row(formOccurrenceEdit.scientificNameAtCollection,
         {'label':"Original scientific name given during the collection", 'attr':{'placeholder': "(optional)"}}) }}
-    {{ form_row(formOccurrence.decimalLatitude,
+    {{ form_row(formOccurrenceEdit.decimalLatitude,
         {'label':"Latitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -90 to 90"}}) }}
-    {{ form_row(formOccurrence.decimalLongitude,
+    {{ form_row(formOccurrenceEdit.decimalLongitude,
         {'label':"Longitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -180 to 180"}}) }}
-    {{ form_row(formOccurrence.locality,
+    {{ form_row(formOccurrenceEdit.locality,
         {'attr':{'placeholder': "Name of the location (optional)"}}) }}
-    {{ form_row(formOccurrence.locationId,
+    {{ form_row(formOccurrenceEdit.locationId,
         {'label':"Marine region identifier ( or any location ID)",'attr':{'placeholder': "(optional)"}}) }}
-    {{ form_row(formOccurrence.occurrenceRemarks,
+    {{ form_row(formOccurrenceEdit.occurrenceRemarks,
         {'label':"Remarks (e.g., stranded specimen,...",'attr':{'placeholder': "(optional)"}}) }}
-    {{ form_row(formOccurrence.associatedMediaUrl,
+    {{ form_row(formOccurrenceEdit.associatedMediaUrl,
         {'label':"URL for any media to the particular observation", 'attr':{'placeholder':"(optional)"}}) }}
 
     <button type="submit" class="btn btn-success">Submit</button>
 
-    {{ form_end(formOccurrence) }}
+    {{ form_end(formOccurrenceEdit) }}
 
 {% endblock %}

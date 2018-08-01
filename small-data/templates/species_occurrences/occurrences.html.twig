@@ -2,24 +2,28 @@
 
 {% block body %}
     <h1>Occurrences for {{ singleSpecies.speciesNameWorms }}</h1>
+    {#<a href="{{ path('occurrence_create', {'worms_aphia_id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
+
     <a href="{{ path('occurrence_create', {'id':singleSpecies.id } )}}" class="btn btn-primary">Create a new occurrence</a>
+
+
 <table>
-
-
     <tr>
-        <th>Year  </th>
+        <th>Date  </th>
         <th>Locality  </th>
         <th>Longitude  </th>
         <th>Latitude  </th>
+        <th></th>
 
     </tr>
 
     {% for occurrence in occurrences %}
     <tr>
-        <td>{{occurrence.eventDate | date ('Y') }}</td>
+        <td>{{occurrence.eventDate | date ('d/m/Y') }}</td>
         <td>{{ occurrence.locality }}</td>
         <td>{{ occurrence.decimalLongitude }}</td>
         <td>{{ occurrence.decimalLatitude }}</td>
+        <td><a href="{{ path('occurrence_edit', {'id':occurrence.id } )}}" class="btn btn-primary">Edit</a></td>
  {#'id':occurrence.id#}
     </tr>
     {% endfor %}
