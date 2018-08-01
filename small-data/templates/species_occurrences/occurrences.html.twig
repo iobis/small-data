@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Occurrences for {{ singleSpecies.speciesNameWorms }}</h1>
+    <h1>Occurrences for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
     {#<a href="{{ path('occurrence_create', {'worms_aphia_id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
 
     <a href="{{ path('occurrence_create', {'id':singleSpecies.id } )}}" class="btn btn-primary">Create a new occurrence</a>
@@ -25,7 +25,7 @@
         <td>{{ occurrence.decimalLongitude }}</td>
         <td>{{ occurrence.decimalLatitude }}</td>
         <td><a href="{{ path('occurrence_edit', {'id':occurrence.id } )}}" class="btn btn-primary">Edit</a></td>
- {#'id':occurrence.id#}
+
     </tr>
         {% endif %}
     {% endfor %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Occurrence;
 use App\Entity\Species;
+use App\Form\OccurrenceType;
 use App\Repository\OccurrenceRepository;
 use App\Repository\SpeciesRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -34,7 +35,7 @@ class SmallDataController extends Controller
     public function indexSpecies(SpeciesRepository $speciesRepository)
     {
 
-        $species = $speciesRepository->findAll();
+        $species = $speciesRepository->findBy([], ['speciesNameWorms' => 'ASC']);
 
         return $this->render('species_occurrences/species.html.twig', [
 //            'controller_name' => 'SmallDataController',
@@ -122,7 +123,7 @@ class SmallDataController extends Controller
      * @Route("{id}/edit_occurrence", name="occurrence_edit")
      */
     public function formOccurrenceEdit(Occurrence $occurrence, Request $request, ObjectManager $objectManager){
-
+//        $form = $this->createForm(OccurrenceType::class, $occurrence);
         $form = $this->createFormBuilder($occurrence)
             ->add('eventDate',DateType::class, [
                 'widget'=>'single_text'
