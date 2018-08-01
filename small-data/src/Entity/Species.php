@@ -29,7 +29,7 @@ class Species
     private $speciesNameWorms;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Occurrence", mappedBy="species")
+     * @ORM\OneToMany(targetEntity="App\Entity\Occurrence", mappedBy="species", orphanRemoval=true)
      */
     private $occurrences;
 

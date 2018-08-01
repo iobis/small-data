@@ -18,6 +18,7 @@
     </tr>
 
     {% for occurrence in occurrences %}
+        {% if occurrence.species == singleSpecies %}
     <tr>
         <td>{{occurrence.eventDate | date ('d/m/Y') }}</td>
         <td>{{ occurrence.locality }}</td>
@@ -26,6 +27,7 @@
         <td><a href="{{ path('occurrence_edit', {'id':occurrence.id } )}}" class="btn btn-primary">Edit</a></td>
  {#'id':occurrence.id#}
     </tr>
+        {% endif %}
     {% endfor %}
 </table>
 
