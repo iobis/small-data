@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1><i>{{ singleSpecies.speciesNameWorms }}</i></h1>
+    <h3>World register of marine species ID {{ singleSpecies.wormsAphiaId }}</h3>
+    <img src="http://placehold.it/300x300" alt="">
+
+    <a href="{{ path('occurrences_list', {'id': singleSpecies.id}) }}" class="btn btn-primary">Occurrences</a>
+
+{% endblock %}

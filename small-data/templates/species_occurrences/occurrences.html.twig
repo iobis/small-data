@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Occurrences for {{ singleSpecies.speciesNameWorms }}</h1>
+    <a href="{{ path('occurrence_create', {'id':singleSpecies.id } )}}" class="btn btn-primary">Create a new occurrence</a>
+<table>
+
+
+    <tr>
+        <th>Year  </th>
+        <th>Locality  </th>
+        <th>Longitude  </th>
+        <th>Latitude  </th>
+
+    </tr>
+
+    {% for occurrence in occurrences %}
+    <tr>
+        <td>{{occurrence.eventDate | date ('Y') }}</td>
+        <td>{{ occurrence.locality }}</td>
+        <td>{{ occurrence.decimalLongitude }}</td>
+        <td>{{ occurrence.decimalLatitude }}</td>
+ {#'id':occurrence.id#}
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+
+{% endblock %}
