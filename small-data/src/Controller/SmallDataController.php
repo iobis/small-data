@@ -82,7 +82,7 @@ class SmallDataController extends Controller
     public function formOccurrence(Species $species, Request $request, ObjectManager $objectManager){
         $occurrence = new Occurrence();
         $form = $this->createForm(OccurrenceType::class, $occurrence);
-//        $form = $this->createFormBuilder($occurrence)>  add add ->add('associatedMediaUrl')->getForm();
+
 
         $form->handleRequest($request);
 
@@ -102,14 +102,13 @@ class SmallDataController extends Controller
     }
 
     /**
-     * @Route("occurrence/{id}/edit", name="occurrence_edit")
+     * @Route("occurrence/{wormsAphiaId}/{id}/edit", name="occurrence_edit")
      */
-    public function formOccurrenceEdit(Occurrence $occurrence, Request $request, ObjectManager $objectManager){
+    public function formOccurrenceEdit(Occurrence $occurrence , Request $request, ObjectManager $objectManager){
 
-
-        $form = $this->createForm(OccurrenceType::class, $occurrence)
+        $form = $this->createForm(OccurrenceType::class, $occurrence);
                 // all the fields ((not including the following are in OccurrenceType
-                    ->add('species', EntityType::class, [
+              $form      ->add('species', EntityType::class, [
                         'class'=>Species::class,
                         'choice_label'=> 'speciesNameWorms'
         ]);
@@ -118,15 +117,13 @@ class SmallDataController extends Controller
         if($form->isSubmitted() && $form->isValid()) {
             $objectManager->persist($occurrence);
             $objectManager->flush();
-            return $this->redirectToRoute('occurrences_list', ['id'=> $occurrence->getSpecies()->getId()]);
+            return $this->redirectToRoute('occurrences_list', ['wormsAphiaId'=> $occurrence->getSpecies()->getWormsAphiaId()]);
         }
 
         return $this->render('species_occurrences/occurrence_edit.html.twig',[
             'occurrence' => $occurrence,
             'formOccurrenceEdit'=> $form->createView()
         ]);
-
-}
-
+    }
 
 }

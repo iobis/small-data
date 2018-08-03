@@ -13,6 +13,7 @@
         <th>Locality  </th>
         <th>Longitude  </th>
         <th>Latitude  </th>
+        <th>Species (WoRMS)</th>
         <th></th>
 
     </tr>
@@ -24,7 +25,8 @@
         <td>{{ occurrence.locality }}</td>
         <td>{{ occurrence.decimalLongitude }}</td>
         <td>{{ occurrence.decimalLatitude }}</td>
-        <td><a href="{{ path('occurrence_edit', {'id':occurrence.id } )}}" class="btn btn-primary">Edit</a></td>
+        <td>{{ occurrence.species.speciesNameWorms }}</td>
+        <td><a href="{{ path('occurrence_edit', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Edit</a></td>
 
     </tr>
         {% endif %}
