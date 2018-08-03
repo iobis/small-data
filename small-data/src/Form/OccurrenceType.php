@@ -26,11 +26,11 @@ class OccurrenceType extends AbstractType
             ->add('locationId')
             ->add('occurrenceRemarks')
             ->add('associatedMediaUrl')
-            ->add('occurrenceCreatedAt')
-            ->add('species', EntityType::class, [
-                'class'=>Species::class,
-                'choice_label'=> 'speciesNameWorms'
-            ])
+//            ->add('occurrenceCreatedAt')
+//            ->add('species', EntityType::class, [
+//                'class'=>Species::class,
+//                'choice_label'=> 'speciesNameWorms'
+//            ])
         ;
     }
 

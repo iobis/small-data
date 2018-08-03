@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Occurrences for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
-    {#<a href="{{ path('occurrence_create', {'worms_aphia_id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
+    {#<a href="{{ path('occurrence_create', {'id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
 
     <a href="{{ path('occurrence_create', {'id':singleSpecies.id } )}}" class="btn btn-primary">Create a new occurrence</a>
 

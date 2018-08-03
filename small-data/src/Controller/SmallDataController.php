@@ -9,13 +9,13 @@ use App\Repository\OccurrenceRepository;
 use App\Repository\SpeciesRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
+
 
 
 
@@ -44,23 +44,28 @@ class SmallDataController extends Controller
     }
 
 
-    //     @Entity("species", expr="repository.find(worms_aphia_id)")...CHECK TO MAKE IT WORK with {worms_aphia_id)
-
     /**
-     * @Route("/species_{id}/details", name="species_details")
+     * @Route("/species/{wormsAphiaId}/details/", name="species_details")
      */
-    public function detailSpecies(Species $species)
+    public function detailSpecies(Species $species) // $wormsAphiaId
     {
 
-        return $this->render('species_occurrences/species_details.html.twig', [
+//        $species = $speciesRepository->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
+//        $species = $this->getDoctrine()->getRepository(Species::class)
+//                        ->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
+
+
+    return $this->render('species_occurrences/species_details.html.twig', [
             'controller_name' => 'SmallDataController',
             'singleSpecies' => $species
         ]);
     }
 
     /**
-     * @Route("/species_{id}/occurrences", name="occurrences_list")
+     * @Route("/species/{wormsAphiaId}/occurrences/",name="occurrences_list")
      */
+//* @Route("/species/occurrences_{wormsAphiaId}/", name="occurrences_list")
+
     public function occurrencesSpecies(Species $species, OccurrenceRepository $occurrenceRepository)
     {
         $occurrences = $occurrenceRepository->findBy([], ['eventDate' => 'ASC']);
@@ -71,44 +76,22 @@ class SmallDataController extends Controller
         ]);
     }
 
-//    /**
-//     * @Route("{worms_aphia_id}/create_occurrence", name="occurrence_create")
-//     *
-//     *
-//     */
-//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-
     /**
      * @Route("{id}/create_occurrence", name="occurrence_create")
      */
     public function formOccurrence(Species $species, Request $request, ObjectManager $objectManager){
         $occurrence = new Occurrence();
-
-        $form = $this->createFormBuilder($occurrence)
-                    ->add('eventDate',DateType::class, [
-                        'widget'=>'single_text'
-                    ])
-                    ->add('vernacularName')
-                    ->add('scientificNameAtCollection')
-                    ->add ('decimalLatitude')
-                    ->add ('decimalLongitude')
-                    ->add('locality')
-                    ->add('locationId')
-                    ->add('occurrenceRemarks')
-                    ->add('associatedMediaUrl')
-                    ->getForm();
+        $form = $this->createForm(OccurrenceType::class, $occurrence);
+//        $form = $this->createFormBuilder($occurrence)>  add add ->add('associatedMediaUrl')->getForm();
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $occurrence->setOccurrenceCreatedAt(new \DateTime())
                         ->setSpecies($species);
-
-
             $objectManager->persist($occurrence);
             $objectManager->flush();
             return $this->redirectToRoute('occurrences_list', ['id'=> $species->getId()]);
-
             ;
         }
 
@@ -116,44 +99,26 @@ class SmallDataController extends Controller
             'singleSpecies' => $species,
             'formOccurrence'=> $form->createView()
         ]);
-
     }
 
     /**
-     * @Route("{id}/edit_occurrence", name="occurrence_edit")
+     * @Route("occurrence/{id}/edit", name="occurrence_edit")
      */
     public function formOccurrenceEdit(Occurrence $occurrence, Request $request, ObjectManager $objectManager){
-//        $form = $this->createForm(OccurrenceType::class, $occurrence);
-        $form = $this->createFormBuilder($occurrence)
-            ->add('eventDate',DateType::class, [
-                'widget'=>'single_text'
-            ])
-            ->add('vernacularName')
-            ->add('scientificNameAtCollection')
-            ->add ('decimalLatitude')
-            ->add ('decimalLongitude')
-            ->add('locality')
-            ->add('locationId')
-            ->add('occurrenceRemarks')
-            ->add('associatedMediaUrl')
-            ->add('species', EntityType::class, [
-                'class'=>Species::class,
-                'choice_label'=> 'speciesNameWorms'
-            ])
-            ->getForm();
 
+
+        $form = $this->createForm(OccurrenceType::class, $occurrence)
+                // all the fields ((not including the following are in OccurrenceType
+                    ->add('species', EntityType::class, [
+                        'class'=>Species::class,
+                        'choice_label'=> 'speciesNameWorms'
+        ]);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-//            $occurrence->setOccurrenceCreatedAt(new \DateTime())
-//            $species = new Species;
-
-
             $objectManager->persist($occurrence);
             $objectManager->flush();
             return $this->redirectToRoute('occurrences_list', ['id'=> $occurrence->getSpecies()->getId()]);
-
-            ;
         }
 
         return $this->render('species_occurrences/occurrence_edit.html.twig',[

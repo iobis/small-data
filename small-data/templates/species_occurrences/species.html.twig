@@ -5,7 +5,8 @@
         <article>
         <h4><i>{{ singleSpecies.speciesNameWorms }}</i></h4>
             <img src="http://placehold.it/300x200" alt="">
-            <a href="{{ path('species_details', {'id' : singleSpecies.id}) }}" class="btn btn-primary">Details</a>
+            {#<a href="{{ path('species_details', {'id' : singleSpecies.id}) }}" class="btn btn-primary">Details</a>#}
+            <a href="{{ path('species_details', {'wormsAphiaId' : singleSpecies.wormsAphiaId}) }}" class="btn btn-primary">Details</a>
         </article>
 
     {% endfor %}
