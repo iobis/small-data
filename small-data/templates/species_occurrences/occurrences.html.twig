@@ -4,7 +4,7 @@
     <h1>Occurrences for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
     {#<a href="{{ path('occurrence_create', {'id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
 
-    <a href="{{ path('occurrence_create', {'id':singleSpecies.id } )}}" class="btn btn-primary">Create a new occurrence</a>
+    <a href="{{ path('occurrence_create', {'wormsAphiaId':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>
 
 
 <table>
@@ -13,8 +13,11 @@
         <th>Locality  </th>
         <th>Longitude  </th>
         <th>Latitude  </th>
-        <th>Species (WoRMS)</th>
+        {#<th>Species (WoRMS)</th>#}
+        <th>Created at </th>
         <th></th>
+        <th></th>
+
 
     </tr>
 
@@ -25,8 +28,11 @@
         <td>{{ occurrence.locality }}</td>
         <td>{{ occurrence.decimalLongitude }}</td>
         <td>{{ occurrence.decimalLatitude }}</td>
-        <td>{{ occurrence.species.speciesNameWorms }}</td>
-        <td><a href="{{ path('occurrence_edit', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Edit</a></td>
+        {#<td>{{ occurrence.species.speciesNameWorms }}</td>#}
+        <td>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d H:i') }}</td>
+
+        <td><a href="{{ path('occurrence_edit', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId  } )}}" class="btn btn-primary">Edit</a></td>
+        <td><a href="{{ path('occurrence_edit_species', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId, 'mode' : "editSpecies" } )}}" class="btn btn-primary">Change species</a></td>
 
     </tr>
         {% endif %}

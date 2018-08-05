@@ -8,6 +8,7 @@ use App\Form\OccurrenceType;
 use App\Repository\OccurrenceRepository;
 use App\Repository\SpeciesRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -76,36 +77,71 @@ class SmallDataController extends Controller
         ]);
     }
 
+//    * @Entity("singleSpecies", expr="repository.find(wormsAphiaId)")
+//     * @Route("occurrence/{wormsAphiaId}/{id}/edit", name="occurrence_edit")
     /**
-     * @Route("{id}/create_occurrence", name="occurrence_create")
+     * @Route("/{wormsAphiaId}/create_occurrence", name="occurrence_create")
+     * @Route("/{wormsAphiaId}/occurrence/{id}/editFields", name="occurrence_edit")
+     * @Route("/{wormsAphiaId}/occurrence/{id}/{mode}", name="occurrence_edit_species")
      */
-    public function formOccurrence(Species $species, Request $request, ObjectManager $objectManager){
-        $occurrence = new Occurrence();
+    public function formOccurrence($wormsAphiaId, $id = null, $mode = null, Occurrence $occurrence = null,
+                                   Request $request, ObjectManager $objectManager){
+        $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
+            ->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
+
+        // At this stage, the whole $occurrence object is null...(only for route "occurrence_create")
+        //i.e. no instance, and the functions of the object cannot be accessed
+        //Therefore create an instance.
+        $flagNewOccurrence = FALSE;
+        $flagEditSpecies = FALSE;
+
+        if (!$occurrence) {
+            $flagNewOccurrence = TRUE;
+            $occurrence = new Occurrence();
+        }
+        if($mode === "editSpecies") {
+            $flagEditSpecies = TRUE;
+        }
+
         $form = $this->createForm(OccurrenceType::class, $occurrence);
+//        if (!$flagNewOccurrence) {
+//           $form->add('species', EntityType::class, [
+//               'class'=>Species::class,
+//               'choice_label'=> 'speciesNameWorms'
+//           ]);
+//        }
+            $form->handleRequest($request);
+        dump($occurrence, $singleSpecies, $request, (bool)$occurrence, $flagNewOccurrence, $mode );
 
-
-        $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $occurrence->setOccurrenceCreatedAt(new \DateTime())
-                        ->setSpecies($species);
+            if ( $flagNewOccurrence){
+            $occurrence->setOccurrenceCreatedAt(new \DateTime())->setSpecies($singleSpecies);
+            }
             $objectManager->persist($occurrence);
             $objectManager->flush();
-            return $this->redirectToRoute('occurrences_list', ['id'=> $species->getId()]);
+            return $this->redirectToRoute('occurrences_list', ['id'=> $singleSpecies->getId()]);
             ;
         }
 
         return $this->render('species_occurrences/occurrence_create.html.twig',[
-            'singleSpecies' => $species,
-            'formOccurrence'=> $form->createView()
+            'formOccurrence'=> $form->createView(),
+            'singleSpecies' => $singleSpecies,
+            'occurrence'=> $occurrence,
+            'editMode'=>$occurrence->getId()!==null,
+            'editModeSpecies'=>$flagEditSpecies
+
         ]);
     }
 
-    /**
-     * @Route("occurrence/{wormsAphiaId}/{id}/edit", name="occurrence_edit")
-     */
-    public function formOccurrenceEdit(Occurrence $occurrence , Request $request, ObjectManager $objectManager){
+//    /**
+//     * @Route("occurrence/{wormsAphiaId}/{id}/edit", name="occurrence_edit")
+//     */
+    public function formOccurrenceEdit($wormsAphiaId, Occurrence $occurrence , Request $request, ObjectManager $objectManager){
+        $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
+                        ->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
 
+        dump($occurrence, $singleSpecies);
         $form = $this->createForm(OccurrenceType::class, $occurrence);
                 // all the fields ((not including the following are in OccurrenceType
               $form      ->add('species', EntityType::class, [

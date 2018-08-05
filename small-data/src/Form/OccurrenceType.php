@@ -9,12 +9,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class OccurrenceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('species', EntityType::class, [
+                'class'=>Species::class,
+                'choice_label'=> 'speciesNameWorms'
+            ])
             ->add('eventDate',DateType::class, [
                 'widget'=>'single_text'
             ])
@@ -27,11 +33,12 @@ class OccurrenceType extends AbstractType
             ->add('occurrenceRemarks')
             ->add('associatedMediaUrl')
 //            ->add('occurrenceCreatedAt')
-//            ->add('species', EntityType::class, [
-//                'class'=>Species::class,
-//                'choice_label'=> 'speciesNameWorms'
-//            ])
+
         ;
+
+//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event){
+//
+//        });
     }
 
     public function configureOptions(OptionsResolver $resolver)

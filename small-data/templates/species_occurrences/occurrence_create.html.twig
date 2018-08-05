@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if editMode and not editModeSpecies%}
+    <h1>Edit occurrence {{ occurrence.id }} for <i>{{ singleSpecies.speciesNameWorms }} </i></h1>
+    {% elseif editMode and editModeSpecies %}
+        <h1>Edit occurrence ID {{ occurrence.id }} (<i>{{ singleSpecies.speciesNameWorms }}</i>)</h1>
+    {% elseif not editMode and not editModeSpecies%}
     <h1>Create a new occurrence for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
+    {% endif %}
+
+    {%  if editMode and not editModeSpecies %}
+        <a href="{{ path('occurrence_edit_species', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId, 'mode' : "editSpecies" } )}}" class="btn btn-primary">Change species</a>
+    {% endif %}
+
     {% form_theme formOccurrence 'bootstrap_4_layout.html.twig' %}
 
     {{ form_start(formOccurrence) }}
 
+
+
+    {% if not editModeSpecies %}
+        {% do formOccurrence.species.setRendered() %}
+        {% else %}
+            <div style="color:red; font-size: 150%">
+            {{ form_row(formOccurrence.species, {'label':"Species ( ! attribution of the occurrence record to another species)"}) }}
+            </div>
+    {% endif %}
+
+
+
     {{ form_row(formOccurrence.eventDate) }}
-    {{ form_row(formOccurrence.vernacularName,
-        {'attr':{'placeholder': "Given name at collection(optional)"}}) }}
-    {{ form_row(formOccurrence.scientificNameAtCollection,
-        {'label':"Original scientific name given during the collection", 'attr':{'placeholder': "(optional)"}}) }}
     {{ form_row(formOccurrence.decimalLatitude,
         {'label':"Latitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -90 to 90"}}) }}
     {{ form_row(formOccurrence.decimalLongitude,
         {'label':"Longitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -180 to 180"}}) }}
+    {{ form_row(formOccurrence.vernacularName,
+        {'attr':{'placeholder': "Given name at collection(optional)"}}) }}
+    {{ form_row(formOccurrence.scientificNameAtCollection,
+        {'label':"Original scientific name given during the collection", 'attr':{'placeholder': "(optional)"}}) }}
+
     {{ form_row(formOccurrence.locality,
         {'attr':{'placeholder': "Name of the location (optional)"}}) }}
     {{ form_row(formOccurrence.locationId,
@@ -23,6 +47,7 @@
         {'label':"Remarks (e.g., stranded specimen,...",'attr':{'placeholder': "(optional)"}}) }}
     {{ form_row(formOccurrence.associatedMediaUrl,
         {'label':"URL for any media to the particular observation", 'attr':{'placeholder':"(optional)"}}) }}
+
 
     <button type="submit" class="btn btn-success">Submit</button>
 
