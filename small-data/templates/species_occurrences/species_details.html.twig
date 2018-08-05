@@ -5,7 +5,7 @@
     <h3>World register of marine species ID {{ singleSpecies.wormsAphiaId }}</h3>
     <img src="http://placehold.it/300x300" alt="">
 
-    {#<a href="{{ path('occurrences_list', {'id': singleSpecies.id}) }}" class="btn btn-primary">Occurrences</a>#}
+
     <a href="{{ path('occurrences_list', {'wormsAphiaId': singleSpecies.wormsAphiaId}) }}" class="btn btn-primary">Occurrences</a>
 
 {% endblock %}

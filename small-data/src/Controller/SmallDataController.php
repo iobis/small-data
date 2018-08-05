@@ -104,12 +104,7 @@ class SmallDataController extends Controller
         }
 
         $form = $this->createForm(OccurrenceType::class, $occurrence);
-//        if (!$flagNewOccurrence) {
-//           $form->add('species', EntityType::class, [
-//               'class'=>Species::class,
-//               'choice_label'=> 'speciesNameWorms'
-//           ]);
-//        }
+
             $form->handleRequest($request);
         dump($occurrence, $singleSpecies, $request, (bool)$occurrence, $flagNewOccurrence, $mode );
 
@@ -120,11 +115,12 @@ class SmallDataController extends Controller
             }
             $objectManager->persist($occurrence);
             $objectManager->flush();
-            return $this->redirectToRoute('occurrences_list', ['id'=> $singleSpecies->getId()]);
+//            return $this->redirectToRoute('occurrences_list', ['id'=> $singleSpecies->getId()]);
+            return $this->redirectToRoute('occurrences_list', ['wormsAphiaId'=> $occurrence->getSpecies()->getWormsAphiaId()]);
             ;
         }
 
-        return $this->render('species_occurrences/occurrence_create.html.twig',[
+        return $this->render('species_occurrences/occurrence_create_edit.html.twig',[
             'formOccurrence'=> $form->createView(),
             'singleSpecies' => $singleSpecies,
             'occurrence'=> $occurrence,
@@ -134,32 +130,6 @@ class SmallDataController extends Controller
         ]);
     }
 
-//    /**
-//     * @Route("occurrence/{wormsAphiaId}/{id}/edit", name="occurrence_edit")
-//     */
-    public function formOccurrenceEdit($wormsAphiaId, Occurrence $occurrence , Request $request, ObjectManager $objectManager){
-        $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
-                        ->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
 
-        dump($occurrence, $singleSpecies);
-        $form = $this->createForm(OccurrenceType::class, $occurrence);
-                // all the fields ((not including the following are in OccurrenceType
-              $form      ->add('species', EntityType::class, [
-                        'class'=>Species::class,
-                        'choice_label'=> 'speciesNameWorms'
-        ]);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $objectManager->persist($occurrence);
-            $objectManager->flush();
-            return $this->redirectToRoute('occurrences_list', ['wormsAphiaId'=> $occurrence->getSpecies()->getWormsAphiaId()]);
-        }
-
-        return $this->render('species_occurrences/occurrence_edit.html.twig',[
-            'occurrence' => $occurrence,
-            'formOccurrenceEdit'=> $form->createView()
-        ]);
-    }
 
 }
