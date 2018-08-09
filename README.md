@@ -27,7 +27,7 @@ Setup for running on a local machine:
 	
 6. Install some fixtures components
 
-    - Run `composer require orm-fixtures –dev`
+    - Run `composer require orm-fixtures –-dev`
     - Run `composer require fzaninotto/faker`
 
 7. Run the fixtures (src/Fixtures) to populate the database with dummy data:
