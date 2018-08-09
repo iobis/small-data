@@ -17,10 +17,10 @@ class OccurrenceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('species', EntityType::class, [
-                'class'=>Species::class,
-                'choice_label'=> 'speciesNameWorms'
-            ])
+//            ->add('species', EntityType::class, [
+//                'class'=>Species::class,
+//                'choice_label'=> 'speciesNameWorms'
+//            ])
             ->add('eventDate',DateType::class, [
                 'widget'=>'single_text'
             ])

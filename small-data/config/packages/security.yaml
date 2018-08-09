@@ -2,12 +2,35 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+        #ADDED, set the source for the security/login data
+        in_database:
+            entity:
+                class: App\Entity\Inputter
+                property: email
+#    ADDED , set the encryption algorithm for the password in the database (bcrypt cannot be reversed)
+    encoders:
+        App\Entity\Inputter:
+            algorithm: bcrypt
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+            #ADDED
+            provider: in_database  #string matching the provider name given above
+
+            form_login:
+                login_path: security_login
+                check_path: security_login
+
+            logout:
+                path: security_logout
+                target: home
+
+#    access_control:
+#        - {path: ^/editFields, roles: ROLE_USER}
 
             # activate different ways to authenticate
 

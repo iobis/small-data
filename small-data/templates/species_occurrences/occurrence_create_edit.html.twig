@@ -4,12 +4,12 @@
     {% if editMode and not editModeSpecies%}
     <h1>Edit occurrence {{ occurrence.id }} for <i>{{ singleSpecies.speciesNameWorms }} </i></h1>
     {% elseif editMode and editModeSpecies %}
-        <h1>Edit occurrence ID {{ occurrence.id }} (<i>{{ singleSpecies.speciesNameWorms }}</i>)</h1>
+        <h1>Edit species and occurrence ID {{ occurrence.id }} (<i>{{ singleSpecies.speciesNameWorms }}</i>)</h1>
     {% elseif not editMode and not editModeSpecies%}
     <h1>Create a new occurrence for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
     {% endif %}
 
-    {%  if editMode and not editModeSpecies %}
+    {% if editMode and not editModeSpecies %}
         <a href="{{ path('occurrence_edit_species', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId, 'mode' : "editSpecies" } )}}" class="btn btn-primary">Change species</a>
     {% endif %}
 
@@ -19,9 +19,7 @@
 
 
 
-    {% if not editModeSpecies %}
-        {% do formOccurrence.species.setRendered() %}
-        {% else %}
+    {% if  editModeSpecies %}
             <div style="color:red; font-size: 150%">
             {{ form_row(formOccurrence.species, {'label':"Species ( ! attribution of the occurrence record to another species)"}) }}
             </div>
@@ -34,13 +32,12 @@
         {'label':"Latitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -90 to 90"}}) }}
     {{ form_row(formOccurrence.decimalLongitude,
         {'label':"Longitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -180 to 180"}}) }}
+    {{ form_row(formOccurrence.locality,
+        {'attr':{'placeholder': "Name of the location (optional)"}}) }}
     {{ form_row(formOccurrence.vernacularName,
         {'attr':{'placeholder': "Given name at collection(optional)"}}) }}
     {{ form_row(formOccurrence.scientificNameAtCollection,
         {'label':"Original scientific name given during the collection", 'attr':{'placeholder': "(optional)"}}) }}
-
-    {{ form_row(formOccurrence.locality,
-        {'attr':{'placeholder': "Name of the location (optional)"}}) }}
     {{ form_row(formOccurrence.locationId,
         {'label':"Marine region identifier ( or any location ID)",'attr':{'placeholder': "(optional)"}}) }}
     {{ form_row(formOccurrence.occurrenceRemarks,

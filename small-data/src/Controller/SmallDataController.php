@@ -104,6 +104,12 @@ class SmallDataController extends Controller
         }
 
         $form = $this->createForm(OccurrenceType::class, $occurrence);
+        if($flagEditSpecies || $flagNewOccurrence) {
+            $form->add('species', EntityType::class, [
+                'class'=>Species::class,
+                'choice_label'=> 'speciesNameWorms'
+            ]);
+        }
 
             $form->handleRequest($request);
         dump($occurrence, $singleSpecies, $request, (bool)$occurrence, $flagNewOccurrence, $mode );
