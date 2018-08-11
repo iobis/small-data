@@ -45,3 +45,4 @@ Every time a new version of the website is pulled from the repository, please dr
 Login
   - Users are instances of the class Inputter (the name standard "user" was creating problem with the migration to PostgreSQL, as it is a reserved word)
   - To login, take one email address that have been generated in the database with the fixture (table inputter). All passwords (bcrypt encrypted) are the same ("smalldata").
+  - Check the user privileges in the json array (in the table inputter)
