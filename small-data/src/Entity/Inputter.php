@@ -5,6 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
+
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InputterRepository")
  */
@@ -29,9 +32,13 @@ class Inputter implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $password;
 
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="please enter the same password")
+     */
     public $confirm_password;
 
     /**
@@ -44,10 +51,12 @@ class Inputter implements UserInterface
      */
     private $lastName;
 
-    public function getId()
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $roles;
+
+
 
     public function getEmail(): ?string
     {
@@ -113,12 +122,28 @@ class Inputter implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
-    public function getRoles()
-    {
-        return ['ROLE_USER'];
-    }
+
+
     public function getSalt()
     {
         // TODO: Implement getSalt() method.
     }
+
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        if(!in_array('ROLE_USER', $roles)) {
+            $roles[]='ROLE_USER';
+        }
+        return $roles;
+    }
+
+    public function setRoles($roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+
 }

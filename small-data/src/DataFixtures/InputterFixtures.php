@@ -27,21 +27,29 @@ class InputterFixtures extends Fixture
         foreach ($arrayInputters as $lastName => $firstName){
             $inputter = new Inputter();
 
-
-
             $inputter->setFirstName($firstName)
                 ->setLastName($lastName)
                 ->setEmail(strtolower($firstName[0].".".$lastName)."@smalldata.com")
                 ->setUsername(strtolower($firstName[0].$lastName));
+            $inputter->setRoles(['ROLE_USER']);
+            $hash = $this->encoder->encodePassword($inputter,"smalldata");
+            $inputter->setPassword($hash);
+            $manager->persist($inputter);
+        }
+        foreach ($arrayInputters as $lastName => $firstName){
+            $inputter = new Inputter();
+            $inputter->setFirstName($firstName)
+                ->setLastName($lastName)
+                ->setEmail(strtolower($firstName[0].".".$lastName."1")."@smalldata.com")
+                ->setUsername(strtolower($firstName[0].$lastName."1"));
+            $inputter->setRoles(['ROLE_USER', 'ROLE_USER_PLUS']);
 
             $hash = $this->encoder->encodePassword($inputter,"smalldata");
             $inputter->setPassword($hash);
-
-
-
             $manager->persist($inputter);
 
         }
+
         $manager->flush();
     }
 }
