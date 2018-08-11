@@ -41,3 +41,7 @@ To use the php internal server
   - Open the website on http://localhost:8000
 	
 Every time a new version of the website is pulled from the repository, please drop all tables in database and repeat steps 3, 4, 5 and 7.
+
+Login
+  - Users are instances of the class Inputter (the name standard "user" was creating problem with the migration to PostgreSQL, as it is a reserved word)
+  - To login, take one email address that have been generated in the database with the fixture (table inputter). All passwords (bcrypt encrypted) are the same ("smalldata").
