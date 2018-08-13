@@ -118,9 +118,13 @@ class SmallDataController extends Controller
         if($form->isSubmitted() && $form->isValid()) {
             if ( $flagNewOccurrence){
             $occurrence->setOccurrenceCreatedAt(new \DateTime())->setSpecies($singleSpecies);
+            //getUser shortcut... see https://symfony.com/blog/new-in-symfony-3-2-user-value-resolver-for-controllers
+            $user = $this ->getUser();
+            $occurrence->setInputter($user);
             }
             $objectManager->persist($occurrence);
             $objectManager->flush();
+            $this->addFlash('success', 'Your changes were saved');
 //            return $this->redirectToRoute('occurrences_list', ['id'=> $singleSpecies->getId()]);
             return $this->redirectToRoute('occurrences_list', ['wormsAphiaId'=> $occurrence->getSpecies()->getWormsAphiaId()]);
             ;

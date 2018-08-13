@@ -4,5 +4,13 @@
 
 {% block body %}
     <h1>Welcome to "Small Data" </h1>
+    {% if app.user %}
+        <h3>Your logged in as: {{ app.user.username }}</h3>
+    {% for role in app.user.roles %}
+    {{ role }} <br>
+    {% endfor %}
+    {% endif %}
+
+
 
 {% endblock %}

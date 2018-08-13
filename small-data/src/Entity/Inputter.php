@@ -2,14 +2,22 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InputterRepository")
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message= "The email is already taken"
+ * )
  */
 class Inputter implements UserInterface
 {
@@ -20,8 +28,11 @@ class Inputter implements UserInterface
      */
     private $id;
 
+
+    //assert set to loose (string validation), for other email validations, see http://symfony.com/doc/current/reference/constraints/Email.html
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email( message = "The email '{{ value }}' is not a valid email format.")
      */
     private $email;
 
@@ -32,6 +43,7 @@ class Inputter implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="8", minMessage = "At least 8 characters")
      *
      */
     private $password;
@@ -55,6 +67,18 @@ class Inputter implements UserInterface
      * @ORM\Column(type="json_array")
      */
     private $roles;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Occurrence", mappedBy="inputter")
+     */
+    private $occurrences;
+
+    public function __construct()
+    {
+        $this->occurrences = new ArrayCollection();
+    }
+
+
 
 
 
@@ -132,6 +156,7 @@ class Inputter implements UserInterface
     public function getRoles()
     {
         $roles = $this->roles;
+        //alternative: make a construct function
         if(!in_array('ROLE_USER', $roles)) {
             $roles[]='ROLE_USER';
         }
@@ -144,6 +169,39 @@ class Inputter implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Occurrence[]
+     */
+    public function getOccurrences(): Collection
+    {
+        return $this->occurrences;
+    }
+
+    public function addOccurrence(Occurrence $occurrence): self
+    {
+        if (!$this->occurrences->contains($occurrence)) {
+            $this->occurrences[] = $occurrence;
+            $occurrence->setInputter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOccurrence(Occurrence $occurrence): self
+    {
+        if ($this->occurrences->contains($occurrence)) {
+            $this->occurrences->removeElement($occurrence);
+            // set the owning side to null (unless already changed)
+            if ($occurrence->getInputter() === $this) {
+                $occurrence->setInputter(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 
 
 }

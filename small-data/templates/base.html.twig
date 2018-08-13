@@ -44,6 +44,12 @@
             </ul>
 
         </div>
+
+        <div>
+                {% if app.user %}
+                    <p class="navbar-brand">You are logged in as: {{ app.user.username }}</p>
+                {% endif %}
+        </div>
     </nav>
     <div class="container">
         {% block body %}{% endblock %}

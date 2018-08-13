@@ -73,6 +73,13 @@ class Occurrence
      */
     private $species;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Inputter", inversedBy="occurrences")
+     */
+    private $inputter;
+
+
+
     public function getId()
     {
         return $this->id;
@@ -209,4 +216,18 @@ class Occurrence
 
         return $this;
     }
+
+    public function getInputter(): ?Inputter
+    {
+        return $this->inputter;
+    }
+
+    public function setInputter(?Inputter $inputter): self
+    {
+        $this->inputter = $inputter;
+
+        return $this;
+    }
+
+
 }
