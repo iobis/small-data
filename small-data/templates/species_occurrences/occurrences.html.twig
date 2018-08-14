@@ -4,15 +4,18 @@
     <h1>Occurrences for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
     {#<a href="{{ path('occurrence_create', {'id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
 
+    {#POSITION OF THE MAP#}
+
+    <div id="map" style="height:400px; width:700px">
+    </div>
+
     <a href="{{ path('occurrence_create', {'wormsAphiaId':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>
-
-
 <table>
     <tr>
         <th>Date  </th>
         <th>Locality  </th>
-        <th>Longitude  </th>
         <th>Latitude  </th>
+        <th>Longitude  </th>
         {#<th>Species (WoRMS)</th>#}
         <th>Creation time </th>
         <th>Author</th>
@@ -27,12 +30,11 @@
     <tr>
         <td>{{occurrence.eventDate | date ('d/m/Y') }}</td>
         <td>{{ occurrence.locality }}</td>
-        <td>{{ occurrence.decimalLongitude }}</td>
         <td>{{ occurrence.decimalLatitude }}</td>
+        <td>{{ occurrence.decimalLongitude }}</td>
         {#<td>{{ occurrence.species.speciesNameWorms }}</td>#}
         <td>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d H:i') }}</td>
         <td>{% if occurrence.inputter %}
-
             {{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}
         {% endif %}
         </td>
@@ -45,7 +47,53 @@
     {% endfor %}
 </table>
 
+    <script>
+        function initMap(){
+            var options = {
+                zoom:1.5,
+                center: {lat:15, lng:0}
+            }
+            var map = new google.maps.Map(document.getElementById('map'), options);
 
+            var markers = [
+                {% for occurrence in occurrences %}
+                {% if occurrence.species == singleSpecies %}
+                {% if loop.index0 != 0 %},{% endif %} {#https://stackoverflow.com/questions/10221055/code-twig-in-javascript#}
+                {
+                    coords:{lat:{{ occurrence.decimalLatitude}}, lng:{{ occurrence.decimalLongitude }} },
+                    content:'{{ occurrence.eventDate | date ('Y') }}<br/>{{ occurrence.locality  }}'
+                }
+                {% endif %}
+                {% endfor %}
+            ];
 
+            for (var i = 0; i<markers.length;i++){
+                    addMarker(markers[i]);
+            }
+
+            function addMarker(props){
+                var marker = new google.maps.Marker({
+                    position:props.coords,
+                    map:map,
+                    icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                });
+
+                if(props.content){
+                    var infoWindow = new google.maps.InfoWindow({
+                        content:props.content
+                    });
+                    //listener for infoWindow
+                    marker.addListener('click', function(){
+                        infoWindow.open(map, marker);
+                    });
+                }
+            }
+
+        }
+
+    </script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4oz6vDqK7ysDuXJ9NXD0U8gsvLMM4fhI&callback=initMap">
+</script>
 
 {% endblock %}

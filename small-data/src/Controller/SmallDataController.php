@@ -69,12 +69,14 @@ class SmallDataController extends Controller
 
     public function occurrencesSpecies(Species $species, OccurrenceRepository $occurrenceRepository)
     {
-        $occurrences = $occurrenceRepository->findBy([], ['eventDate' => 'ASC']);
+        $occurrences = $occurrenceRepository->findBy(['species'=>$species], ['eventDate' => 'ASC']);
+        dump($species, $occurrences);
         return $this->render('species_occurrences/occurrences.html.twig', [
             'controller_name' => 'SmallDataController',
             'singleSpecies' => $species,
             'occurrences' => $occurrences
         ]);
+
     }
 
 //    * @Entity("singleSpecies", expr="repository.find(wormsAphiaId)")
