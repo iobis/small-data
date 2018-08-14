@@ -6,7 +6,7 @@
 
     {#POSITION OF THE MAP#}
 
-    <div id="map" style="height:400px; width:700px">
+    <div id="map" style="height:400px; width:800px">
     </div>
 
     <a href="{{ path('occurrence_create', {'wormsAphiaId':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>
@@ -61,7 +61,7 @@
                 {% if loop.index0 != 0 %},{% endif %} {#https://stackoverflow.com/questions/10221055/code-twig-in-javascript#}
                 {
                     coords:{lat:{{ occurrence.decimalLatitude}}, lng:{{ occurrence.decimalLongitude }} },
-                    content:'{{ occurrence.eventDate | date ('Y') }}<br/>{{ occurrence.locality  }}'
+                    content:'{{ occurrence.eventDate | date ('Y') }}<br/>{{ occurrence.locality  }}<br/>{{ occurrence.inputter.firstName | first }}. {{ occurrence.inputter.lastName }}'
                 }
                 {% endif %}
                 {% endfor %}
