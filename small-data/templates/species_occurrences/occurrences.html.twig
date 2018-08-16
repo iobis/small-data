@@ -48,6 +48,7 @@
 </table>
 
     <script>
+
         function initMap(){
             var options = {
                 zoom:1.5,
@@ -68,14 +69,15 @@
             ];
 
             for (var i = 0; i<markers.length;i++){
-                    addMarker(markers[i]);
+                addMarker(markers[i]);
             }
 
             function addMarker(props){
                 var marker = new google.maps.Marker({
                     position:props.coords,
                     map:map,
-                    icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                    // icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                    icon: "{{ asset('images/green-dot.png') }}"
                 });
 
                 if(props.content){
@@ -92,8 +94,16 @@
         }
 
     </script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4oz6vDqK7ysDuXJ9NXD0U8gsvLMM4fhI&callback=initMap">
-</script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4oz6vDqK7ysDuXJ9NXD0U8gsvLMM4fhI&callback=initMap">
+    </script>
 
 {% endblock %}
+
+
+
+
+
+
+
