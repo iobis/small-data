@@ -76,6 +76,7 @@ class Inputter implements UserInterface
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
+        $this->roles[] = 'ROLE_USER';
     }
 
 
