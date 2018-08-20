@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Create a new occurrence for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
+
+    {% form_theme formCreateOccurrence 'bootstrap_4_layout.html.twig' %}
+
+    {{ form_start(formCreateOccurrence) }}
+
+    {{ form_row(formCreateOccurrence.eventDate) }}
+    {{ form_row(formCreateOccurrence.decimalLatitude,
+        {'label':"Latitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -90 to 90"}}) }}
+    {{ form_row(formCreateOccurrence.decimalLongitude,
+        {'label':"Longitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -180 to 180"}}) }}
+    {{ form_row(formCreateOccurrence.locality,
+        {'attr':{'placeholder': "Name of the location (optional)"}}) }}
+    {{ form_row(formCreateOccurrence.vernacularName,
+        {'attr':{'placeholder': "Given name at collection(optional)"}}) }}
+    {{ form_row(formCreateOccurrence.scientificNameAtCollection,
+        {'label':"Original scientific name given during the collection", 'attr':{'placeholder': "(optional)"}}) }}
+    {{ form_row(formCreateOccurrence.locationId,
+        {'label':"Marine region identifier ( or any location ID)",'attr':{'placeholder': "(optional)"}}) }}
+    {{ form_row(formCreateOccurrence.occurrenceRemarks,
+        {'label':"Remarks (e.g., stranded specimen,...",'attr':{'placeholder': "(optional)"}}) }}
+    {{ form_row(formCreateOccurrence.associatedMediaUrl,
+        {'label':"URL for any media to the particular observation", 'attr':{'placeholder':"(optional)"}}) }}
+
+    <button type="submit" class="btn btn-success">Submit</button>
+
+    {{ form_end(formCreateOccurrence) }}
+
+
+{% endblock %}

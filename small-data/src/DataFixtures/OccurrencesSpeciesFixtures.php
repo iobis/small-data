@@ -42,7 +42,7 @@ class OccurrencesSpeciesFixtures extends Fixture
                 ->setLastName($lastName)
                 ->setEmail(strtolower($firstName[0].".".$lastName)."@smalldata.com")
                 ->setUsername(strtolower($firstName[0].$lastName));
-            $inputter->setRoles(['ROLE_USER']);
+            $inputter->setRoles(['ROLE_INPUTTER']);
             $hash = $this->encoder->encodePassword($inputter,"smalldata");
             $inputter->setPassword($hash);
             $manager->persist($inputter);
@@ -50,10 +50,10 @@ class OccurrencesSpeciesFixtures extends Fixture
         foreach ($arrayInputters as $lastName => $firstName){
             $inputter = new Inputter();
             $inputter->setFirstName($firstName)
-                ->setLastName($lastName)
+                ->setLastName($lastName.'1')
                 ->setEmail(strtolower($firstName[0].".".$lastName."1")."@smalldata.com")
                 ->setUsername(strtolower($firstName[0].$lastName."1"));
-            $inputter->setRoles(['ROLE_USER', 'ROLE_USER_PLUS']);
+            $inputter->setRoles(['ROLE_INPUTTER', 'ROLE_VALIDATOR']);
 
             $hash = $this->encoder->encodePassword($inputter,"smalldata");
             $inputter->setPassword($hash);
@@ -114,7 +114,8 @@ class OccurrencesSpeciesFixtures extends Fixture
                     $occurrence->setDecimalLatitude($lineOccurrence[6]);
                     $occurrence->setDecimalLongitude($lineOccurrence[5]);
                     //https://stackoverflow.com/questions/12447110/php-date-format-remove-time-and-more
-                   $date = ($lineOccurrence[4].'-01-01');
+                  $date = ($lineOccurrence[4].'-01-01');
+//                $date = ($lineOccurrence[4]);
                     $createDate = new \DateTime($date);
 //                    $dateWithoutTime = $createDate->format('YYYY-MM-DD');
 //                    $occurrence->setEventDate($dateWithoutTime);

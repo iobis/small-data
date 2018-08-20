@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+{#https://stackoverflow.com/questions/24383917/symfony2-get-user-role-in-twig#}
+    {% if  app.user  !=  occurrence.inputter and not is_granted ('ROLE_VALIDATOR') %}
+        <h1>Occurrence {{ occurrence.id }} for <i>{{ singleSpecies.speciesNameWorms }} </i></h1>
+        <p>Created by {{ occurrence.inputter.firstName }} {{ occurrence.inputter.lastName }} ({{ occurrence.inputter.username }}),
+            on {{ occurrence.occurrenceCreatedAt | date ('d/m/Y')}}
+            at {{ occurrence.occurrenceCreatedAt | date ('H:i')}}</p>
+        <br>
+        <h4>As you are not the creator of this record, please notice that you are not authorizes to edit it.</h4>
+        <h4>Please contact the administrator to become a validator</h4>
+
+    {% else %}
+
+    <h1>Edit occurrence {{ occurrence.id }} for <i>{{ singleSpecies.speciesNameWorms }} </i></h1>
+    <p>Created by {{ occurrence.inputter.firstName }} {{ occurrence.inputter.lastName }} ({{ occurrence.inputter.username }}),
+        on {{ occurrence.occurrenceCreatedAt | date ('d/m/Y')}}
+            at {{ occurrence.occurrenceCreatedAt | date ('H:i')}}</p>
+
+        {% form_theme formEditOccurrence 'bootstrap_4_layout.html.twig' %}
+
+        {{ form_start(formEditOccurrence) }}
+        {{ form_row(formEditOccurrence.eventDate) }}
+        {{ form_row(formEditOccurrence.decimalLatitude,
+            {'label':"Latitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -90 to 90"}}) }}
+        {{ form_row(formEditOccurrence.decimalLongitude,
+            {'label':"Longitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -180 to 180"}}) }}
+        {{ form_row(formEditOccurrence.locality,
+            {'attr':{'placeholder': "Name of the location (optional)"}}) }}
+        {{ form_row(formEditOccurrence.vernacularName,
+            {'attr':{'placeholder': "Given name at collection(optional)"}}) }}
+        {{ form_row(formEditOccurrence.scientificNameAtCollection,
+            {'label':"Original scientific name given during the collection", 'attr':{'placeholder': "(optional)"}}) }}
+        {{ form_row(formEditOccurrence.locationId,
+            {'label':"Marine region identifier ( or any location ID)",'attr':{'placeholder': "(optional)"}}) }}
+        {{ form_row(formEditOccurrence.occurrenceRemarks,
+            {'label':"Remarks (e.g., stranded specimen,...",'attr':{'placeholder': "(optional)"}}) }}
+        {{ form_row(formEditOccurrence.associatedMediaUrl,
+            {'label':"URL for any media to the particular observation", 'attr':{'placeholder':"(optional)"}}) }}
+        <div style="color:red; font-size: 150%">
+            {{ form_row(formEditOccurrence.species, {'label':"Species ( ! attribution of the occurrence record to another species)"}) }}
+        </div>
+
+
+
+        <button type="submit" class="btn btn-success">Submit</button>
+
+        {{ form_end(formEditOccurrence) }}
+
+
+    {% endif %}
+
+{% endblock %}

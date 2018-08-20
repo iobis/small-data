@@ -79,68 +79,7 @@ class SmallDataController extends Controller
 
     }
 
-//    * @Entity("singleSpecies", expr="repository.find(wormsAphiaId)")
-//     * @Route("occurrence/{wormsAphiaId}/{id}/edit", name="occurrence_edit")
-    /**
-     * @Route("/{wormsAphiaId}/create_occurrence", name="occurrence_create")
-     * @Route("/{wormsAphiaId}/occurrence/{id}/editFields", name="occurrence_edit")
-     * @Route("/{wormsAphiaId}/occurrence/{id}/{mode}", name="occurrence_edit_species")
-     */
-    public function formOccurrence($wormsAphiaId, $id = null, $mode = null, Occurrence $occurrence = null,
-                                   Request $request, ObjectManager $objectManager){
-        $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
-            ->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
 
-        // At this stage, the whole $occurrence object is null...(only for route "occurrence_create")
-        //i.e. no instance, and the functions of the object cannot be accessed
-        //Therefore create an instance.
-        $flagNewOccurrence = FALSE;
-        $flagEditSpecies = FALSE;
-
-        if (!$occurrence) {
-            $flagNewOccurrence = TRUE;
-            $occurrence = new Occurrence();
-        }
-        if($mode === "editSpecies") {
-            $flagEditSpecies = TRUE;
-        }
-
-        $form = $this->createForm(OccurrenceType::class, $occurrence);
-        if($flagEditSpecies || $flagNewOccurrence) {
-            $form->add('species', EntityType::class, [
-                'class'=>Species::class,
-                'choice_label'=> 'speciesNameWorms'
-            ]);
-        }
-
-            $form->handleRequest($request);
-        dump($occurrence, $singleSpecies, $request, (bool)$occurrence, $flagNewOccurrence, $mode );
-
-
-        if($form->isSubmitted() && $form->isValid()) {
-            if ( $flagNewOccurrence){
-            $occurrence->setOccurrenceCreatedAt(new \DateTime())->setSpecies($singleSpecies);
-            //getUser shortcut... see https://symfony.com/blog/new-in-symfony-3-2-user-value-resolver-for-controllers
-            $user = $this ->getUser();
-            $occurrence->setInputter($user);
-            }
-            $objectManager->persist($occurrence);
-            $objectManager->flush();
-            $this->addFlash('success', 'Your changes were saved');
-//            return $this->redirectToRoute('occurrences_list', ['id'=> $singleSpecies->getId()]);
-            return $this->redirectToRoute('occurrences_list', ['wormsAphiaId'=> $occurrence->getSpecies()->getWormsAphiaId()]);
-            ;
-        }
-
-        return $this->render('species_occurrences/occurrence_create_edit.html.twig',[
-            'formOccurrence'=> $form->createView(),
-            'singleSpecies' => $singleSpecies,
-            'occurrence'=> $occurrence,
-            'editMode'=>$occurrence->getId()!==null,
-            'editModeSpecies'=>$flagEditSpecies
-
-        ]);
-    }
 
 
 

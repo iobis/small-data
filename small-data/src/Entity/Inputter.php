@@ -76,7 +76,7 @@ class Inputter implements UserInterface
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
-        $this->roles[] = 'ROLE_USER';
+        $this->roles[] = 'ROLE_INPUTTER';
     }
 
 
@@ -158,8 +158,8 @@ class Inputter implements UserInterface
     {
         $roles = $this->roles;
         //alternative: make a construct function
-        if(!in_array('ROLE_USER', $roles)) {
-            $roles[]='ROLE_USER';
+        if(!in_array('ROLE_INPUTTER', $roles)) {
+            $roles[]='ROLE_INPUTTER';
         }
         return $roles;
     }

@@ -31,9 +31,9 @@ security:
             access_denied_handler: App\Security\AccessDeniedHandler
 
     access_control:
-        - { path: ^/.*/editFields, roles: ROLE_USER }
-        - { path: ^/.*/create_occurrence, roles: ROLE_USER}
-        - { path: ^/.*/editSpecies, roles: ROLE_USER_PLUS }
+#        - { path: ^/.*/editFields, roles: ROLE_INPUTTER }
+        - { path: ^/.*/create_occurrence, roles: ROLE_INPUTTER}
+        - { path: ^/.*/editSpecies, roles: ROLE_VALIDATOR }
 
             # activate different ways to authenticate
 

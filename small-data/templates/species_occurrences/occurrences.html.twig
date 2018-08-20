@@ -1,16 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block head_scripts %}
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
+
+
 {% block body %}
     <h1>Occurrences for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
     {#<a href="{{ path('occurrence_create', {'id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
 
     {#POSITION OF THE MAP#}
-
     <div id="map" style="height:400px; width:800px">
     </div>
+    {#Position of the chart#}
+    <div id="histogram" style="height:400px; width:400px"></div>
 
     <a href="{{ path('occurrence_create', {'wormsAphiaId':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>
 <table>
+
     <tr>
         <th>Date  </th>
         <th>Locality  </th>
@@ -34,18 +41,35 @@
         <td>{{ occurrence.decimalLongitude }}</td>
         {#<td>{{ occurrence.species.speciesNameWorms }}</td>#}
         <td>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d H:i') }}</td>
-        <td>{% if occurrence.inputter %}
-            {{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}
-        {% endif %}
-        </td>
+        <td>{{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}</td>
 
-        <td><a href="{{ path('occurrence_edit', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId  } )}}" class="btn btn-primary">Edit</a></td>
-        <td><a href="{{ path('occurrence_edit_species', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId, 'mode' : "editSpecies" } )}}" class="btn btn-primary">Change species</a></td>
+        <td><a href="{{ path('occurrence_edit', {'idOccurrence':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId  } )}}" class="btn btn-primary">Edit</a></td>
+        {#<td><a href="{{ path('occurrence_edit_species', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId, 'mode' : "editSpecies" } )}}" class="btn btn-primary">Change species</a></td>#}
 
     </tr>
         {% endif %}
     {% endfor %}
 </table>
+
+    <script>
+        var year = [
+            {% for occurrence in occurrences %}
+            {% if occurrence.species == singleSpecies %}
+            {% if loop.index0 != 0 %},{% endif %}
+            {{ occurrence.eventDate | date ('Y')}}
+            {% endif %}
+            {% endfor %}
+
+        ];
+
+        var trace = {
+            x: year,
+            type: 'histogram'
+        };
+        var data = [trace];
+        Plotly.newPlot('histogram', data);
+
+    </script>
 
     <script>
 
