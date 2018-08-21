@@ -60,6 +60,18 @@ class OccurrencesSpeciesFixtures extends Fixture
             $manager->persist($inputter);
 
         }
+        foreach ($arrayInputters as $lastName => $firstName){
+            $inputter = new Inputter();
+
+            $inputter->setFirstName($firstName)
+                ->setLastName($lastName.'2')
+                ->setEmail(strtolower($firstName[0].".".$lastName.'2')."@smalldata.com")
+                ->setUsername(strtolower($firstName[0].$lastName.'2'));
+            $inputter->setRoles(['ROLE_INPUTTER', 'ROLE_VALIDATOR', 'ROLE_ADMINISTRATOR']);
+            $hash = $this->encoder->encodePassword($inputter,"smalldata");
+            $inputter->setPassword($hash);
+            $manager->persist($inputter);
+        }
 
         $manager->flush();
 

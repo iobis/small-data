@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OccurrencesSpeciesFixtures.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OccurrencesSpeciesFixtures.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="55" column="65" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="65" />
+            <state relative-caret-position="-706">
+              <caret line="69" column="87" selection-start-line="69" selection-start-column="87" selection-end-line="69" selection-end-column="87" />
               <folding>
                 <element signature="e#36#62#0#PHP" expanded="true" />
               </folding>
@@ -26,16 +26,9 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FormsController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/FormsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1040">
-              <caret line="62" column="76" selection-start-line="62" selection-start-column="76" selection-end-line="62" selection-end-column="76" />
-              <folding>
-                <element signature="e#34#60#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+      <file leaf-file-name="SpeciesType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Form/SpeciesType.php">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="security.yaml" pinned="false" current-in-tab="false">
@@ -50,7 +43,7 @@
       <file leaf-file-name="SmallDataController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/SmallDataController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
+            <state relative-caret-position="154">
               <caret line="81" selection-start-line="81" selection-end-line="81" />
               <folding>
                 <element signature="e#34#60#0#PHP" expanded="true" />
@@ -71,7 +64,7 @@
       <file leaf-file-name="edit_occurrence.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/forms/edit_occurrence.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="20">
               <caret line="12" column="96" selection-start-line="12" selection-start-column="96" selection-end-line="12" selection-end-column="96" />
             </state>
           </provider>
@@ -80,7 +73,7 @@
       <file leaf-file-name="OccurrenceType.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Form/OccurrenceType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
+            <state relative-caret-position="20">
               <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
               <folding>
                 <element signature="e#28#54#0#PHP" expanded="true" />
@@ -89,11 +82,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="occurrences.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="occurrences.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="69" column="42" selection-start-line="69" selection-start-column="42" selection-end-line="69" selection-end-column="42" />
+            <state relative-caret-position="180">
+              <caret line="15" column="54" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,10 +161,10 @@
         <option value="$PROJECT_DIR$/src/Controller/FormsController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Inputter.php" />
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
-        <option value="$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php" />
         <option value="$PROJECT_DIR$/templates/forms/edit_occurrence.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig" />
+        <option value="$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php" />
       </list>
     </option>
   </component>
@@ -439,12 +435,12 @@
       <workItem from="1534447542130" duration="17985000" />
       <workItem from="1534593004121" duration="27263000" />
       <workItem from="1534693580848" duration="34359000" />
-      <workItem from="1534786292425" duration="217000" />
+      <workItem from="1534786292425" duration="1956000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="377934000" />
+    <option name="totallyTimeSpent" value="379548000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -654,16 +650,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4600">
           <caret line="231" selection-start-line="231" selection-end-line="231" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/SpeciesType.php">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Species.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="83" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <element signature="e#30#78#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -713,23 +712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="55" column="65" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="65" />
-          <folding>
-            <element signature="e#36#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/forms/edit_occurrence.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="96" selection-start-line="12" selection-start-column="96" selection-end-line="12" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -744,9 +726,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="15" column="54" selection-start-line="15" selection-start-column="54" selection-end-line="15" selection-end-column="54" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/OccurrenceType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
+        <state relative-caret-position="20">
           <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
           <folding>
             <element signature="e#28#54#0#PHP" expanded="true" />
@@ -756,7 +748,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/SmallDataController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
+        <state relative-caret-position="154">
           <caret line="81" selection-start-line="81" selection-end-line="81" />
           <folding>
             <element signature="e#34#60#0#PHP" expanded="true" />
@@ -764,10 +756,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Form/SpeciesType.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/forms/edit_occurrence.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="69" column="42" selection-start-line="69" selection-start-column="42" selection-end-line="69" selection-end-column="42" />
+        <state relative-caret-position="20">
+          <caret line="12" column="96" selection-start-line="12" selection-start-column="96" selection-end-line="12" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-706">
+          <caret line="69" column="87" selection-start-line="69" selection-start-column="87" selection-end-line="69" selection-end-column="87" />
+          <folding>
+            <element signature="e#36#62#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
