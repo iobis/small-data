@@ -54,7 +54,16 @@
 
         <div>
                 {% if app.user %}
-                    <p class="navbar-brand">You are logged in as: {{ app.user.username }}</p>
+                    <p class="navbar-brand">You are logged in as: '{{ app.user.username }}'(
+                        {% if 'ROLE_ADMINISTRATOR' in (app.user.roles)  %}
+                        administrator
+                        {% elseif 'ROLE_VALIDATOR' and 'ROLE_ADMINISTRATOR' not in (app.user.roles) %}
+                        validator
+                        {% else %}
+                        inputter
+                        {% endif %}
+                    )</p>
+
                 {% endif %}
         </div>
     </nav>

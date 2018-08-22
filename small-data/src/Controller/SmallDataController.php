@@ -80,6 +80,20 @@ class SmallDataController extends Controller
     }
 
 
+    /**
+     * @Route("/{wormsAphiaId}/occurrence/{idOccurrence}/details", name="occurrence_details")
+     * @Route("/{wormsAphiaId}/occurrence/{idOccurrence}/details/{slug}", name="occurrence_details_satellite")
+     */
+    public function occurrenceDetails($idOccurrence, $slug = null){
+        $occurrence = $this->getDoctrine()->getRepository((Occurrence::class))
+            ->findOneBy(['id'=>$idOccurrence]);
+
+
+        return $this->render('species_occurrences/occurrence_details.html.twig', [
+            'occurrence'=>$occurrence,
+            'satellite'=>$slug
+        ]);
+    }
 
 
 

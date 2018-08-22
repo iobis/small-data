@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block head_scripts %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+          integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+            integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+            crossorigin=""></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+
+{% endblock %}
+
+{% block body %}
+    <h1>Occurrence {{ occurrence.id }} for <i>{{ occurrence.species.speciesNameWorms }} </i></h1>
+
+    <p>Record created by {{ occurrence.inputter.firstName }} {{ occurrence.inputter.lastName }} on {{ occurrence.occurrenceCreatedAt | date ('d/m/Y') }}</p>
+    <p>Last modified by {{ occurrence.lastModifier.firstName }} {{ occurrence.lastModifier.lastName }} on {{ occurrence.lastModifiedAt | date ('d/m/Y') }}</p>
+
+
+
+    <h5>Date: {{ occurrence.eventDate | date('d/m/Y') }}</h5>
+
+    <div id="mapid" style="height: 300px; width: 500px ; "></div>
+    {% if not satellite %}
+        <a href="{{ path('occurrence_details_satellite',{'slug':'satellite', 'idOccurrence':occurrence.id,'wormsAphiaId': occurrence.species.wormsAphiaId}) }}" class="btn btn-primary">Satellite view</a>
+    {% else %}
+        <a href="{{ path('occurrence_details',{'idOccurrence':occurrence.id,'wormsAphiaId': occurrence.species.wormsAphiaId}) }}" class="btn btn-primary">Map view</a>
+    {% endif %}
+
+    <h5><p id="toDMS"></p>
+    <p>Decimal latitude: {{ occurrence.decimalLatitude }} ; decimal longitude: {{ occurrence.decimalLongitude }}</p>
+    </h5>
+    <h5>Locality: {% if occurrence.locality %} {{ occurrence.locality }} {% else %}No information {% endif %}</h5>
+    <h5>Remarks or reference: "{% if occurrence.occurrenceRemarks %} {{ occurrence.occurrenceRemarks }} {% else %}No information {% endif %}"</h5>
+
+    <a href="{{ path('occurrences_list',{'idOccurrence':occurrence.id,'wormsAphiaId': occurrence.species.wormsAphiaId}) }}" class="btn btn-primary">Back to full list</a>
+
+
+
+    <script>
+        var mymap = L.map('mapid').setView([{{ occurrence.decimalLatitude}}, {{ occurrence.decimalLongitude }}], 6);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+        {% if satellite %} id: 'mapbox.satellite',{% else %}id: 'mapbox.streets', {% endif %}
+            accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A'
+        }).addTo(mymap);
+
+        var marker = L.marker([{{ occurrence.decimalLatitude}}, {{ occurrence.decimalLongitude }}]).addTo(mymap);
+
+    </script>
+    <script>
+        //https://stackoverflow.com/questions/37893131/how-to-convert-lat-long-from-decimal-degrees-to-dms-format
+        //https://stackoverflow.com/questions/5786025/decimal-degrees-to-degrees-minutes-and-seconds-in-javascript
+        //https://en.wikipedia.org/wiki/Geographic_coordinate_conversion#Conversion_from_Decimal_Degree_to_DMS
+
+
+        function degreeToDMS(decimalDegrees){
+            var absDecDegrees = Math.abs(decimalDegrees);
+            var deg = Math.floor(absDecDegrees);
+            var decMinutes = (absDecDegrees - deg)*60;
+            var min = Math.floor(decMinutes);
+            var decSeconds = (decMinutes-min)*60;
+            var sec = (Math.round(decSeconds * 100))/100;
+            if(sec==60){min++; sec=0;}
+            if (min==60){deg++; min=0; }
+
+            return deg +"º "+min+"' "+sec +"'' ";
+        }
+
+        function convertDMS(lat, lng) {
+            var latitude = degreeToDMS(lat);
+            var latitudeCardinal = Math.sign(lat) >= 0 ? "N" : "S";
+
+            var longitude = degreeToDMS(lng);
+            var longitudeCardinal = Math.sign(lng) >= 0 ? "E" : "W";
+
+            return latitude + " " + latitudeCardinal + "\n" + longitude + " " + longitudeCardinal;
+        }
+
+        document.getElementById('toDMS').innerHTML = convertDMS({{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }});
+
+
+
+
+
+    </script>
+
+
+
+{% endblock %}

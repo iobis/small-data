@@ -64,13 +64,14 @@ class FormsController extends Controller
             ->findOneBy(['id'=>$idOccurrence]);
 
         $speciesName = $occurrence->getSpecies()->getSpeciesNameWorms();
+        $speciesPhylum = $occurrence->getSpecies()->getPhylum();
 
 
         $form = $this->createForm(OccurrenceType::class, $occurrence);
         $form ->add('species', EntityType::class, [
             'class'=>Species::class,
             'query_builder' =>function (EntityRepository $er){ //https://stackoverflow.com/questions/8164682/doctrine-and-like-query
-
+//https://stackoverflow.com/questions/37326605/symfony-and-doctrine-dql-query-builder-how-to-use-multiple-setparameters-inside/37326606
                     return $er->createQueryBuilder('sp')
                         ->select('sp')
                         ->where('sp.speciesNameWorms LIKE :species')
@@ -81,9 +82,17 @@ class FormsController extends Controller
             'choice_label'=> 'speciesNameWorms'
         ]);
 
+
+
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            $user = $this->getUser();  //getUser shortcut... see https://symfony.com/blog/new-in-symfony-3-2-user-value-resolver-for-controllers
+            $occurrence->setLastModifiedAt(new \DateTime());
+            $occurrence->setLastModifier($user);
+
             $objectManager->persist($occurrence);
             $objectManager->flush();
 

@@ -73,10 +73,16 @@ class Inputter implements UserInterface
      */
     private $occurrences;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Occurrence", mappedBy="lastModifier")
+     */
+    private $modifiedOccurrences;
+
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
         $this->roles[] = 'ROLE_INPUTTER';
+        $this->modifiedOccurrences = new ArrayCollection();
     }
 
 
@@ -196,6 +202,37 @@ class Inputter implements UserInterface
             // set the owning side to null (unless already changed)
             if ($occurrence->getInputter() === $this) {
                 $occurrence->setInputter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Occurrence[]
+     */
+    public function getModifiedOccurrences(): Collection
+    {
+        return $this->modifiedOccurrences;
+    }
+
+    public function addModifiedOccurrence(Occurrence $modifiedOccurrence): self
+    {
+        if (!$this->modifiedOccurrences->contains($modifiedOccurrence)) {
+            $this->modifiedOccurrences[] = $modifiedOccurrence;
+            $modifiedOccurrence->setLastModifier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModifiedOccurrence(Occurrence $modifiedOccurrence): self
+    {
+        if ($this->modifiedOccurrences->contains($modifiedOccurrence)) {
+            $this->modifiedOccurrences->removeElement($modifiedOccurrence);
+            // set the owning side to null (unless already changed)
+            if ($modifiedOccurrence->getLastModifier() === $this) {
+                $modifiedOccurrence->setLastModifier(null);
             }
         }
 

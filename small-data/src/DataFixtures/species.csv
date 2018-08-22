@@ -1,15 +1,15 @@
-Species;AphiaId
-Caulerpa cylindracea;660621
-Caulerpa taxifolia;144476
-Chondrus giganteus;232212
-Codium fragile subsp. fragile;370562
-Dasysiphonia japonica;836896
-Gelidium vagum;372129
-Gracilaria vermiculophylla;236157
-Grateloupia turuturu;295880
-Lomentaria hakodatensis;232230
-Sargassum muticum;494791
-Stypopodium schimperi;145391
-Undaria pinnatifida;145721
-Womersleyella setacea;146371
-Polysiphonia morrowii;232563
+Species;AphiaId;Phylum
+Caulerpa cylindracea;660621;Chlorophyta
+Caulerpa taxifolia;144476;Chlorophyta
+Chondrus giganteus;232212;Rhodophyta
+Codium fragile subsp. fragile;370562;Chlorophyta
+Dasysiphonia japonica;836896;Rhodophyta
+Gelidium vagum;372129;Rhodophyta
+Gracilaria vermiculophylla;236157;Rhodophyta
+Grateloupia turuturu;295880;Rhodophyta
+Lomentaria hakodatensis;232230;Rhodophyta
+Sargassum muticum;494791;Ocrophyta
+Stypopodium schimperi;145391;Ocrophyta
+Undaria pinnatifida;145721;Ocrophyta
+Womersleyella setacea;146371;Rhodophyta
+Polysiphonia morrowii;232563;Rhodophyta

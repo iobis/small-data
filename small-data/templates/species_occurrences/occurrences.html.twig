@@ -9,11 +9,27 @@
     <h1>Occurrences for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
     {#<a href="{{ path('occurrence_create', {'id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
 
-    {#POSITION OF THE MAP#}
-    <div id="map" style="height:400px; width:800px">
+    <div class="row">
+            <div class="col-sm-8">
+                {#POSITION OF THE MAP#}
+                <div id="map" style="height:400px; width:700px"></div>
+            </div>
+
+              <div class="col-sm-4">
+                  {#Position of the chart#}
+
+                  <div id="histogram" class="col" style="height:300px; width:300px" style="border-style: solid;"></div>
+                  <p>Geographical and temporal distribution of records</p>
+              </div>
+
+
+
+
+
+
     </div>
-    {#Position of the chart#}
-    <div id="histogram" style="height:400px; width:400px"></div>
+
+
 
     <a href="{{ path('occurrence_create', {'wormsAphiaId':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>
 <table>
@@ -45,6 +61,7 @@
 
         <td><a href="{{ path('occurrence_edit', {'idOccurrence':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId  } )}}" class="btn btn-primary">Edit</a></td>
         {#<td><a href="{{ path('occurrence_edit_species', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId, 'mode' : "editSpecies" } )}}" class="btn btn-primary">Change species</a></td>#}
+        <td><a href="{{ path('occurrence_details', {'idOccurrence':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId  } )}}" class="btn btn-primary">More</a></td>
 
     </tr>
         {% endif %}

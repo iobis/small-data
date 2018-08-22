@@ -33,6 +33,11 @@ class Species
      */
     private $occurrences;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phylum;
+
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
@@ -94,6 +99,18 @@ class Species
                 $occurrence->setSpecies(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPhylum(): ?string
+    {
+        return $this->phylum;
+    }
+
+    public function setPhylum(?string $phylum): self
+    {
+        $this->phylum = $phylum;
 
         return $this;
     }

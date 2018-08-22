@@ -78,6 +78,17 @@ class Occurrence
      */
     private $inputter;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $lastModifiedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Inputter", inversedBy="modifiedOccurrences")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $lastModifier;
+
 
 
     public function getId()
@@ -225,6 +236,30 @@ class Occurrence
     public function setInputter(?Inputter $inputter): self
     {
         $this->inputter = $inputter;
+
+        return $this;
+    }
+
+    public function getLastModifiedAt(): ?\DateTimeInterface
+    {
+        return $this->lastModifiedAt;
+    }
+
+    public function setLastModifiedAt(\DateTimeInterface $lastModifiedAt): self
+    {
+        $this->lastModifiedAt = $lastModifiedAt;
+
+        return $this;
+    }
+
+    public function getLastModifier(): ?Inputter
+    {
+        return $this->lastModifier;
+    }
+
+    public function setLastModifier(?Inputter $lastModifier): self
+    {
+        $this->lastModifier = $lastModifier;
 
         return $this;
     }

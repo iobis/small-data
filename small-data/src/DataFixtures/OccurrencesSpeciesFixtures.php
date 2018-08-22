@@ -89,6 +89,7 @@ class OccurrencesSpeciesFixtures extends Fixture
                 $species = new Species();
                 $species->setSpeciesNameWorms($lineSpecies[0] );
                 $species->setWormsAphiaId($lineSpecies[1]);
+                $species->setPhylum($lineSpecies[2]);
                 $manager->persist($species);
 
 //                $this->addReference('species-'.$rowCsvSpecies, $species[$rowCsvSpecies]);
@@ -146,8 +147,12 @@ class OccurrencesSpeciesFixtures extends Fixture
 
                     //https://stackoverflow.com/questions/25278645/getting-a-random-object-from-an-array-in-php
                     $inputter = $inputtersForOccurrences[array_rand($inputtersForOccurrences)];
+                    $timeCreationAndLastModification = $faker->dateTimeBetween('-100 days');
                     $occurrence->setInputter($inputter);
-                    $occurrence->setOccurrenceCreatedAt($faker->dateTimeBetween('-100 days'));
+                    $occurrence->setOccurrenceCreatedAt($timeCreationAndLastModification);
+                    $occurrence->setLastModifier($inputter);
+                    $occurrence->setLastModifiedAt($timeCreationAndLastModification);
+
                     $manager->persist($occurrence);
 
 
