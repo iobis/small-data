@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Occurrence;
+use App\Entity\Phylum;
 use App\Entity\Species;
 use App\Entity\Inputter;
 use App\Repository\InputterRepository;
@@ -75,7 +76,23 @@ class OccurrencesSpeciesFixtures extends Fixture
 
         $manager->flush();
 
+        $csvPhyla = fopen(dirname(__FILE__).'/phyla.csv', 'r');
+        $rowCsvPhyla = 0;
+        while (!feof($csvPhyla)){
+            $rowCsvPhyla++;
+            $linePhyla = fgetcsv($csvPhyla, [], ';');
+            if($rowCsvPhyla>1){
+                $phylum = new Phylum();
+                $phylum->setPhylumNameWorms($linePhyla[0]);
+                $manager->persist($phylum);
+            }
+        }
+        fclose($csvPhyla);
+        $manager->flush();
 
+
+        $phylaRep = $manager->getRepository(Phylum::class);
+        $phylaForSpecies = $phylaRep->findBy([]);
 
 //https://stackoverflow.com/questions/35792244/symfony-doctrine-data-fixture-how-to-handle-large-csv-file
         $csvSpecies = fopen(dirname(__FILE__).'/species.csv', 'r');
@@ -89,7 +106,13 @@ class OccurrencesSpeciesFixtures extends Fixture
                 $species = new Species();
                 $species->setSpeciesNameWorms($lineSpecies[0] );
                 $species->setWormsAphiaId($lineSpecies[1]);
-                $species->setPhylum($lineSpecies[2]);
+                foreach ($phylaForSpecies as $phylumForSpecies) {
+                    if($phylumForSpecies->getPhylumNameWorms()== $lineSpecies[2]){
+                        $species->setPhylum($phylumForSpecies);
+                    }
+
+                }
+
                 $manager->persist($species);
 
 //                $this->addReference('species-'.$rowCsvSpecies, $species[$rowCsvSpecies]);
@@ -99,6 +122,7 @@ class OccurrencesSpeciesFixtures extends Fixture
         }
         fclose($csvSpecies);
         $manager->flush();
+
 
 
 

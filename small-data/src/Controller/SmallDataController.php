@@ -6,6 +6,7 @@ use App\Entity\Occurrence;
 use App\Entity\Species;
 use App\Form\OccurrenceType;
 use App\Repository\OccurrenceRepository;
+use App\Repository\PhylumRepository;
 use App\Repository\SpeciesRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -32,15 +33,20 @@ class SmallDataController extends Controller
 
     /**
      * @Route("/species", name="index_species")
+     * @Route("/species/{phylumNameWorms}", name="index_species_per_phylum")
      */
-    public function indexSpecies(SpeciesRepository $speciesRepository)
+    public function indexSpecies(SpeciesRepository $speciesRepository, PhylumRepository $phylumRepository, $phylumNameWorms = null)
     {
 
         $species = $speciesRepository->findBy([], ['speciesNameWorms' => 'ASC']);
-
+        $phyla = $phylumRepository->findBy([], ['phylumNameWorms' => 'ASC']);
+        $phylumToDisplay = $phylumRepository->findOneBy(['phylumNameWorms'=>$phylumNameWorms]);
+        dump ($phyla);
         return $this->render('species_occurrences/species.html.twig', [
 //            'controller_name' => 'SmallDataController',
-            'species' => $species
+            'species' => $species,
+            'phyla'=>$phyla,
+            'phylumToDisplay'=>$phylumToDisplay
         ]);
     }
 

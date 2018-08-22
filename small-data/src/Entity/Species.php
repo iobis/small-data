@@ -34,9 +34,11 @@ class Species
     private $occurrences;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Phylum", inversedBy="species")
      */
     private $phylum;
+
+
 
     public function __construct()
     {
@@ -72,6 +74,22 @@ class Species
         return $this;
     }
 
+    public function getPhylum(): ?Phylum
+    {
+        return $this->phylum;
+    }
+
+    public function setPhylum(?Phylum $phylum): self
+    {
+        $this->phylum = $phylum;
+
+        return $this;
+    }
+
+
+
+
+
     /**
      * @return Collection|Occurrence[]
      */
@@ -103,15 +121,6 @@ class Species
         return $this;
     }
 
-    public function getPhylum(): ?string
-    {
-        return $this->phylum;
-    }
 
-    public function setPhylum(?string $phylum): self
-    {
-        $this->phylum = $phylum;
 
-        return $this;
-    }
 }
