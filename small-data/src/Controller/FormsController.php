@@ -27,7 +27,7 @@ class FormsController extends Controller
         $occurrence = new Occurrence();
 
         $form = $this->createForm(OccurrenceType::class, $occurrence);
-        $form->
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -38,10 +38,14 @@ class FormsController extends Controller
             //getUser shortcut... see https://symfony.com/blog/new-in-symfony-3-2-user-value-resolver-for-controllers
             $user = $this->getUser();
             $occurrence->setInputter($user);
+            $occurrence->setLastModifiedAt(new \DateTime());
+            $occurrence->setLastModifier($user);
+
             $objectManager->persist($occurrence);
             $objectManager->flush();
 
-            return $this->redirectToRoute('occurrences_list', ['wormsAphiaId'=> $occurrence->getSpecies()->getWormsAphiaId()]);
+            return $this->redirectToRoute('occurrence_details',
+                ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(), 'idOccurrence'=>$occurrence->getId()]);
         }
 
         return $this->render('forms/create_occurrence.html.twig', [
@@ -82,9 +86,6 @@ class FormsController extends Controller
             'choice_label'=> 'speciesNameWorms'
         ]);
 
-
-
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -96,7 +97,8 @@ class FormsController extends Controller
             $objectManager->persist($occurrence);
             $objectManager->flush();
 
-            return $this->redirectToRoute('occurrences_list', ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId()]);
+            return $this->redirectToRoute('occurrence_details',
+                ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(), 'idOccurrence'=>$occurrence->getId()]);
         }
 
         return $this->render('forms/edit_occurrence.html.twig', [

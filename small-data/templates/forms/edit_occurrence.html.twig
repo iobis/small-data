@@ -24,8 +24,14 @@
 
         {{ form_start(formEditOccurrence) }}
         {{ form_row(formEditOccurrence.eventDate) }}
+        {#{{ form_row(formEditOccurrence.decimalLatitude,#}
+            {#{'label':"Latitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -90 to 90"}}) }}#}
+
+        {#<div id="getLatitude"></div>#}
         {{ form_row(formEditOccurrence.decimalLatitude,
-            {'label':"Latitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -90 to 90"}}) }}
+            {'label':"Latitude (in decimals)", 'attr':{'placeholder': "<div id='getLatitude'></div>"}}) }}
+
+
         {{ form_row(formEditOccurrence.decimalLongitude,
             {'label':"Longitude (in decimals)", 'attr':{'placeholder': "Required (e.g. 12.24345), from -180 to 180"}}) }}
         {{ form_row(formEditOccurrence.locality,
@@ -52,5 +58,12 @@
 
 
     {% endif %}
+
+    <script>
+        function getLatitude(lat){
+            return lat;
+        }
+        document.getElementById('getLatitude').innerHTML= getLatitude(3.456);
+    </script>
 
 {% endblock %}
