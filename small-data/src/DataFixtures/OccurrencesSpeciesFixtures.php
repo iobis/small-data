@@ -34,7 +34,7 @@ class OccurrencesSpeciesFixtures extends Fixture
 //
         //https://github.com/fzaninotto/Faker
         $faker = \Faker\Factory::create();
-        $arrayInputters = ["Mineur"=>"Frederic", "Provoost"=>"Pieter", "Bosch"=>"Samuel", "Appeltans"=>"Ward", "Oneill"=>"Ian"  ];
+        $arrayInputters = ["Mineur"=>"Frederic", "Provoost"=>"Pieter", "Bosch"=>"Samuel", "Appeltans"=>"Ward", "Oneill"=>"Ian", "DeClerck" => "Olivier" ];
 
         foreach ($arrayInputters as $lastName => $firstName){
             $inputter = new Inputter();

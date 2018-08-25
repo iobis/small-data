@@ -2,6 +2,17 @@
 
 {% block head_scripts %}
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+          integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+            integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+            crossorigin=""></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 {% endblock %}
 
 
@@ -9,23 +20,18 @@
     <h1>Occurrences for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
     {#<a href="{{ path('occurrence_create', {'id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
 
-    <div class="row">
-            <div class="col-sm-8">
-                {#POSITION OF THE MAP#}
-                <div id="map" style="height:400px; width:700px"></div>
-            </div>
 
-              <div class="col-sm-4">
+
+                {#POSITION OF THE MAP#}
+                <div id="map_for_occurrences" style="height:400px; width:700px"></div>
+
+
+
                   {#Position of the chart#}
 
-                  <div id="histogram" class="col" style="height:300px; width:300px" style="border-style: solid;"></div>
+
+                  <div id="histogram" class="col" style="height:300px; width:400px;"></div>
                   <p>Geographical and temporal distribution of records</p>
-              </div>
-
-
-
-
-
 
     </div>
 
@@ -37,6 +43,7 @@
     <tr>
         <th>Date  </th>
         <th>Locality  </th>
+        <th></th>
         <th>Latitude  </th>
         <th>Longitude  </th>
         {#<th>Species (WoRMS)</th>#}
@@ -53,6 +60,7 @@
     <tr>
         <td>{{occurrence.eventDate | date ('d/m/Y') }}</td>
         <td>{{ occurrence.locality }}</td>
+        <td><a href="#" id="id{{ occurrence.id }}" class="btn btn-primary">Highlight</a></td>
         <td>{{ occurrence.decimalLatitude }}</td>
         <td>{{ occurrence.decimalLongitude }}</td>
         {#<td>{{ occurrence.species.speciesNameWorms }}</td>#}
@@ -90,55 +98,62 @@
 
     <script>
 
-        function initMap(){
-            var options = {
-                zoom:1.5,
-                center: {lat:15, lng:0}
-            }
-            var map = new google.maps.Map(document.getElementById('map'), options);
 
-            var markers = [
-                {% for occurrence in occurrences %}
-                {% if occurrence.species == singleSpecies %}
-                {% if loop.index0 != 0 %},{% endif %} {#https://stackoverflow.com/questions/10221055/code-twig-in-javascript#}
-                {
-                    coords:{lat:{{ occurrence.decimalLatitude}}, lng:{{ occurrence.decimalLongitude }} },
-                    content:'{{ occurrence.eventDate | date ('Y') }}<br/>{{ occurrence.locality  }}<br/>{{ occurrence.inputter.firstName | first }}. {{ occurrence.inputter.lastName }}'
+            var optionsMap = {
+                zoom:3,
+                center: [50,0]
+            }
+
+            var mapForOccurrences = L.map('map_for_occurrences', optionsMap);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 20,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A'
+            }).addTo(mapForOccurrences);
+
+            var markers = [];
+            {% for occurrence in occurrences %}
+            {% if occurrence.species == singleSpecies %} //https://stackoverflow.com/questions/12149233/concatenate-a-dynamic-variable-name-in-javascript
+
+            var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}"})
+                .addTo(mapForOccurrences)
+                .bindPopup("<p>{{ occurrence.locality }}</p><p>{{ occurrence.eventDate | date ('Y')  }}</p>");
+
+            markers.push (marker);
+            {% endif %}
+            {% endfor %}
+            console.log(markers);
+
+            function markerFunction(id){
+                for (var i in markers){
+                    var markerID = markers[i].options.title;
+
+
+                    if (markerID == id){
+                        var position = markers[i].getLatLng();
+                        // console.log(position);
+                        // var newPosition = new
+                        // console.log
+                        // mapForOccurrences.SetView(position, 5);
+
+                        markers[i].openPopup();
+                        // mapForOccurrences.panTo(position, 18);
+                        mapForOccurrences.flyTo(position, 7);
+                    };
                 }
-                {% endif %}
-                {% endfor %}
-            ];
-
-            for (var i = 0; i<markers.length;i++){
-                addMarker(markers[i]);
             }
 
-            function addMarker(props){
-                var marker = new google.maps.Marker({
-                    position:props.coords,
-                    map:map,
-                    // icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-                    icon: "{{ asset('images/green-dot.png') }}"
-                });
+            $("a").click(function(){
+                markerFunction($(this)[0].id);
+            });
 
-                if(props.content){
-                    var infoWindow = new google.maps.InfoWindow({
-                        content:props.content
-                    });
-                    //listener for infoWindow
-                    marker.addListener('click', function(){
-                        infoWindow.open(map, marker);
-                    });
-                }
-            }
 
-        }
+
 
     </script>
 
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4oz6vDqK7ysDuXJ9NXD0U8gsvLMM4fhI&callback=initMap">
-    </script>
+
 
 {% endblock %}
 
