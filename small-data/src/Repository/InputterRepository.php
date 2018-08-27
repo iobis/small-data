@@ -31,7 +31,7 @@ class InputterRepository extends ServiceEntityRepository
             ->execute();
 
     }
-    
+
 
     /**
      * @return Inputter[]

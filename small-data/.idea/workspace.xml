@@ -21,7 +21,7 @@
               <entry file="file://$PROJECT_DIR$/src/Repository/InputterRepository.php">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="304">
-                    <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+                    <caret line="33" selection-start-line="33" selection-end-line="33" />
                   </state>
                 </provider>
               </entry>
@@ -37,8 +37,8 @@
             <file leaf-file-name="OccurrencesSpeciesFixtures.php" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="335">
-                    <caret line="197" column="58" selection-start-line="197" selection-start-column="56" selection-end-line="197" selection-end-column="58" />
+                  <state relative-caret-position="655">
+                    <caret line="177" column="32" selection-start-line="177" selection-start-column="32" selection-end-line="177" selection-end-column="32" />
                     <folding>
                       <element signature="e#36#62#0#PHP" expanded="true" />
                     </folding>
@@ -427,12 +427,12 @@
       <workItem from="1534593004121" duration="27263000" />
       <workItem from="1534693580848" duration="34359000" />
       <workItem from="1534786292425" duration="44146000" />
-      <workItem from="1534982724616" duration="69007000" />
+      <workItem from="1534982724616" duration="73121000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490745000" />
+    <option name="totallyTimeSpent" value="494859000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -799,8 +799,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="197" column="58" selection-start-line="197" selection-start-column="56" selection-end-line="197" selection-end-column="58" />
+        <state relative-caret-position="655">
+          <caret line="177" column="32" selection-start-line="177" selection-start-column="32" selection-end-line="177" selection-end-column="32" />
           <folding>
             <element signature="e#36#62#0#PHP" expanded="true" />
           </folding>
@@ -810,7 +810,7 @@
     <entry file="file://$PROJECT_DIR$/src/Repository/InputterRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>

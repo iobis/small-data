@@ -847,52 +847,31 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 3918;Lomentaria hakodatensis;Romagnoli Solazzi 2003;Numana;1999;13.62971;43.51333
 5069;Lomentaria hakodatensis;Stegenga & Karremans;Wemeldinge;2014;4.00822;51.520558
 5070;Lomentaria hakodatensis;Stegenga & Karremans;Kattendijke;2014;3.950845;51.529509
-165;Sargassum muticum;Irish Biodiv Data Centre;"Rath Slip, Caher Daniel, Co. Kerry
- 2003";2003;-10.0568;51.76754
-166;Sargassum muticum;Irish Biodiv Data Centre;"West Cove, Co. Kerry
- 2003";2003;-10.0541;51.76921
+165;Sargassum muticum;Irish Biodiv Data Centre;Rath Slip, Caher Daniel, Co. Kerry;2003;-10.0568;51.76754
+166;Sargassum muticum;Irish Biodiv Data Centre;West Cove, Co. Kerry;2003;-10.0541;51.76921
 168;Sargassum muticum;ICES WGITMO 2004;Rath Strand Kenmare River;2001;-10.05272;51.77093
 174;Sargassum muticum;Irish Biodiv Data Centre;Dog's Bay, Roundstone, Co. Galway;2008;-9.96495;53.38009
-181;Sargassum muticum;Irish Biodiv Data Centre;"Blackhaven Bay, Co. Galway
- 2003";2003;-9.90655;53.38733
-182;Sargassum muticum;Irish Biodiv Data Centre;"Blackhaven Bay, Co. Galway
- 2003";2003;-9.89234;53.38828
-183;Sargassum muticum;Irish Biodiv Data Centre;"Blackhaven Bay, Co. Galway
- 2003";2003;-9.8898;53.39311
-184;Sargassum muticum;Irish Biodiv Data Centre;"Blackhaven Bay, Co. Galway
- 2003";2003;-9.8898;53.39311
-188;Sargassum muticum;Irish Biodiv Data Centre;"Outer Cashel Bay, Co. Galway
- 2003";2003;-9.8711;53.3936
-189;Sargassum muticum;Irish Biodiv Data Centre;"Leitir Ard Quay, Inishtreh sound, Co. Galway
- 2003";2003;-9.86359;53.38033
-190;Sargassum muticum;Irish Biodiv Data Centre;"Outer Cashel Bay, Co. Galway
- 2003";2003;-9.86236;53.40069
-191;Sargassum muticum;Irish Biodiv Data Centre;"Outer Cashel Bay, Co. Galway
- 2003";2003;-9.8622;53.38977
-195;Sargassum muticum;Irish Biodiv Data Centre;"Outer Cashel Bay, Co. Galway
- 2003";2003;-9.84731;53.39807
-198;Sargassum muticum;Irish Biodiv Data Centre;"Illaunaknock East of Glinsk Pier, Co. Galway
- 2003";2003;-9.83544;53.39291
+181;Sargassum muticum;Irish Biodiv Data Centre;Blackhaven Bay, Co. Galway;2003;-9.90655;53.38733
+182;Sargassum muticum;Irish Biodiv Data Centre;Blackhaven Bay, Co. Galway;2003;-9.89234;53.38828
+183;Sargassum muticum;Irish Biodiv Data Centre;Blackhaven Bay, Co. Galway;2003;-9.8898;53.39311
+184;Sargassum muticum;Irish Biodiv Data Centre;Blackhaven Bay, Co. Galway;2003;-9.8898;53.39311
+188;Sargassum muticum;Irish Biodiv Data Centre;Outer Cashel Bay, Co. Galway;2003;-9.8711;53.3936
+189;Sargassum muticum;Irish Biodiv Data Centre;Leitir Ard Quay, Inishtreh sound, Co. Galway;2003;-9.86359;53.38033
+190;Sargassum muticum;Irish Biodiv Data Centre;Outer Cashel Bay, Co. Galway;2003;-9.86236;53.40069
+191;Sargassum muticum;Irish Biodiv Data Centre;Outer Cashel Bay, Co. Galway;2003;-9.8622;53.38977
+195;Sargassum muticum;Irish Biodiv Data Centre;Outer Cashel Bay, Co. Galway;2003;-9.84731;53.39807
+198;Sargassum muticum;Irish Biodiv Data Centre;Illaunaknock East of Glinsk Pier, Co. Galway;2003;-9.83544;53.39291
 199;Sargassum muticum;ICES WGITMO 2004;Bertraghboy Bay.;2001;-9.81917;53.41805
-200;Sargassum muticum;Irish Biodiv Data Centre;"Middle Cashel Bay, Co. Galway
- 2003";2003;-9.81809;53.41529
-202;Sargassum muticum;Irish Biodiv Data Centre;"Inner Cashel Bay, Co. Galway
- 2003";2003;-9.81444;53.41771
-203;Sargassum muticum;Irish Biodiv Data Centre;"Middle Cashel Bay, Co. Galway
- 2003";2003;-9.81436;53.41643
-204;Sargassum muticum;Irish Biodiv Data Centre;"Inner Cashel Bay, Co. Galway
- 2003";2003;-9.80433;53.41608
+200;Sargassum muticum;Irish Biodiv Data Centre;Middle Cashel Bay, Co. Galway;2003;-9.81809;53.41529
+202;Sargassum muticum;Irish Biodiv Data Centre;Inner Cashel Bay, Co. Galway;2003;-9.81444;53.41771
+203;Sargassum muticum;Irish Biodiv Data Centre;Middle Cashel Bay, Co. Galway;2003;-9.81436;53.41643
+204;Sargassum muticum;Irish Biodiv Data Centre;Inner Cashel Bay, Co. Galway;2003;-9.80433;53.41608
 205;Sargassum muticum;Irish Biodiv Data Centre;Carraroe coral beach, Co. Galway;2007;-9.78545;53.32389
-208;Sargassum muticum;Irish Biodiv Data Centre;"Farranamagh, Kilcrohan, Dunmannus Bay. Co. Cork
- 2002";2002;-9.68558;51.5809
-210;Sargassum muticum;Irish Biodiv Data Centre;"Kitchen Cove, Dunmannus Bay, Co. Cork
- 2003";2003;-9.63745;51.59538
-214;Sargassum muticum;Irish Biodiv Data Centre;"Carriglea Rock, Dunmannus Bay, Co. Cork
- 2003";2003;-9.58416;51.61008
-215;Sargassum muticum;Irish Biodiv Data Centre;"Reen Point, Loughaun Pier, Bantry Bay, Co. Cork
- 2003";2003;-9.57421;51.65015
-216;Sargassum muticum;Irish Biodiv Data Centre;"Ross Laher, Kilmeena, Clew Bay, Co. Mayo
- 2003";2003;-9.57237;53.8496
+208;Sargassum muticum;Irish Biodiv Data Centre;Farranamagh, Kilcrohan, Dunmannus Bay. Co. Cork;2002;-9.68558;51.5809
+210;Sargassum muticum;Irish Biodiv Data Centre;Kitchen Cove, Dunmannus Bay, Co. Cork;2003;-9.63745;51.59538
+214;Sargassum muticum;Irish Biodiv Data Centre;Carriglea Rock, Dunmannus Bay, Co. Cork;2003;-9.58416;51.61008
+215;Sargassum muticum;Irish Biodiv Data Centre;Reen Point, Loughaun Pier, Bantry Bay, Co. Cork;2003;-9.57421;51.65015
+216;Sargassum muticum;Irish Biodiv Data Centre;Ross Laher, Kilmeena, Clew Bay, Co. Mayo;2003;-9.57237;53.8496
 249;Sargassum muticum;Mahon data;Sherkin Island;2004;-9.4362;51.47001
 250;Sargassum muticum;Mahon data;Sherkin Island;2004;-9.4362;51.47001
 251;Sargassum muticum;Mahon data;Sherkin Island;2004;-9.43476;51.48296
@@ -903,14 +882,12 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 265;Sargassum muticum;Coimbra Herbarium;Furnas;2003;-9.41525;38.93069
 266;Sargassum muticum;Coimbra Herbarium;Furnas;2003;-9.41525;38.93069
 267;Sargassum muticum;Irish Biodiv Data Centre;Sherkin Island, Roaring Water Bay, Co. Cork;2004;-9.41032;51.47727
-268;Sargassum muticum;Irish Biodiv Data Centre;"White Hall, Roaring Water Bay, Co. Cork
- 2003";2003;-9.40422;51.52949
+268;Sargassum muticum;Irish Biodiv Data Centre;White Hall, Roaring Water Bay, Co. Cork;2003;-9.40422;51.52949
 269;Sargassum muticum;Mahon data;Sherkin Island;2004;-9.40238;51.47504
 270;Sargassum muticum;Mahon data;Sherkin Island;2004;-9.40238;51.47504
 283;Sargassum muticum;Coimbra Herbarium;Peniche;1998;-9.38311;39.34884
 303;Sargassum muticum;Berecibar pers observ;Carcavelos;2009;-9.319;38.6756
-305;Sargassum muticum;Irish Biodiv Data Centre;"South of the 'Whirlpool' cliff area. Eastern shore
- 2003";2003;-9.3116;51.49623
+305;Sargassum muticum;Irish Biodiv Data Centre;South of the 'Whirlpool' cliff area. Eastern shore;2003;-9.3116;51.49623
 307;Sargassum muticum;ICES WGITMO 2004;Lough Hyne;2003;-9.30379;51.50743
 308;Sargassum muticum;ICES WGITMO 2004;Lough Hyne;2003;-9.30379;51.50743
 309;Sargassum muticum;Berecibar pers observ;Oeiras;2009;-9.3024;38.6841
@@ -949,8 +926,7 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 663;Sargassum muticum;Coimbra Herbarium;Aguda;2001;-8.67403;41.14752
 682;Sargassum muticum;ICES WGITMO 2004;Drumcliff Bay;2002;-8.6282;54.336
 683;Sargassum muticum;Sabour et al 2012;Sidi Bouzid;2012;-8.5937;33.1968
-684;Sargassum muticum;Irish Biodiv Data Centre;"Rosses Point, Yachting Club, Co. Sligo
- 2003";2003;-8.57628;54.30634
+684;Sargassum muticum;Irish Biodiv Data Centre;Rosses Point, Yachting Club, Co. Sligo;2003;-8.57628;54.30634
 685;Sargassum muticum;Sabour et al 2012;Sidi Bouzib;2012;-8.56639;33.21001
 691;Sargassum muticum;Irish Biodiv Data Centre;Sandy Cove, Kinsale Harbour, Co. Cork;2005;-8.5276;51.65191
 700;Sargassum muticum;Sabour et al 2012;El jadida;2012;-8.49609;33.25262
@@ -974,11 +950,8 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 913;Sargassum muticum;Barcelo Marti et al 2001;Ribadeo;1989;-7.03531;43.55613
 917;Sargassum muticum;ALIENS data;Tapia de Casariego;2002;-6.94377;43.57371
 925;Sargassum muticum;ALIENS data;Torbas;2002;-6.71463;43.56662
-931;Sargassum muticum;Irish Biodiv Data Centre;"Kilmore Quay, Forlorn Point, Co. Waterford. 
- 2003";2003;-6.5904;52.17121
 932;Sargassum muticum;ICES WGITMO 2004;Kilmore Quay;2001;-6.58363;52.1713
-933;Sargassum muticum;Irish Biodiv Data Centre;"Kilmore Quay, Forlorn Point, Co. Waterford
- 2003";2003;-6.55913;52.18157
+933;Sargassum muticum;Irish Biodiv Data Centre;Kilmore Quay, Forlorn Point, Co. Waterford;2003;-6.55913;52.18157
 960;Sargassum muticum;Davison 1999;Scilly Islands;1980;-6.29511;49.94653
 965;Sargassum muticum;ALIENS data;Novellana;2002;-6.26684;43.58308
 980;Sargassum muticum;Irish Biodiv Data Centre;Mullaghnore Harbour, Donegal Bay, Co. Sligo;2005;-6.19127;54.05205
@@ -999,36 +972,26 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 1039;Sargassum muticum;Irish Biodiv Data Centre;Darragh Island Causeway, Strangford Lough;2004;-5.62626;54.45286
 1043;Sargassum muticum;Altamirano, 2009;Los Lances beach;2009;-5.615;36.01917
 1046;Sargassum muticum;Irish Biodiv Data Centre;Ardglass Marina;2006;-5.60484;54.25975
-1049;Sargassum muticum;Irish Biodiv Data Centre;"Chapel Island Causeway, Strangford Lough
- 2003";2003;-5.59335;54.38504
+1049;Sargassum muticum;Irish Biodiv Data Centre;Chapel Island Causeway, Strangford Lough;2003;-5.59335;54.38504
 1054;Sargassum muticum;ALIENS data;Marlfield Bay;2002;-5.57968;54.41418
-1055;Sargassum muticum;Irish Biodiv Data Centre;"Selk Rock
- 2003";2003;-5.57846;54.39348
+1055;Sargassum muticum;Irish Biodiv Data Centre;Selk Rock;2003;-5.57846;54.39348
 1056;Sargassum muticum;Irish Biodiv Data Centre;Inner Lee's Wreck, Ballyhenry, Strangford Lough;2006;-5.57677;54.39276
 1058;Sargassum muticum;Irish Biodiv Data Centre;The Pins, Ballyhenry Bay, Strangford Lough;2004;-5.56723;54.39072
 1059;Sargassum muticum;Irish Biodiv Data Centre;Inner Lee's Wreck, Ballyhenry, Strangford Lough;2006;-5.56723;54.39072
-1061;Sargassum muticum;Irish Biodiv Data Centre;"Opposite Walter's Rocks, Strangford Lough
- 2003";2003;-5.55941;54.38615
+1061;Sargassum muticum;Irish Biodiv Data Centre;Opposite Walter's Rocks, Strangford Lough;2003;-5.55941;54.38615
 1062;Sargassum muticum;Irish Biodiv Data Centre;Audley's Castle Rocks, Strangford Lough;2005;-5.55941;54.38615
 1064;Sargassum muticum;Scottish Natural Heritage;Campbeltown Loch, Kintyre, Argyll;2007;-5.55028;55.4178
 1065;Sargassum muticum;Irish Biodiv Data Centre;Isle O' Valla, Strangford Lough;2005;-5.54973;54.36034
-1067;Sargassum muticum;Irish Biodiv Data Centre;"Sewage Plant, Black Islands, Strangford Lough
- 2003";2003;-5.54873;54.36357
+1067;Sargassum muticum;Irish Biodiv Data Centre;Sewage Plant, Black Islands, Strangford Lough;2003;-5.54873;54.36357
 1069;Sargassum muticum;Irish Biodiv Data Centre;Portaferry Marina;2006;-5.54668;54.37815
 1070;Sargassum muticum;Irish Biodiv Data Centre;Yellow Rocks, Strangford Lough;2005;-5.54506;54.4435
-1071;Sargassum muticum;Irish Biodiv Data Centre;"Cloghy Rocks, Strangford Lough
- 2003";2003;-5.54362;54.34902
-1073;Sargassum muticum;Irish Biodiv Data Centre;"Rue Point, Strangford Lough
- 2003";2003;-5.54023;54.36573
+1071;Sargassum muticum;Irish Biodiv Data Centre;Cloghy Rocks, Strangford Lough;2003;-5.54362;54.34902
+1073;Sargassum muticum;Irish Biodiv Data Centre;Rue Point, Strangford Lough;2003;-5.54023;54.36573
 1076;Sargassum muticum;Irish Biodiv Data Centre;Islandacor, Strangford Lough;2007;-5.53941;54.3648
-1078;Sargassum muticum;Irish Biodiv Data Centre;"Kilclief Bay, Strangford Lough
- 2003";2003;-5.53832;54.33819
-1079;Sargassum muticum;Irish Biodiv Data Centre;"Benderg Bay south
- 2003";2003;-5.5339;54.30987
-1080;Sargassum muticum;Irish Biodiv Data Centre;"Benderg Bay south
- 2003";2003;-5.5339;54.30987
-1081;Sargassum muticum;Irish Biodiv Data Centre;"Craiglewey
- 2003";2003;-5.5339;54.30987
+1078;Sargassum muticum;Irish Biodiv Data Centre;Kilclief Bay, Strangford Lough;2003;-5.53832;54.33819
+1079;Sargassum muticum;Irish Biodiv Data Centre;Benderg Bay south;2003;-5.5339;54.30987
+1080;Sargassum muticum;Irish Biodiv Data Centre;Benderg Bay south;2003;-5.5339;54.30987
+1081;Sargassum muticum;Irish Biodiv Data Centre;Craiglewey;2003;-5.5339;54.30987
 1093;Sargassum muticum;Scottish Natural Heritage;Ganavan, Oban, Argyll;2007;-5.46966;56.43787
 1099;Sargassum muticum;Scottish Natural Heritage;Clonaig, Kintyre, Argyll;2007;-5.38759;55.75058
 1100;Sargassum muticum;Scottish Natural Heritage;Loch Fyne, Argyll;2006;-5.35865;55.87724
@@ -1059,8 +1022,7 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 1197;Sargassum muticum;Belsher questionnaire;Port du  Conquet;1989;-4.78045;48.36398
 1200;Sargassum muticum;Belsher questionnaire;Lochrist;1989;-4.77609;48.34627
 1204;Sargassum muticum;Gruet 1983;Ladunvez;1983;-4.75026;48.55018
-1205;Sargassum muticum;Scottish Natural Heritage;"Porth Oer,
- North Lleyn";2002;-4.74238;52.81575
+1205;Sargassum muticum;Scottish Natural Heritage;Porth Oer, North Lleyn;2002;-4.74238;52.81575
 1215;Sargassum muticum;Davison 1999;Lundy_drift;1996;-4.65316;51.18381
 1216;Sargassum muticum;Scottish Natural Heritage;Porth Ysgaden;2007;-4.64955;52.90482
 1219;Sargassum muticum;Eno et al 1997;Crackington Cove;1992;-4.64439;50.745
@@ -1069,8 +1031,7 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 1231;Sargassum muticum;Belsher questionnaire;Beg ar Vill;1984;-4.59382;48.567
 1232;Sargassum muticum;Belsher questionnaire;Camaret pontoon;1990;-4.59148;48.2831
 1233;Sargassum muticum;Scottish Natural Heritage;Inland Sea, Anglesey;2004;-4.59032;53.30729
-1243;Sargassum muticum;Scottish Natural Heritage;"Porth
- Dinllaen";2002;-4.56951;52.94145
+1243;Sargassum muticum;Scottish Natural Heritage;Porth Dinllaen;2002;-4.56951;52.94145
 1252;Sargassum muticum;Belsher questionnaire;Audierne_drift;1987;-4.54804;48.01124
 1261;Sargassum muticum;ALIENS data;Talland Bay;2002;-4.51139;50.33341
 1268;Sargassum muticum;Fernandez Montero et al 1997;Ria Tina Menor;1997;-4.4685;43.3941
@@ -1078,8 +1039,7 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 1283;Sargassum muticum;Belsher questionnaire;Brest insdustrial area;1988;-4.4159;48.38362
 1284;Sargassum muticum;Belsher questionnaire;Anse de Poulmic;1987;-4.39735;48.28099
 1288;Sargassum muticum;Belsher questionnaire;Douarnenez;1989;-4.36701;48.11444
-1292;Sargassum muticum;Scottish Natural Heritage;"Newborough,
- West Anglesey";2003;-4.35562;53.1492
+1292;Sargassum muticum;Scottish Natural Heritage;Newborough,West Anglesey;2003;-4.35562;53.1492
 1293;Sargassum muticum;Belsher questionnaire;Kerity harbour;1983;-4.35142;47.78958
 1294;Sargassum muticum;Belsher questionnaire;Pointe du Bindy;1984;-4.34194;48.32065
 1302;Sargassum muticum;Belsher questionnaire;Baie de Men Meur;1988;-4.3209;47.79085
@@ -1126,9 +1086,7 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 1441;Sargassum muticum;Belsher questionnaire;Plouezoch;1987;-3.8505;48.6335
 1442;Sargassum muticum;Belsher questionnaire;Plouezoch;1983;-3.84775;48.63328
 1445;Sargassum muticum;Belsher questionnaire;Pen Ar Guer;1984;-3.84265;48.63296
-1447;Sargassum muticum;Scottish Natural Heritage;"Port Talbot
- Harbour,
- Glamorgan";2003;-3.79891;51.57145
+1447;Sargassum muticum;Scottish Natural Heritage;Port Talbot Harbour,Glamorgan;2003;-3.79891;51.57145
 1448;Sargassum muticum;Critchley 1983;Salcombe;1981;-3.78788;50.22436
 1457;Sargassum muticum;ALIENS data;East Prawle;2002;-3.71101;50.21025
 1462;Sargassum muticum;ALIENS data;Lannacombe;2002;-3.68852;50.22074
@@ -1531,7 +1489,7 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 2613;Sargassum muticum;Stiger-Pouvreau, unpublished data;Saint Pabu;2001;-4.6279;48.5791
 2614;Sargassum muticum;Tanniou et al;Plouzan�;2011;-4.631;48.339
 2616;Sargassum muticum;Belsher questionnaire;Saintes Maries de la Mer in a canal;1990;4.43581;43.45864
-2617;Sargassum muticum;Le Lann et al. 2012;Porsmeur;;-4.77;48.48
+2617;Sargassum muticum;Le Lann et al. 2012;Porsmeur;2012;-4.77;48.48
 2621;Sargassum muticum;Tanniou et al;Solberg;2011;4.797;60.587
 2623;Sargassum muticum;Tanniou et al;Kr�kjeb�rholmen;2011;4.844;60.584
 2624;Sargassum muticum;Tanniou et al;Sau�yna;2011;4.848;60.588
@@ -1567,10 +1525,7 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 2829;Sargassum muticum;E. Hegg�y;Skudeneshavn;2011;5.26005;59.1478
 2836;Sargassum muticum;V. Husa;Milde;2010;5.268816667;60.24936667
 2838;Sargassum muticum;E. Hegg�y;Koparvik;2011;5.2989;59.28311667
-2840;Sargassum muticum;Le Diouron PhD, unp. Data;Site 1;;5.5004;59.768
-2842;Sargassum muticum;Le Diouron PhD, unp. Data;Site 2;;5.5021;59.7685
 2852;Sargassum muticum;V. Husa;R�yksund;2010;5.33615;59.72856667
-2874;Sargassum muticum;Le Diouron PhD, unp. Data;Site 3;;5.6524;59.7693
 2879;Sargassum muticum;Henning Steen data;Halhjem;1993;5.43094;60.1469
 2881;Sargassum muticum;V. Husa;Alvestad;2011;5.457283333;59.21873333
 2884;Sargassum muticum;V. Husa;Sl�ttesvik;2011;5.462416667;59.31245
@@ -1626,7 +1581,6 @@ number;ScientificName_accepted;REFERENCE;SITE;YEAR;LONGITUDE;LATITUDE
 3157;Sargassum muticum;Henning Steen data;Dansvik;1989;7.374515;58.00867
 3158;Sargassum muticum;Henning Steen data;Hill�y;1989;7.382732;57.99445
 3201;Sargassum muticum;Henning Steen data;T�nes / �lo;1990;7.702157;58.03747
-3204;Sargassum muticum;"Moen, Karl Ivar; �sen, Per Arvid; m.fl.";Lastad;2005;7.706457;58.050375
 3209;Sargassum muticum;Rueness 1989;Norway_drift;1984;7.76234;58.04049
 3210;Sargassum muticum;Rueness 1989;Norway;1988;7.77783;58.04049
 3221;Sargassum muticum;Henning Steen data;between Kr.sand and S�gne;1989;7.895683;58.08424
