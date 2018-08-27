@@ -28,9 +28,15 @@ class Phylum
      */
     private $species;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Inputter", mappedBy="phylumOfExpertise")
+     */
+    private $expertiseBy;
+
     public function __construct()
     {
         $this->species = new ArrayCollection();
+        $this->expertiseBy = new ArrayCollection();
     }
 
     public function getId()
@@ -76,6 +82,34 @@ class Phylum
             if ($species->getPhylum() === $this) {
                 $species->setPhylum(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Inputter[]
+     */
+    public function getExpertiseBy(): Collection
+    {
+        return $this->expertiseBy;
+    }
+
+    public function addExpertiseBy(Inputter $expertiseBy): self
+    {
+        if (!$this->expertiseBy->contains($expertiseBy)) {
+            $this->expertiseBy[] = $expertiseBy;
+            $expertiseBy->addPhylumOfExpertise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExpertiseBy(Inputter $expertiseBy): self
+    {
+        if ($this->expertiseBy->contains($expertiseBy)) {
+            $this->expertiseBy->removeElement($expertiseBy);
+            $expertiseBy->removePhylumOfExpertise($this);
         }
 
         return $this;

@@ -177,6 +177,7 @@ class OccurrencesSpeciesFixtures extends Fixture
                     $occurrence->setLastModifier($inputter);
                     $occurrence->setLastModifiedAt($timeCreationAndLastModification);
 
+
                     $manager->persist($occurrence);
 
 
@@ -189,5 +190,74 @@ class OccurrencesSpeciesFixtures extends Fixture
         $manager->flush();
 
 
+        //NOW setting the validations on occurrences
+        $occurrencesRep = $manager->getRepository(Occurrence::class);
+        $occurrences = $occurrencesRep->findBy([]);
+//        $validatorsForOccurrence = $inputterRep->findBy([]);
+        foreach ($occurrences as $occurrence){
+            $occurrence->setIsValidated($faker->boolean(70));
+
+
+            $manager->persist($occurrence);
+        }
+        $manager->flush();
+
+        $occurrencesValid = $occurrencesRep->findAllValidatedOccurrences();
+        $inputterRep=$manager->getRepository(Inputter::class);
+        $validatorsForOccurrences = $inputterRep->findAllValidators();
+
+        foreach ($occurrencesValid as $occurrenceValid){
+            $validator = $validatorsForOccurrences[array_rand($validatorsForOccurrences)];
+            $occurrenceValid->addValidatedBy($validator);
+
+            $occurrenceValid->setLocationId('trial');
+            $anotherValidator = $validatorsForOccurrences[array_rand($validatorsForOccurrences)];
+            if ($anotherValidator != $validator){ //getting supplementary validator for the occurrence
+                $prob = $faker->boolean(30);
+                if($prob){
+                    $occurrenceValid->addValidatedBy($anotherValidator);
+                }
+
+            }
+            $manager->persist($occurrenceValid);
+        }
+        $manager->flush();
+
+        //Now setting the expertise
+        $phyla = $manager->getRepository(Phylum::class)->findBy([]);
+
+
+        foreach ($validatorsForOccurrences as $validator){
+            $phylum = $phyla[array_rand($phyla)];
+            $validator->addPhylumOfExpertise($phylum);
+            $anotherPhylum = $phyla[array_rand($phyla)];
+            if($anotherPhylum != $phylum){
+                $prob = $faker->boolean(50);
+                if($prob){
+                    $validator->addPhylumOfExpertise($anotherPhylum);
+                }
+            }
+            $manager->persist($validator);
+        }
+        $manager->flush();
+
+
+
+//        $inputterRep=$manager->getRepository(Inputter::class);
+//        $inputtersForPhylum = $inputterRep->findBy([]);
+
+
+
+
+
+
+
+       //https://symfony.com/doc/3.3/doctrine.html#querying-for-objects-using-doctrine-s-query-builder
+
+
+
+
     }
 }
+
+//https://www.youtube.com/watch?v=IEThNX6vLKk

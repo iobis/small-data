@@ -78,11 +78,29 @@ class Inputter implements UserInterface
      */
     private $modifiedOccurrences;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Occurrence", mappedBy="validatedBy")
+     */
+    private $occurrencesValidated;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Phylum", inversedBy="expertiseBy")
+     * @ORM\JoinTable(name="phylum_validator")
+     */
+    private $phylumOfExpertise;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $trialField;
+
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
         $this->roles[] = 'ROLE_INPUTTER';
         $this->modifiedOccurrences = new ArrayCollection();
+        $this->occurrencesValidated = new ArrayCollection();
+        $this->phylumOfExpertise = new ArrayCollection();
     }
 
 
@@ -235,6 +253,72 @@ class Inputter implements UserInterface
                 $modifiedOccurrence->setLastModifier(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Occurrence[]
+     */
+    public function getOccurrencesValidated(): Collection
+    {
+        return $this->occurrencesValidated;
+    }
+
+    public function addOccurrencesValidated(Occurrence $occurrencesValidated): self
+    {
+        if (!$this->occurrencesValidated->contains($occurrencesValidated)) {
+            $this->occurrencesValidated[] = $occurrencesValidated;
+            $occurrencesValidated->addValidatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOccurrencesValidated(Occurrence $occurrencesValidated): self
+    {
+        if ($this->occurrencesValidated->contains($occurrencesValidated)) {
+            $this->occurrencesValidated->removeElement($occurrencesValidated);
+            $occurrencesValidated->removeValidatedBy($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Phylum[]
+     */
+    public function getPhylumOfExpertise(): Collection
+    {
+        return $this->phylumOfExpertise;
+    }
+
+    public function addPhylumOfExpertise(Phylum $phylumOfExpertise): self
+    {
+        if (!$this->phylumOfExpertise->contains($phylumOfExpertise)) {
+            $this->phylumOfExpertise[] = $phylumOfExpertise;
+        }
+
+        return $this;
+    }
+
+    public function removePhylumOfExpertise(Phylum $phylumOfExpertise): self
+    {
+        if ($this->phylumOfExpertise->contains($phylumOfExpertise)) {
+            $this->phylumOfExpertise->removeElement($phylumOfExpertise);
+        }
+
+        return $this;
+    }
+
+    public function getTrialField(): ?string
+    {
+        return $this->trialField;
+    }
+
+    public function setTrialField(?string $trialField): self
+    {
+        $this->trialField = $trialField;
 
         return $this;
     }

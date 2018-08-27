@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -88,6 +90,27 @@ class Occurrence
      * @ORM\JoinColumn(nullable=false)
      */
     private $lastModifier;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isValidated;
+
+
+//https://knpuniversity.com/screencast/collections/many-to-many-setup
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Inputter", inversedBy="occurrencesValidated")
+     * @ORM\JoinTable(name="occurrence_validator")
+     */
+    private $validatedBy;
+
+    public function __construct()
+    {
+        $this->validatedBy = new ArrayCollection();
+        $this->isValidated = false;
+    }
+
+
 
 
 
@@ -263,6 +286,46 @@ class Occurrence
 
         return $this;
     }
+
+    public function getIsValidated(): ?bool
+    {
+        return $this->isValidated;
+    }
+
+    public function setIsValidated(bool $isValidated ): self
+    {
+        $this->isValidated = $isValidated;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Inputter[]
+     */
+    public function getValidatedBy(): Collection
+    {
+        return $this->validatedBy;
+    }
+
+    public function addValidatedBy(Inputter $validatedBy): self
+    {
+        if (!$this->validatedBy->contains($validatedBy)) {
+            $this->validatedBy[] = $validatedBy;
+        }
+
+        return $this;
+    }
+
+    public function removeValidatedBy(Inputter $validatedBy): self
+    {
+        if ($this->validatedBy->contains($validatedBy)) {
+            $this->validatedBy->removeElement($validatedBy);
+        }
+
+        return $this;
+    }
+
+
 
 
 }

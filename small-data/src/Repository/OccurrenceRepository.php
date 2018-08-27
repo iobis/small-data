@@ -19,7 +19,17 @@ class OccurrenceRepository extends ServiceEntityRepository
         parent::__construct($registry, Occurrence::class);
     }
 
+    /**
+     * @return Occurrence[]
+     */
+    public function findAllValidatedOccurrences(){
 
+        return $this->createQueryBuilder('occ')
+            ->andWhere('occ.isValidated = :isValidated')
+            ->setParameter('isValidated', true)
+            ->getQuery()
+            ->execute();
+    }
 
 
 

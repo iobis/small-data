@@ -4,13 +4,13 @@
 
 
 {#https://stackoverflow.com/questions/24383917/symfony2-get-user-role-in-twig#}
-    {% if  app.user  !=  occurrence.inputter and not is_granted ('ROLE_VALIDATOR') %}
+    {% if  app.user  !=  occurrence.inputter or not is_granted ('ROLE_VALIDATOR') %}
         <h1>Occurrence {{ occurrence.id }} for <i>{{ singleSpecies.speciesNameWorms }} </i></h1>
         <p>Created by {{ occurrence.inputter.firstName }} {{ occurrence.inputter.lastName }} ({{ occurrence.inputter.username }}),
             on {{ occurrence.occurrenceCreatedAt | date ('d/m/Y')}}
             at {{ occurrence.occurrenceCreatedAt | date ('H:i')}}</p>
         <br>
-        <h4>As you are not the creator of this record, please notice that you are not authorizes to edit it.</h4>
+        <h4>As you are not the creator of this record, please notice that you are not authorized to edit it.</h4>
         <h4>Please contact the administrator to become a validator</h4>
 
     {% else %}

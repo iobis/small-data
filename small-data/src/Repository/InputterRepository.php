@@ -19,6 +19,37 @@ class InputterRepository extends ServiceEntityRepository
         parent::__construct($registry, Inputter::class);
     }
 
+    /**
+     * @return Inputter[]
+     */
+    public function findAllValidatorsJson(){
+        return $this->createQueryBuilder('inp')
+//str_replace('"', '', )
+            ->andWhere(json_encode('inp.roles LIKE :role'))
+            ->setParameter('role', '%ROLE_VALIDATOR%' )
+            ->getQuery()
+            ->execute();
+
+    }
+    
+
+    /**
+     * @return Inputter[]
+     */
+    public function findAllValidators(){
+        return $this->createQueryBuilder('inp')
+            ->andWhere('inp.username LIKE :username1')
+            ->setParameter('username1', '%1%')
+            ->orWhere('inp.username LIKE :username2')
+
+            ->setParameter('username2', '%2%')
+            ->getQuery()
+            ->execute();
+
+    }
+
+
+
 //    /**
 //     * @return Inputter[] Returns an array of Inputter objects
 //     */
