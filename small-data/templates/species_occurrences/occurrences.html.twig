@@ -56,6 +56,7 @@
     </tr>
 
     {% for occurrence in occurrences %}
+        {% if  occurrence.isValidated %}
         {% if occurrence.species == singleSpecies %}
     <tr>
         <td>{{occurrence.eventDate | date ('d/m/Y') }}</td>
@@ -73,15 +74,18 @@
 
     </tr>
         {% endif %}
+        {% endif %}
     {% endfor %}
 </table>
 
     <script>
         var year = [
             {% for occurrence in occurrences %}
+            {% if occurrence.isValidated %}
             {% if occurrence.species == singleSpecies %}
             {% if loop.index0 != 0 %},{% endif %}
             {{ occurrence.eventDate | date ('Y')}}
+            {% endif %}
             {% endif %}
             {% endfor %}
 
@@ -114,6 +118,7 @@
 
             var markers = [];
             {% for occurrence in occurrences %}
+            {% if occurrence.isValidated %}
             {% if occurrence.species == singleSpecies %} //https://stackoverflow.com/questions/12149233/concatenate-a-dynamic-variable-name-in-javascript
 
             var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}"})
@@ -121,6 +126,7 @@
                 .bindPopup("<p>{{ occurrence.locality }}</p><p>{{ occurrence.eventDate | date ('Y')  }}</p>");
 
             markers.push (marker);
+            {% endif %}
             {% endif %}
             {% endfor %}
             console.log(markers);

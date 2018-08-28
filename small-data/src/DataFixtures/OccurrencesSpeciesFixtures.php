@@ -144,31 +144,15 @@ class OccurrencesSpeciesFixtures extends Fixture
                     $occurrence->setSpecies($singleSpeciesForOccurrences);
                 }
             }
-//                $species = $speciesForOccurrences[array_rand($speciesForOccurrences)];
-//                $occurrence->setSpecies($species);
-
 
                     $occurrence->setDecimalLatitude($lineOccurrence[6]);
                     $occurrence->setDecimalLongitude($lineOccurrence[5]);
                     //https://stackoverflow.com/questions/12447110/php-date-format-remove-time-and-more
                   $date = ($lineOccurrence[4].'-01-01');
-//                $date = ($lineOccurrence[4]);
                     $createDate = new \DateTime($date);
-//                    $dateWithoutTime = $createDate->format('YYYY-MM-DD');
-//                    $occurrence->setEventDate($dateWithoutTime);
-//                https://stackoverflow.com/questions/6238992/converting-string-to-date-and-datetime
-//                        $year = $lineOccurrence[4];
-//                    $dateString = $year.'-01-01';
-//                    $ymd = \DateTime::createFromFormat('Y-m-d', $dateString);
-//                    $occurrence->setEventDate($ymd);
-
-                 //  $occurrence->setEventDate($faker->dateTimeBetween('-100 years'));
-
-
                     $occurrence->setEventDate($createDate);
                    $occurrence->setLocality($lineOccurrence[3]);
                    $occurrence->setOccurrenceRemarks($lineOccurrence[2]);
-
                     //https://stackoverflow.com/questions/25278645/getting-a-random-object-from-an-array-in-php
                     $inputter = $inputtersForOccurrences[array_rand($inputtersForOccurrences)];
                     $timeCreationAndLastModification = $faker->dateTimeBetween('-100 days');
@@ -193,9 +177,9 @@ class OccurrencesSpeciesFixtures extends Fixture
         //NOW setting the validations on occurrences
         $occurrencesRep = $manager->getRepository(Occurrence::class);
         $occurrences = $occurrencesRep->findBy([]);
-//        $validatorsForOccurrence = $inputterRep->findBy([]);
+
         foreach ($occurrences as $occurrence){
-            $occurrence->setIsValidated($faker->boolean(70));
+            $occurrence->setIsValidated($faker->boolean(90));
 
 
             $manager->persist($occurrence);
@@ -203,15 +187,26 @@ class OccurrencesSpeciesFixtures extends Fixture
         $manager->flush();
 
         $occurrencesValid = $occurrencesRep->findAllValidatedOccurrences();
+
         $inputterRep=$manager->getRepository(Inputter::class);
-        $validatorsForOccurrences = $inputterRep->findAllValidators();
+        $allInputters = $inputterRep->findBy([]);
+        $inputtersValidators = [];
+        foreach ($allInputters as $inputter){
+            $roles= $inputter->getRoles();
+            foreach ($roles as $role){
+                if((string)$role=='ROLE_VALIDATOR'){
+                    $inputtersValidators[]=$inputter;
+                }
+            }
+        }
+
 
         foreach ($occurrencesValid as $occurrenceValid){
-            $validator = $validatorsForOccurrences[array_rand($validatorsForOccurrences)];
+            $validator = $inputtersValidators[array_rand($inputtersValidators)];
             $occurrenceValid->addValidatedBy($validator);
 
             $occurrenceValid->setLocationId('trial');
-            $anotherValidator = $validatorsForOccurrences[array_rand($validatorsForOccurrences)];
+            $anotherValidator = $inputtersValidators[array_rand($inputtersValidators)];
             if ($anotherValidator != $validator){ //getting supplementary validator for the occurrence
                 $prob = $faker->boolean(30);
                 if($prob){
@@ -227,7 +222,7 @@ class OccurrencesSpeciesFixtures extends Fixture
         $phyla = $manager->getRepository(Phylum::class)->findBy([]);
 
 
-        foreach ($validatorsForOccurrences as $validator){
+        foreach ($inputtersValidators as $validator){
             $phylum = $phyla[array_rand($phyla)];
             $validator->addPhylumOfExpertise($phylum);
             $anotherPhylum = $phyla[array_rand($phyla)];

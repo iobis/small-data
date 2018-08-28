@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for singleSpecies in phylumToDisplay.species %}
+
+        {% set newOccurrencesForSpecies = [] %}
+        {% for occurrence in occurrencesNonValid if occurrence.species.id == singleSpecies.id %}
+        {% set newOccurrencesForSpecies = newOccurrencesForSpecies|merge([occurrence]) %}
+        {% endfor %}
+
+        {% if newOccurrencesForSpecies|length > 0 %}
+           <h3><i>{{ singleSpecies.speciesNameWorms }}</i>: {{ newOccurrencesForSpecies|length }} new records</h3>
+            <a href="{{ path('non_valid_list_for_phylum_with_details_one_species', {'idPhylum':singleSpecies.phylum.id, 'wormsAphiaId': singleSpecies.wormsAphiaId, 'mode' : "show_list" } )}}" class="btn btn-primary">View</a>
+            {% if mode == 'show_list' and wormsAphiaIdForDetails == singleSpecies.wormsAphiaId %}
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Locality</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Author</th>
+                        <th>Last modified by</th>
+
+                    </tr>
+
+                {% for occurrence in newOccurrencesForSpecies %}
+
+                    <tr>
+                        <td>{{occurrence.eventDate | date ('d/m/Y') }}</td>
+                        <td>{{ occurrence.locality }}</td>
+                        <td>{{ occurrence.decimalLatitude }}</td>
+                        <td>{{ occurrence.decimalLongitude }}</td>
+                        <td>{{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}<br>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d') }}</td>
+                        <td>{{ occurrence.lastModifier.lastName }}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+                {% endif %}
+
+        {% endif %}
+
+    {% endfor %}
+
+{% endblock %}
+

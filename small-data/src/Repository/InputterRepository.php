@@ -24,7 +24,6 @@ class InputterRepository extends ServiceEntityRepository
      */
     public function findAllValidatorsJson(){
         return $this->createQueryBuilder('inp')
-//str_replace('"', '', )
             ->andWhere(json_encode('inp.roles LIKE :role'))
             ->setParameter('role', '%ROLE_VALIDATOR%' )
             ->getQuery()

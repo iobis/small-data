@@ -6,9 +6,43 @@
     <h1>Welcome to "Small Data" </h1>
     {% if app.user %}
         <h3>Your logged in as: {{ app.user.username }}</h3>
-    {% for role in app.user.roles %}
-    {{ role }} <br>
-    {% endfor %}
+    {#{% for role in app.user.roles %}#}
+    {#{{ role }} <br>#}
+    {#{% endfor %}#}
+
+
+    <h4>Your roles are:
+
+   {% if 'ROLE_INPUTTER' in app.user.roles %}
+       inputter
+    {% endif %}
+ {% if 'ROLE_VALIDATOR' in app.user.roles %}
+      , validator
+    {% endif %}
+ {% if 'ROLE_ADMINSTRATOR' in app.user.roles %}
+     , administrator
+ {% endif %}
+    .</h4>
+
+
+    {% if 'ROLE_VALIDATOR' in app.user.roles %}
+        <h4>Your current credentials allow you to validate new records for the following taxonomic groups: </h4>
+            {% for expertise in app.user.phylumOfExpertise %}
+            <h5>{{ expertise.phylumNameWorms | raw}} :
+                {#http://findnerd.com/list/view/How-to-use-if-condition-with-for-loop-in-twig-symfony/23183/#}
+                {% set newOccurrencesforPhylum = [] %}
+                {% for occurrence in occurrencesNonValid if occurrence.species.phylum.phylumNameWorms == expertise.phylumNameWorms %}
+                        {#{{ occurrence.species.phylum.phylumNameWorms }}#}
+                    {% set newOccurrencesforPhylum = newOccurrencesforPhylum|merge([occurrence.id]) %}
+
+                {% endfor %}
+                {{ newOccurrencesforPhylum |length }} new records
+
+                <a href="{{ path('non_valid_list_for_phylum', {'idPhylum': expertise.id}) }}" class="btn btn-primary">Start validation</a></h5>
+            {% endfor %}
+
+    {% endif %}
+
     {% endif %}
 
 

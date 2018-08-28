@@ -26,9 +26,15 @@ class SmallDataController extends Controller
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(ObjectManager $manager)
     {
-        return $this->render('species_occurrences/home.html.twig', []);
+        $occurrences = $manager->getRepository(Occurrence::class)->findBy([]);
+        $occurrencesNonValid = $manager->getRepository(Occurrence::class)->findBy(['isValidated'=>false]);
+
+        return $this->render('species_occurrences/home.html.twig', [
+            'occurrences'=>$occurrences,
+            'occurrencesNonValid'=>$occurrencesNonValid
+        ]);
     }
 
     /**
