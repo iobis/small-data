@@ -24,9 +24,9 @@
  {% endif %}
     .</h4>
 
-
+        <br><br>
     {% if 'ROLE_VALIDATOR' in app.user.roles %}
-        <h4>Your current credentials allow you to validate new records for the following taxonomic groups: </h4>
+        <h4>Your current validator credentials allow you to validate new records for the following taxonomic groups: </h4>
             {% for expertise in app.user.phylumOfExpertise %}
             <h5>{{ expertise.phylumNameWorms | raw}} :
                 {#http://findnerd.com/list/view/How-to-use-if-condition-with-for-loop-in-twig-symfony/23183/#}
@@ -42,6 +42,12 @@
             {% endfor %}
 
     {% endif %}
+        <br><br>
+        {% if 'ROLE_ADMINISTRATOR' in app.user.roles %}
+            <h4>Administration</h4>
+            <a href="{{ path('admin_species') }}" class="btn btn-primary">Manage<br>Species</a>
+            <a href="#" class="btn btn-primary">Manage<br>Users</a>
+            {% endif %}
 
     {% endif %}
 

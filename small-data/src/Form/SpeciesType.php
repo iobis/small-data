@@ -14,6 +14,7 @@ class SpeciesType extends AbstractType
         $builder
             ->add('wormsAphiaId')
             ->add('speciesNameWorms')
+            ->add('imageSpecies')
         ;
     }
 

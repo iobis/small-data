@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends Controller
 {
@@ -38,11 +39,17 @@ class SecurityController extends Controller
         ]);
     }
 
+
+    //https://symfony.com/doc/current/security/form_login_setup.html
     /**
      * @Route ("/login", name="security_login")
      */
-    public function login(){
-        return $this->render('security/login.html.twig');
+    public function login(AuthenticationUtils $authenticationUtils){
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+        return $this->render('security/login.html.twig', [
+            'error'=>$error
+        ]);
     }
 
     /**

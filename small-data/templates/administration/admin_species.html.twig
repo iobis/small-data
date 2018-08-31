@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <h2>Species manager</h2>
+
+<table>
+
+    {% for phylum in phyla %}
+    <tr>
+        <td><h3>{{ phylum.phylumNameWorms }}</h3></td>
+        </tr>
+
+        {% for singleSpecies in species if (phylum.id == singleSpecies.phylum.id) %}
+            <tr>
+           <td><h5><i>{{ singleSpecies.speciesNameWorms }}</i></h5></td>
+                <td>
+                    {% set occurrencesForSpecies = [] %}
+                    {% for occurrence in occurrences if (occurrence.species == singleSpecies)%}
+                        {% set occurrencesForSpecies = occurrencesForSpecies|merge([occurrence.id])   %}
+                      {% endfor %}
+                    {% set occurrencesNonValidForSpecies = [] %}
+                    {% for occurrence in occurrencesNonValid if (occurrence.species == singleSpecies)%}
+                        {% set occurrencesNonValidForSpecies = occurrencesNonValidForSpecies|merge([occurrence.id])   %}
+                    {% endfor %}
+              <h5>{{ occurrencesForSpecies |length }} records including {{ occurrencesNonValidForSpecies |length }} non valid </h5>
+               </td>
+                <td><a href="{{ path('warning_remove_singleSpecies', {'idSpecies':singleSpecies.id  } )}}" class="btn btn-primary" >Remove</a></td>
+            </tr>
+        {% endfor %}
+
+
+
+    {% endfor %}
+
+</table>
+
+
+
+{% endblock %}

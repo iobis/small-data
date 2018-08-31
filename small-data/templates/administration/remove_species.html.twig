@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h3>You are about to remove <i>{{ singleSpecies.speciesNameWorms }}</i> and all occurrences records</h3>
+    <h3>Are you sure you want to proceed?</h3>
+    <a href="{{ path('admin_species')}}" class="btn btn-primary" >Back</a>
+    <a href="{{ path('remove_singleSpecies' , {'idSpecies':singleSpecies.id  })}}" class="btn btn-primary" >Remove species and occurrences</a>
+    <a href="{{ path('csv_species_occurrences' , {'idSpecies':singleSpecies.id  })}}" class="btn btn-primary" >Download csv occurrences</a>
+
+
+
+{% endblock %}

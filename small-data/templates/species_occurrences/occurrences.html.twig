@@ -67,9 +67,11 @@
         {#<td>{{ occurrence.species.speciesNameWorms }}</td>#}
         <td>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d H:i') }}</td>
         <td>{{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}</td>
-
+            {% if  (app.user  ==  occurrence.inputter) or (is_granted ('ROLE_VALIDATOR')) %}
         <td><a href="{{ path('occurrence_edit', {'idOccurrence':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId  } )}}" class="btn btn-primary">Edit</a></td>
-        {#<td><a href="{{ path('occurrence_edit_species', {'id':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId, 'mode' : "editSpecies" } )}}" class="btn btn-primary">Change species</a></td>#}
+            {% else %}
+                <td></td>
+                {% endif %}
         <td><a href="{{ path('occurrence_details', {'idOccurrence':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId  } )}}" class="btn btn-primary">More</a></td>
 
     </tr>
@@ -96,7 +98,12 @@
             type: 'histogram'
         };
         var data = [trace];
-        Plotly.newPlot('histogram', data);
+        var layout = {
+            title: "Occurrences of  {{ singleSpecies.speciesNameWorms }}",
+            xaxis:{title: "Year"},
+            yaxis:{title: "Number of occurrences"}
+        };
+        Plotly.newPlot('histogram', data, layout);
 
     </script>
 
