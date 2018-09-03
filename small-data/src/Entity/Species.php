@@ -5,10 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SpeciesRepository")
+ * @UniqueEntity(
+ *     fields={"wormsAphiaId"},
+ *     message = "Species identified by WoRMS AphiaId is already taken")
+ * )
  */
 class Species
 {
@@ -40,16 +45,21 @@ class Species
     private $phylum;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Image
+     * @ORM\OneToMany(targetEntity="App\Entity\SpeciesImage", mappedBy="species")
      */
-    private $imageSpecies;
+    private $speciesImages;
+
+
+
+
+
 
 
 
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
+        $this->speciesImages = new ArrayCollection();
     }
 
     public function getId()
@@ -128,17 +138,37 @@ class Species
         return $this;
     }
 
-    public function getImageSpecies(): ?string
+    /**
+     * @return Collection|SpeciesImage[]
+     */
+    public function getSpeciesImages(): Collection
     {
-        return $this->imageSpecies;
+        return $this->speciesImages;
     }
 
-    public function setImageSpecies(?string $imageSpecies): self
+    public function addSpeciesImage(SpeciesImage $speciesImage): self
     {
-        $this->imageSpecies = $imageSpecies;
+        if (!$this->speciesImages->contains($speciesImage)) {
+            $this->speciesImages[] = $speciesImage;
+            $speciesImage->setSpecies($this);
+        }
 
         return $this;
     }
+
+    public function removeSpeciesImage(SpeciesImage $speciesImage): self
+    {
+        if ($this->speciesImages->contains($speciesImage)) {
+            $this->speciesImages->removeElement($speciesImage);
+            // set the owning side to null (unless already changed)
+            if ($speciesImage->getSpecies() === $this) {
+                $speciesImage->setSpecies(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 
 

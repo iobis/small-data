@@ -15,7 +15,17 @@
 
         <article>
         <h4><i>{{ singleSpecies.speciesNameWorms }}</i></h4>
+
+            {#{% if singleSpecies.mainImage %}#}
+                {#<div style="max-width: 300px">#}
+                {#<img src="{{ asset('uploads/images_species/' ~ singleSpecies.mainImage.speciesImageName) }}"#}
+                     {#style="max-width:100%" alt="">#}
+                {#</div>#}
+            {#{% else %}#}
             <img src="http://placehold.it/300x200" alt="">
+            {#{% endif %}#}
+
+
             <a href="{{ path('species_details', {'wormsAphiaId' : singleSpecies.wormsAphiaId}) }}" class="btn btn-primary">Details</a>
             <a href="{{ path('occurrences_list', {'wormsAphiaId': singleSpecies.wormsAphiaId}) }}" class="btn btn-primary">Occurrences</a>
         </article>

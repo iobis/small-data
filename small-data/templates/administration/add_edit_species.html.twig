@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% form_theme formAddEditSpecies 'bootstrap_4_layout.html.twig' %}
+
+    {% if mode == 'add' %}
+    <h3>Adding a species</h3>
+    {% elseif mode == 'edit' %}
+    <h3>Edit</h3>
+    {% endif %}
+
+    {{ form_start(formAddEditSpecies) }}
+    {{ form_row(formAddEditSpecies.speciesNameWorms) }}
+    {{ form_row(formAddEditSpecies.wormsAphiaId) }}
+    {{ form_row(formAddEditSpecies.phylum) }}
+    {#{{ form_row(formAddSpecies.imageSpecies) }}#}
+
+
+    <button type="submit" class="btn btn-success">Submit</button>
+
+    {{ form_end(formAddEditSpecies) }}
+
+
+{% endblock %}

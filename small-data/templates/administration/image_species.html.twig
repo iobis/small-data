@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% form_theme formImageSpecies 'bootstrap_4_layout.html.twig' %}
+
+    {% if not is_granted('ROLE_ADMINISTRATOR') %}
+    <h3>Access not authorized</h3>
+    {% else %}
+
+     {% if singleSpecies.speciesImages is not empty %}
+        <h3>Images for <i> {{ singleSpecies.speciesNameWorms }}</i></h3>
+         <a href="{{ path('admin_species') }}" class="btn btn-primary" >Back to species admin</a>
+
+          <div class="row">
+         {% for image in singleSpecies.speciesImages %}
+
+        <div style="max-height: 200px">
+        <img src="{{ asset('uploads/images_species/' ~ image.speciesImageName) }}"
+        style="max-height:100%" alt="">
+
+            {% if not image.isForDisplay %}
+            <a href="{{ path('editForDisplay_image_species', {'idImageSpecies':image.id, 'display':'no'}) }}" class="btn btn-primary" >Display</a>
+            {% else %}
+             <a href="{{ path('editForDisplay_image_species', {'idImageSpecies':image.id, 'display':'yes'}) }}" class="btn btn-primary" >Undisplay</a>
+            {% endif %}
+            <a href="{{ path('remove_image_species', {'idImageSpecies':image.id}) }}" class="btn btn-primary" >Remove</a>
+        </div>
+
+
+        {#<a href="{{ path('editForDisplay_image_species', {'idImageSpecies':image.id}) }}" class="btn btn-secondary" >Display</a>#}
+             {#<a href="#" class="btn btn-secondary" >Display</a>#}
+
+
+
+         {% endfor %}
+         </div>
+        <div>
+         <h4>Upload new image  </h4>
+
+
+         {{ form_start(formImageSpecies) }}
+         {{ form_row(formImageSpecies.speciesImageName) }}
+         {{ form_row(formImageSpecies.isForDisplay) }}
+
+         <button type="submit" class="btn btn-success">Submit</button>
+         {{ form_end(formImageSpecies) }}
+
+        </div>
+
+        {% else %}
+
+
+
+    <h3>Upload image for {{ singleSpecies.speciesNameWorms }}</h3>
+            <a href="{{ path('admin_species') }}" class="btn btn-primary" >Back to species admin</a>
+
+
+
+    {{ form_start(formImageSpecies) }}
+    {{ form_row(formImageSpecies.speciesImageName) }}
+     {{ form_row(formImageSpecies.isForDisplay) }}
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    {{ form_end(formImageSpecies) }}
+
+         {#end mode block#}
+         {% endif %}
+
+    {% endif %} {#end of condition administrator#}
+
+{% endblock %}

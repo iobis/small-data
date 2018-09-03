@@ -3,7 +3,19 @@
 
 {% block body %}
 
+    {% if not is_granted('ROLE_ADMINISTRATOR') %}
+        <h3>Access not authorized</h3>
+        {% else %}
+
     <h2>Species manager</h2>
+    {% for message in app.flashes('notice_remove_species') %}
+        <div class="flash-notice">
+            <h4>{{ message }}</h4>
+        </div>
+    {% endfor %}
+
+
+    <a href="{{ path('add_species' )}}" class="btn btn-primary" >Add a species</a>
 
 <table>
 
@@ -26,7 +38,16 @@
                     {% endfor %}
               <h5>{{ occurrencesForSpecies |length }} records including {{ occurrencesNonValidForSpecies |length }} non valid </h5>
                </td>
+                <td><a href="{{ path('edit_species', {'idSpecies':singleSpecies.id  } )}}" class="btn btn-primary" >Edit</a></td>
+
                 <td><a href="{{ path('warning_remove_singleSpecies', {'idSpecies':singleSpecies.id  } )}}" class="btn btn-primary" >Remove</a></td>
+
+                    {% if   singleSpecies.getSpeciesImages is empty %}
+                <td><a href="{{ path('manage_images_species', {'idSpecies':singleSpecies.id}) }}" class="btn btn-primary" >Add images</a></td>
+                    {% else %}
+
+                        <td><a href="{{ path('manage_images_species', {'idSpecies':singleSpecies.id}) }}" class="btn btn-secondary" >Manage images</a></td>
+                        {% endif %}
             </tr>
         {% endfor %}
 
@@ -36,6 +57,8 @@
 
 </table>
 
+
+    {% endif %}
 
 
 {% endblock %}
