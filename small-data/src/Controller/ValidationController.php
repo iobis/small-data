@@ -35,4 +35,35 @@ class ValidationController extends Controller
             'wormsAphiaIdForDetails' => $wormsAphiaId
         ]);
     }
+
+
+    //!!!! WEIRD problems happens when "{idOccurrence}" is not followed by a slash bar or not at the end of the route.....
+    /**
+     * @Route("/validation/validate/{idOccurrence}/", name="validate_occurrence")
+     */
+    public function validateOccurrence(ObjectManager $manager, $idOccurrence=null)
+    {
+        $occurrence = $manager->getRepository(Occurrence::class)->findOneBy(['id' => $idOccurrence]);
+        $wormsAphiaId = $occurrence->getSpecies()->getWormsAphiaId();
+        $idPhylum = $occurrence->getSpecies()->getPhylum()->getId();
+        $occurrence->setIsValidated(true);
+        $manager->persist($occurrence);
+        $manager->flush();
+
+        return $this->redirectToRoute('non_valid_list_for_phylum_with_details_one_species', [
+                'idPhylum'=>$idPhylum,
+                'wormsAphiaId'=>$wormsAphiaId,
+                'mode'=>'show_list'
+        ]);
+
+    }
+
 }
+
+//            'phylumToDisplay'=>$phylumToDisplay,
+//            'singleSpeciesToDisplay'=>$singleSpeciesToDisplay,
+//            'occurrencesNonValid'=>$occurrencesNonValid,
+
+//            'wormsAphiaId' => $wormsAphiaId,
+//            'wormsAphiaIdForDetails' => $wormsAphiaId,
+//            'mode'=>'show_list'
