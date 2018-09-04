@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h3>Edit the expertise for {{ inputter.firstName }} {{ inputter.lastName }}
+            {% if 'ROLE_VALIDATOR' in inputter.roles %}: validator {% endif %}
+    </h3><a href="{{ path('admin_users') }}" class="btn btn-primary">Back to menu</a>
+    <table>
+
+        {% for phylum in phyla %}
+        <tr>
+            <td><h4>{{ phylum.phylumNameWorms }}</h4></td>
+        <td>{% if inputter in phylum.expertiseBy %}
+                <a href="{{ path('edit_user_phylum', {'idInputter': inputter.id, 'idPhylum':phylum.id, 'mode':'remove'} ) }}" class="btn btn-warning">Remove</a>
+            {% else %}
+                <a href="{{ path('edit_user_phylum', {'idInputter': inputter.id, 'idPhylum':phylum.id, 'mode':'add'} ) }}" class="btn btn-success">Add</a>
+            {% endif %}</td>
+
+
+
+
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+{% endblock %}

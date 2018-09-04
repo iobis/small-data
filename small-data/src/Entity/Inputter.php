@@ -105,7 +105,10 @@ class Inputter implements UserInterface
 
 
 
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getEmail(): ?string
     {

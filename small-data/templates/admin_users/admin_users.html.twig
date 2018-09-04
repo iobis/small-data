@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <h3>Users registered to the systems</h3>
+    <table>
+
+        <tr>
+            <th><h3>Last name</h3></th>
+            <th><h3>First name</h3></th>
+            <th><h3>Username</h3></th>
+            <th><h3>Inputter</h3></th>
+            <th><h3>Validator</h3></th>
+            <th><h3>Administrator</h3></th>
+
+        </tr>
+
+    {% for inputter in inputters %}
+        <tr>
+            <td><h4>{{ inputter.lastName }}</h4></td>
+            <td><h4>{{ inputter.firstName }}</h4></td>
+            <td><h4>{{ inputter.username }}</h4></td>
+            <td>{% if 'ROLE_INPUTTER' in inputter.getRoles %}<h4>yes</h4>{% endif %}</td>
+            <td><h4>{% if 'ROLE_VALIDATOR' in inputter.roles %}Yes <a href="{{ path('edit_users_expertise', {'idInputter': inputter.id}) }}" class="btn btn-secondary">Modify</a>
+                    {% else %} No <a href="{{ path('edit_users_expertise', {'idInputter': inputter.id}) }}" class="btn btn-primary">Upgrade</a>
+                    {% endif %}</h4></td>
+            <td><h4>{% if 'ROLE_ADMINISTRATOR' in inputter.roles %}Yes {% else %}No {% endif %}</h4></td>
+
+
+
+
+
+
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}
