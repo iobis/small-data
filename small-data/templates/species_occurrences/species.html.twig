@@ -15,19 +15,26 @@
 
         <article>
         <h4><i>{{ singleSpecies.speciesNameWorms }}</i></h4>
+        <div class="row">
+            {% if singleSpecies.speciesImages is not empty %}
+                {% for image in singleSpecies.speciesImages if image.isForDisplay %}
 
-            {#{% if singleSpecies.mainImage %}#}
-                {#<div style="max-width: 300px">#}
-                {#<img src="{{ asset('uploads/images_species/' ~ singleSpecies.mainImage.speciesImageName) }}"#}
-                     {#style="max-width:100%" alt="">#}
-                {#</div>#}
-            {#{% else %}#}
-            <img src="http://placehold.it/300x200" alt="">
-            {#{% endif %}#}
+                <div style="max-height: 200px">
+                <img src="{{ asset('uploads/images_species/' ~ image.speciesImageName) }}"
+                     style="max-height:100%" alt="">
+                </div>
+                {% endfor %}
+        </div>
+            {% else %}
+                <div class="row">
+            <div><img src="http://placehold.it/200x200" alt=""></div>
+                </div>
+            {% endif %}
 
-
+        <div>
             <a href="{{ path('species_details', {'wormsAphiaId' : singleSpecies.wormsAphiaId}) }}" class="btn btn-primary">Details</a>
             <a href="{{ path('occurrences_list', {'wormsAphiaId': singleSpecies.wormsAphiaId}) }}" class="btn btn-primary">Occurrences</a>
+        </div>
         </article>
 
     {% endfor %}

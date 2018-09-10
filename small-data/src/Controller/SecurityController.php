@@ -68,4 +68,30 @@ class SecurityController extends Controller
             'controller_name' => 'SecurityController'
         ]);
     }
+
+
+    /**
+     * @Route("/security/changePassword/{idInputter}/", name="change_password")
+     */
+    public function changePassword(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, $idInputter){
+
+        $inputter = $manager->getRepository(Inputter::class)->findOneBy(['id'=>$idInputter]);
+
+        $form = $this->createForm(RegistrationType::class, $inputter);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $hash = $encoder->encodePassword($inputter, $inputter->getPassword());
+            $inputter->setPassword($hash);
+
+            $manager->persist($inputter);
+            $manager->flush();
+            return $this->redirectToRoute('security_login');
+        }
+
+        return $this->render ('security/change_password.html.twig', [
+            'formChangePassword'=>$form->createView()
+            ]);
+    }
+
 }

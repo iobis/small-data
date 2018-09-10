@@ -31,7 +31,8 @@ class AdminUsersController extends Controller
     {
         $inputter = $manager->getRepository(Inputter::class)->findOneBy(['id'=>$idInputter]);
         $phyla = $manager->getRepository(Phylum::class)->findBy([], ['phylumNameWorms'=>'ASC']);
-//    dump($inputter);
+        $roles=$inputter->getRoles();
+    dump($roles);
         return $this->render('admin_users/admin_users_expertise.html.twig',[
             'phyla'=>$phyla,
             'inputter'=>$inputter
@@ -56,8 +57,11 @@ class AdminUsersController extends Controller
             $manager->persist($inputter);
         }
         $manager->flush();
-        $roles = $inputter->getRoles();
+//        $roles = $inputter->getRoles();
         if($inputter->getPhylumOfExpertise()==null){
+//            unset($roles);
+//https://stackoverflow.com/questions/26316089/remove-an-element-from-json-array
+            $inputter->setRoles(null);
             $inputter->setRoles(['ROLE_INPUTTER']);
         } else {
             $inputter->setRoles(['ROLE_INPUTTER', 'ROLE_VALIDATOR']);

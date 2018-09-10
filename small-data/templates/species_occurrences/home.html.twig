@@ -5,6 +5,7 @@
 {% block body %}
     <h1>Welcome to "Small Data" </h1>
     {% if app.user %}
+        <a href="{{ path('change_password', {'idInputter': app.user.id}) }}" class="btn btn-primary">Change<br>password</a>
         <h3>Your logged in as: {{ app.user.username }}</h3>
     {#{% for role in app.user.roles %}#}
     {#{{ role }} <br>#}
