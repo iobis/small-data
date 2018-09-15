@@ -79,10 +79,91 @@ class SmallDataController extends Controller
      */
 //* @Route("/species/occurrences_{wormsAphiaId}/", name="occurrences_list")
 
-    public function occurrencesSpecies(Species $species, OccurrenceRepository $occurrenceRepository)
+    public function occurrencesSpecies(Species $species, OccurrenceRepository $occurrenceRepository, ObjectManager $manager)
     {
         $occurrences = $occurrenceRepository->findBy(['species'=>$species], ['eventDate' => 'ASC']);
-        dump($species, $occurrences);
+//        dump($species, $occurrences);
+
+        $yearsOccurrences = [];
+        foreach ($occurrences as $occurrence){
+//            $yearOccurrence = [$occurrence->getId()=>$occurrence->getEventDate()->format("Y")];
+            $yearOccurrence = $occurrence->getEventDate()->format("Y");
+
+            array_push($yearsOccurrences, $yearOccurrence);
+
+        }
+        arsort($yearsOccurrences);
+        $minYear = min($yearsOccurrences);
+        $maxYear = max($yearsOccurrences);
+        $interval = ($maxYear-$minYear)/7;
+        $intervalYears = [];
+        $year=$minYear;
+        for ($i=0; $i<8; $i++){
+
+            array_push($intervalYears, intval($year));
+            $year +=$interval;
+        }
+        $freq = array_count_values($yearsOccurrences);
+        // We have now two arrays: $intervalYears gives the years chosen for the intervals (8 years have been chosen), $freq gives all the frequency of occurrences by year (all the years)
+        //Now we produce an array with frequencies for each interval.
+        $freqForInterval=[];
+        $intervalsWithFreqAndOccurrence =[];
+        for ($i=0; $i<sizeof($intervalYears); $i++){
+            $numberOfRecordsForInterval = 0;
+            $yearLower = $intervalYears[$i];
+            if ($i<(sizeof($intervalYears)-1)){
+                $arrayOccurrences=[];
+                $yearUpperPlusOne = $intervalYears[$i+1];
+                $yearUpper = $yearUpperPlusOne -1; //to be used if we chose to put it as a sting in the key of the array
+                foreach ($freq as $year=>$frequency){
+                    if ($year >=$yearLower && $year <$yearUpperPlusOne){
+                        $numberOfRecordsForInterval+=$frequency;
+
+                        foreach ($occurrences as $occurrence){
+                            if($occurrence->getEventDate()->format("Y")== $year){
+                                array_push($arrayOccurrences, $occurrence);
+                            }
+                        }
+
+
+
+                    }
+                }
+                array_push($freqForInterval, [$yearLower.'-'=>$numberOfRecordsForInterval]);
+
+
+
+                array_push($intervalsWithFreqAndOccurrence, [$yearLower.'-', $numberOfRecordsForInterval, $arrayOccurrences]);
+
+
+
+
+
+            } else {  //That's if we are in the last index of the array $intervalYears
+                $arrayOccurrences=[];
+                foreach ($freq as $year=>$frequency){
+                    if ($year >=$yearLower){
+                        $numberOfRecordsForInterval+=$frequency;
+                        foreach ($occurrences as $occurrence){
+                            if($occurrence->getEventDate()->format("Y")== $year){
+                                array_push($arrayOccurrences, $occurrence);
+                            }
+                        }
+                    }
+                }
+                array_push($freqForInterval, [$yearLower.'-'=>$numberOfRecordsForInterval]);
+                array_push($intervalsWithFreqAndOccurrence, [$yearLower.'-', $numberOfRecordsForInterval, $arrayOccurrences]);
+            }
+        }
+
+
+
+
+
+//        dump($yearsOccurrences);
+        dump($intervalYears);
+        dump($freqForInterval);
+        dump($intervalsWithFreqAndOccurrence);
         return $this->render('species_occurrences/occurrences.html.twig', [
             'controller_name' => 'SmallDataController',
             'singleSpecies' => $species,
