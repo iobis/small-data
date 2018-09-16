@@ -129,11 +129,11 @@ class SmallDataController extends Controller
 
                     }
                 }
-                array_push($freqForInterval, [$yearLower.'-'=>$numberOfRecordsForInterval]);
+                array_push($freqForInterval, [(string)($yearLower.' to '.$yearUpper)=>$numberOfRecordsForInterval]);
 
 
 
-                array_push($intervalsWithFreqAndOccurrence, [$yearLower.'-', $numberOfRecordsForInterval, $arrayOccurrences]);
+                array_push($intervalsWithFreqAndOccurrence, [(string)($yearLower.'-'.$yearUpper), $numberOfRecordsForInterval, $arrayOccurrences]);
 
 
 
@@ -151,8 +151,8 @@ class SmallDataController extends Controller
                         }
                     }
                 }
-                array_push($freqForInterval, [$yearLower.'-'=>$numberOfRecordsForInterval]);
-                array_push($intervalsWithFreqAndOccurrence, [$yearLower.'-', $numberOfRecordsForInterval, $arrayOccurrences]);
+                array_push($freqForInterval, [(string)($yearLower)=>$numberOfRecordsForInterval]);
+                array_push($intervalsWithFreqAndOccurrence, [(string)($yearLower), $numberOfRecordsForInterval, $arrayOccurrences]);
             }
         }
 
@@ -167,7 +167,8 @@ class SmallDataController extends Controller
         return $this->render('species_occurrences/occurrences.html.twig', [
             'controller_name' => 'SmallDataController',
             'singleSpecies' => $species,
-            'occurrences' => $occurrences
+            'occurrences' => $occurrences,
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
         ]);
 
     }

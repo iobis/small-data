@@ -130,22 +130,68 @@
                 popupAnchor:  [9, 2] // point from which the popup should open relative to the iconAnchor
             });
 
+            var LeafIcon = L.Icon.extend({
+                options: {
+                    iconSize:     [10, 10],
+                    iconAnchor:   [0, 0],
+                    popupAnchor:  [9, 2]
+                }
+            });
+            var icon0 = new LeafIcon({iconUrl: '{{ asset('images/colorbrewer0.png') }}'}),
+                icon1 = new LeafIcon({iconUrl: '{{ asset('images/colorbrewer1.png') }}'}),
+                icon2 = new LeafIcon({iconUrl: '{{ asset('images/colorbrewer2.png') }}'}),
+                icon3 = new LeafIcon({iconUrl: '{{ asset('images/colorbrewer3.png') }}'}),
+                icon4 = new LeafIcon({iconUrl: '{{ asset('images/colorbrewer4.png') }}'}),
+                icon5 = new LeafIcon({iconUrl: '{{ asset('images/colorbrewer5.png') }}'}),
+                icon6 = new LeafIcon({iconUrl: '{{ asset('images/colorbrewer6.png') }}'}),
+                icon7 = new LeafIcon({iconUrl: '{{ asset('images/colorbrewer7.png') }}'});
+
             var markers = [];
-            {% for occurrence in occurrences %}
+            {% for intervalWithFreqAndOccurrences in intervalsWithFreqAndOccurrences %}
+            {% set nameForIcon = 'icon' ~ loop.index0 %}
+            {% for occurrence in intervalWithFreqAndOccurrences.2 %}
             {% if occurrence.isValidated %}
-            {% if occurrence.species == singleSpecies %} //https://stackoverflow.com/questions/12149233/concatenate-a-dynamic-variable-name-in-javascript
-
-
-
-            var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}", icon:myIcon})
+            {% if occurrence.species == singleSpecies %}
+            var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}", icon:{{ nameForIcon}} })
                 .addTo(mapForOccurrences)
                 .bindPopup("<p>{{ occurrence.locality }}</p><p>{{ occurrence.eventDate | date ('Y')  }}</p>");
-
             markers.push (marker);
+
             {% endif %}
             {% endif %}
             {% endfor %}
-            console.log(markers);
+            {% endfor %}
+
+
+
+
+            {#{% for intervalWithFreqAndOccurrences in intervalsWithFreqAndOccurrences %}#}
+            {#var arrayIntervals = [];#}
+            {#{% for occurrence in intervalWithFreqAndOccurrences.2 %}#}
+
+            {#var latitude = {{ occurrence.eventDate | date ("Y") }};#}
+                {#arrayIntervals.push(latitude);#}
+
+            {#{% endfor %}#}
+            {#console.log(arrayIntervals);#}
+            {#{% endfor %}#}
+
+
+            // WORKING BIT
+            {#var markers = [];#}
+            {#{% for occurrence in occurrences %}#}
+            {#{% if occurrence.isValidated %}#}
+            {#{% if occurrence.species == singleSpecies %} //https://stackoverflow.com/questions/12149233/concatenate-a-dynamic-variable-name-in-javascript#}
+
+            {#var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}", icon:myIcon})#}
+                {#.addTo(mapForOccurrences)#}
+                {#.bindPopup("<p>{{ occurrence.locality }}</p><p>{{ occurrence.eventDate | date ('Y')  }}</p>");#}
+
+            {#markers.push (marker);#}
+            {#{% endif %}#}
+            {#{% endif %}#}
+            {#{% endfor %}#}
+            {#// console.log(markers);#}
 
             function markerFunction(id){
                 for (var i in markers){
