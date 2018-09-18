@@ -102,14 +102,33 @@
 
     <script>
 
-            var intervalLayer0 = L.layerGroup();
-            var intervalLayer1 = L.layerGroup();
-            var intervalLayer2 = L.layerGroup();
-            var intervalLayer3 = L.layerGroup();
-            var intervalLayer4 = L.layerGroup();
-            var intervalLayer5 = L.layerGroup();
-            var intervalLayer6 = L.layerGroup();
-            var intervalLayer7 = L.layerGroup();
+
+            var optionsMap = {
+                zoom:3,
+                center: [50,0]
+            };
+
+
+
+            var mapForOccurrences = L.map('map_for_occurrences', optionsMap);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 20,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A'
+            }).addTo(mapForOccurrences);
+
+            var myIcon = L.icon({
+
+                iconUrl: '{{ asset('images/red.png') }}',
+                // shadowUrl: 'leaf-shadow.png',
+
+                iconSize:     [12, 12], // size of the icon
+                // shadowSize:   [50, 64], // size of the shadow
+                iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+                // shadowAnchor: [4, 62],  // the same for the shadow
+                popupAnchor:  [9, 2] // point from which the popup should open relative to the iconAnchor
+            });
 
             var LeafIcon = L.Icon.extend({
                 options: {
@@ -131,71 +150,18 @@
             var markers = [];
             {% for intervalWithFreqAndOccurrences in intervalsWithFreqAndOccurrences %}
             {% set nameForIcon = 'icon' ~ loop.index0 %}
-            {% set nameForLayerGroup = 'intervalLayer' ~ loop.index0 %}
             {% for occurrence in intervalWithFreqAndOccurrences.2 %}
             {% if occurrence.isValidated %}
             {% if occurrence.species == singleSpecies %}
             var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}", icon:{{ nameForIcon}} })
-                .bindPopup("<p>{{ occurrence.locality }}</p><p>{{ occurrence.eventDate | date ('Y')  }}</p>")
-                .addTo({{ nameForLayerGroup }});
+                .addTo(mapForOccurrences)
+                .bindPopup("<p>{{ occurrence.locality }}</p><p>{{ occurrence.eventDate | date ('Y')  }}</p>");
             markers.push (marker);
+
             {% endif %}
             {% endif %}
             {% endfor %}
             {% endfor %}
-
-            var mapUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
-            var mapAttributes = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
-
-            var satellite = L.tileLayer(mapUrl, {id: 'mapbox.satellite',
-                accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A',
-                attribution:mapAttributes
-            });
-            var streets = L.tileLayer(mapUrl, {id: 'mapbox.streets',
-                accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A',
-                attribution:mapAttributes
-            });
-
-
-
-            var optionsMap = {
-                zoom:3,
-                center: [50,0]
-            };
-            var mapForOccurrences = L.map('map_for_occurrences',{
-                zoom:3,
-                center: [50,0],
-                layers: [satellite, streets,intervalLayer0, intervalLayer1, intervalLayer2, intervalLayer3, intervalLayer4,
-                    intervalLayer5, intervalLayer6, intervalLayer7]
-            });
-
-
-            var baseLayers = {
-                "Satellite": satellite,
-                "Map": streets,
-            };
-
-            var overlays = {
-            {% for intervalWithFreqAndOccurrences in intervalsWithFreqAndOccurrences %}
-            {% set nameLayer = 'intervalLayer' ~ loop.index0 %}
-            {% set indexOfLoop = '' ~ loop.index0 %}
-                "<img style='vertical-align:middle; height: 10px' src='{{ asset("images/cb#{indexOfLoop}.png") }}'><div style='vertical-align:middle; display:inline;'>&nbsp; {{ intervalWithFreqAndOccurrences.0 }}</div>": {{ nameLayer }},
-            {% endfor %}
-            };
-
-            L.control.layers(baseLayers, overlays).addTo(mapForOccurrences);
-
-
-            // var mapForOccurrences = L.map('map_for_occurrences', optionsMap);
-            // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            //     maxZoom: 20,
-            //     id: 'mapbox.streets',
-            //     accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A'
-            // }).addTo(mapForOccurrences);
-
-
-
 
 
 

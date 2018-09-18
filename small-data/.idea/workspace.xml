@@ -12,14 +12,37 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
+  <component name="DockManager">
+    <window id="2">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="occurrences_180918.html.twig" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences_180918.html.twig">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="-2847">
+                    <folding>
+                      <element signature="e#9#15#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="occurrences.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="134" column="41" selection-start-line="134" selection-start-column="41" selection-end-line="134" selection-end-column="41" />
+            <state relative-caret-position="264">
+              <caret line="181" column="181" selection-start-line="181" selection-start-column="174" selection-end-line="181" selection-end-column="181" />
               <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+                <element signature="e#9#15#0" expanded="true" />
                 <element signature="e#9#15#0" expanded="true" />
               </folding>
             </state>
@@ -29,15 +52,10 @@
       <file leaf-file-name="SmallDataController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/SmallDataController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="2440">
               <caret line="135" column="83" selection-start-line="135" selection-start-column="83" selection-end-line="135" selection-end-column="83" />
               <folding>
                 <element signature="e#34#60#0#PHP" expanded="true" />
-                <element signature="e#1043#1079#0#PHP" expanded="true" />
-                <element signature="e#1787#1826#0#PHP" expanded="true" />
-                <element signature="e#2445#2492#0#PHP" expanded="true" />
-                <element signature="e#3783#3826#0#PHP" expanded="true" />
-                <element signature="e#4437#4487#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,7 +64,7 @@
       <file leaf-file-name="OccurrencesSpeciesFixtures.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
+            <state relative-caret-position="960">
               <caret line="56" column="67" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="67" />
             </state>
           </provider>
@@ -262,8 +280,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1491" />
-    <option name="y" value="68" />
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
     <option name="width" value="1378" />
     <option name="height" value="733" />
   </component>
@@ -319,6 +337,12 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="administration" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="small-data" type="b2602c69:ProjectViewProjectNode" />
+              <item name="small-data" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="species_occurrences" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -334,12 +358,13 @@
     <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\src\Migrations\MigrationsMySQL" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\templates\species_occurrences" />
       <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\public\images" />
       <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\src\Form" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\src\Migrations\MigrationsMySQL" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -386,12 +411,13 @@
       <workItem from="1536666368428" duration="4091000" />
       <workItem from="1536744815940" duration="588000" />
       <workItem from="1536830417392" duration="2413000" />
-      <workItem from="1536883866003" duration="42488000" />
+      <workItem from="1536883866003" duration="43085000" />
+      <workItem from="1537192762778" duration="12064000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="763864000" />
+    <option name="totallyTimeSpent" value="776525000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -403,20 +429,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.059001513" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32828283" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.13943355" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14978679" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.8894389" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.06435644" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -425,24 +450,25 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.8894389" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34114978" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32828283" />
+      <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.15841584" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.14356436" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -460,13 +486,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="9" column="50" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/prod/doctrine.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-240" />
@@ -760,31 +779,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
+        <state relative-caret-position="960">
           <caret line="56" column="67" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/SmallDataController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
+        <state relative-caret-position="2440">
           <caret line="135" column="83" selection-start-line="135" selection-start-column="83" selection-end-line="135" selection-end-column="83" />
           <folding>
             <element signature="e#34#60#0#PHP" expanded="true" />
-            <element signature="e#1043#1079#0#PHP" expanded="true" />
-            <element signature="e#1787#1826#0#PHP" expanded="true" />
-            <element signature="e#2445#2492#0#PHP" expanded="true" />
-            <element signature="e#3783#3826#0#PHP" expanded="true" />
-            <element signature="e#4437#4487#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences_180918.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2847">
+          <folding>
+            <element signature="e#9#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="134" column="41" selection-start-line="134" selection-start-column="41" selection-end-line="134" selection-end-column="41" />
+        <state relative-caret-position="264">
+          <caret line="181" column="181" selection-start-line="181" selection-start-column="174" selection-end-line="181" selection-end-column="181" />
           <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#9#15#0" expanded="true" />
             <element signature="e#9#15#0" expanded="true" />
           </folding>
         </state>
