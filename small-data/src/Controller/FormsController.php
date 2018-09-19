@@ -18,11 +18,11 @@ class FormsController extends Controller
 {
 
     /**
-     * @Route("/{wormsAphiaId}/create_occurrence", name="occurrence_create")
+     * @Route("/{idSpecies}/create_occurrence", name="occurrence_create")
      */
-    public function formCreateOccurrence($wormsAphiaId, Request $request, ObjectManager $objectManager){
+    public function formCreateOccurrence($idSpecies, Request $request, ObjectManager $objectManager){
         $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
-            ->findOneBy(['wormsAphiaId'=>$wormsAphiaId]);
+            ->findOneBy(['id'=>$idSpecies]);
 
         $occurrence = new Occurrence();
 
@@ -58,7 +58,7 @@ class FormsController extends Controller
     }
 
     /**
-     *@Route("/{wormsAphiaId}/occurrence/{idOccurrence}/editFields", name="occurrence_edit")
+     *@Route("/occurrence/{idOccurrence}/editFields", name="occurrence_edit")
      */
     public function formEditOccurrence($idOccurrence , Request $request, ObjectManager $objectManager){
 //        $singleSpecies = $this->getDoctrine()->getRepository(Species::class)

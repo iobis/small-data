@@ -25,9 +25,9 @@
 
     <div id="mapid" style="height: 300px; width: 500px ; "></div>
     {% if not satellite %}
-        <a href="{{ path('occurrence_details_satellite',{'slug':'satellite', 'idOccurrence':occurrence.id,'wormsAphiaId': occurrence.species.wormsAphiaId}) }}" class="btn btn-primary">Satellite view</a>
+        <a href="{{ path('occurrence_details_satellite',{'slug':'satellite', 'idOccurrence':occurrence.id}) }}" class="btn btn-primary">Satellite view</a>
     {% else %}
-        <a href="{{ path('occurrence_details',{'idOccurrence':occurrence.id,'wormsAphiaId': occurrence.species.wormsAphiaId}) }}" class="btn btn-primary">Map view</a>
+        <a href="{{ path('occurrence_details',{'idOccurrence':occurrence.id}) }}" class="btn btn-primary">Map view</a>
     {% endif %}
 
     <h5><p id="toDMS"></p>
@@ -36,8 +36,8 @@
     <h5>Locality: {% if occurrence.locality %} {{ occurrence.locality }} {% else %}No information {% endif %}</h5>
     <h5>Remarks or reference: "{% if occurrence.occurrenceRemarks %} {{ occurrence.occurrenceRemarks }} {% else %}No information {% endif %}"</h5>
 
-    <a href="{{ path('occurrences_list',{'idOccurrence':occurrence.id,'wormsAphiaId': occurrence.species.wormsAphiaId}) }}" class="btn btn-primary">Full list</a>
-    <a href="{{ path('occurrence_edit', {'idOccurrence':occurrence.id, 'wormsAphiaId': occurrence.species.wormsAphiaId  } )}}" class="btn btn-primary">Edit</a>
+    <a href="{{ path('occurrences_list',{'idOccurrence':occurrence.id,'idSpecies': occurrence.species.id}) }}" class="btn btn-primary">Full list</a>
+    <a href="{{ path('occurrence_edit', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">Edit</a>
 
 
 

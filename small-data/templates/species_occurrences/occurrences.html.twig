@@ -30,7 +30,7 @@
 
 
 
-    <a href="{{ path('occurrence_create', {'wormsAphiaId':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>
+    <a href="{{ path('occurrence_create', {'idSpecies':singleSpecies.id } )}}" class="btn btn-primary">Create a new occurrence</a>
 <table>
 
     <tr>
@@ -61,11 +61,11 @@
         <td>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d H:i') }}</td>
         <td>{{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}</td>
             {% if  (app.user  ==  occurrence.inputter) or (is_granted ('ROLE_VALIDATOR')) %}
-        <td><a href="{{ path('occurrence_edit', {'idOccurrence':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId  } )}}" class="btn btn-primary">Edit</a></td>
+        <td><a href="{{ path('occurrence_edit', {'idOccurrence':occurrence.id } )}}" class="btn btn-primary">Edit</a></td>
             {% else %}
                 <td></td>
                 {% endif %}
-        <td><a href="{{ path('occurrence_details', {'idOccurrence':occurrence.id, 'wormsAphiaId': singleSpecies.wormsAphiaId  } )}}" class="btn btn-primary">More</a></td>
+        <td><a href="{{ path('occurrence_details', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">More</a></td>
 
     </tr>
         {% endif %}

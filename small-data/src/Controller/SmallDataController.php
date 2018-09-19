@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Occurrence;
+use App\Entity\Phylum;
 use App\Entity\Species;
 use App\Form\OccurrenceType;
 use App\Repository\OccurrenceRepository;
@@ -39,14 +40,15 @@ class SmallDataController extends Controller
 
     /**
      * @Route("/species", name="index_species")
-     * @Route("/species/{phylumNameWorms}", name="index_species_per_phylum")
+     * @Route("/species/{idPhylum}", name="index_species_per_phylum")
      */
-    public function indexSpecies(SpeciesRepository $speciesRepository, PhylumRepository $phylumRepository, $phylumNameWorms = null)
+    public function indexSpecies($idPhylum = null, ObjectManager $manager)
     {
 
-        $species = $speciesRepository->findBy([], ['speciesNameWorms' => 'ASC']);
-        $phyla = $phylumRepository->findBy([], ['phylumNameWorms' => 'ASC']);
-        $phylumToDisplay = $phylumRepository->findOneBy(['phylumNameWorms'=>$phylumNameWorms]);
+        $species = $manager->getRepository(Species::class)->findBy([], ['speciesNameWorms' => 'ASC']);
+        $phyla = $manager->getRepository(Phylum::class)->findBy([], ['phylumNameWorms' => 'ASC']);
+
+        $phylumToDisplay = $manager->getRepository(Phylum::class)->findOneBy(['id'=>$idPhylum]);
         dump ($phyla);
         return $this->render('species_occurrences/species.html.twig', [
 //            'controller_name' => 'SmallDataController',
@@ -58,11 +60,11 @@ class SmallDataController extends Controller
 
 
     /**
-     * @Route("/species/{wormsAphiaId}/details/", name="species_details")
+     * @Route("/species/{idSpecies}/details/", name="species_details")
      */
-    public function detailSpecies(Species $species) // $wormsAphiaId
+    public function detailSpecies(ObjectManager $manager, $idSpecies) // $wormsAphiaId
     {
-
+            $species = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
 //        $species = $speciesRepository->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
 //        $species = $this->getDoctrine()->getRepository(Species::class)
 //                        ->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
@@ -75,22 +77,24 @@ class SmallDataController extends Controller
     }
 
     /**
-     * @Route("/species/{wormsAphiaId}/occurrences/",name="occurrences_list")
+     * @Route("/species/{idSpecies}/occurrences/",name="occurrences_list")
      */
 //* @Route("/species/occurrences_{wormsAphiaId}/", name="occurrences_list")
 
-    public function occurrencesSpecies(Species $species, OccurrenceRepository $occurrenceRepository, ObjectManager $manager)
+    public function occurrencesSpecies( ObjectManager $manager, $idSpecies)
     {
-        $occurrences = $occurrenceRepository->findBy(['species'=>$species], ['eventDate' => 'ASC']);
+        $species = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
+        $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$species], ['eventDate' => 'ASC']);
 //        dump($species, $occurrences);
 
         $yearsOccurrences = [];
         foreach ($occurrences as $occurrence){
+            if($occurrence->getIsValidated()){
 //            $yearOccurrence = [$occurrence->getId()=>$occurrence->getEventDate()->format("Y")];
             $yearOccurrence = $occurrence->getEventDate()->format("Y");
 
             array_push($yearsOccurrences, $yearOccurrence);
-
+            }
         }
         arsort($yearsOccurrences);
         $minYear = min($yearsOccurrences);
@@ -120,8 +124,11 @@ class SmallDataController extends Controller
                         $numberOfRecordsForInterval+=$frequency;
 
                         foreach ($occurrences as $occurrence){
+                            if($occurrence->getIsValidated()){
                             if($occurrence->getEventDate()->format("Y")== $year){
+
                                 array_push($arrayOccurrences, $occurrence);
+                                }
                             }
                         }
 
@@ -145,8 +152,10 @@ class SmallDataController extends Controller
                     if ($year >=$yearLower){
                         $numberOfRecordsForInterval+=$frequency;
                         foreach ($occurrences as $occurrence){
+                            if($occurrence->getIsValidated()){
                             if($occurrence->getEventDate()->format("Y")== $year){
                                 array_push($arrayOccurrences, $occurrence);
+                            }
                             }
                         }
                     }
@@ -175,10 +184,10 @@ class SmallDataController extends Controller
 
 
     /**
-     * @Route("/{wormsAphiaId}/occurrence/{idOccurrence}/details", name="occurrence_details")
-     * @Route("/{wormsAphiaId}/occurrence/{idOccurrence}/details/{slug}", name="occurrence_details_satellite")
+     * @Route("/occurrence/{idOccurrence}/details", name="occurrence_details")
+     * @Route("/occurrence/{idOccurrence}/details/{slug}", name="occurrence_details_satellite")
      */
-    public function occurrenceDetails($idOccurrence, $slug = null){
+    public function occurrenceDetails($idOccurrence,  $slug = null){
         $occurrence = $this->getDoctrine()->getRepository((Occurrence::class))
             ->findOneBy(['id'=>$idOccurrence]);
 
