@@ -63,30 +63,17 @@
     {{ form_end(formCreateOccurrence) }}
 
     <script>
-        var mapUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
-        var mapAttributes = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
-
-        var satellite = L.tileLayer(mapUrl, {id: 'mapbox.satellite',
-            accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A',
-            attribution:mapAttributes
-        });
-        var streets = L.tileLayer(mapUrl, {id: 'mapbox.streets',
-            accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A',
-            attribution:mapAttributes
-        });
-
-        var mapForOccurrence = L.map('map_for_occurrence',{
-            zoom:3,
+        var optionsMap ={
             center: [50,0],
-            layers: [satellite, streets]
-        });
-        var baseLayers = {
-            "Satellite": satellite,
-            "Map": streets,
-        };
-
-        L.control.layers(baseLayers).addTo(mapForOccurrence);
-
+            zoom: 5
+        }
+        var mapForOccurrence = L.map('map_for_occurrence', optionsMap);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 20,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A'
+        }).addTo(mapForOccurrence);
 
         var myMarker = L.marker([50, 0], {draggable: true}).addTo(mapForOccurrence)
             .on('dragend', function() {

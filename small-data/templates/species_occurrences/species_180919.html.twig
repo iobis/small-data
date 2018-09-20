@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <p>Please choose one of the following phyla</p>
+    {% for phylum in phyla %}
+        <a href="{{ path('index_species_per_phylum', {'idPhylum': phylum.id}) }}" class="btn btn-primary">{{ phylum.phylumNameWorms }}</a>
+    {% endfor %}
+    {% if phylumToDisplay %}
+        <a href="{{ path('index_species') }}" class="btn btn-primary">All species</a>
+    {% endif %}
+
+    {% if not phylumToDisplay %}
+        <h2>All species</h2>
+    {% for singleSpecies in species %}
+
+        <div>
+        <h4><i>{{ singleSpecies.speciesNameWorms }}</i></h4>
+        <div class="row">
+            {% if singleSpecies.speciesImages is not empty %}
+                {% for image in singleSpecies.speciesImages if image.isForDisplay %}
+
+                <div style="max-height: 200px">
+                <img src="{{ asset('uploads/images_species/' ~ image.speciesImageName) }}"
+                     style="max-height:100%" alt="">
+                </div>
+                {% endfor %}
+        </div>
+            {% else %}
+                <div class="row">
+            <div><img src="http://placehold.it/200x200" alt=""></div>
+                </div>
+            {% endif %}
+
+        <div>
+            <a href="{{ path('species_details', {'idSpecies' : singleSpecies.id}) }}" class="btn btn-primary">Details</a>
+            <a href="{{ path('occurrences_list', {'idSpecies': singleSpecies.id}) }}" class="btn btn-primary">Occurrences</a>
+        </div>
+        </div>
+
+    {% endfor %}
+        {% else %}
+            <h2>Species belonging to the phylum {{ phylumToDisplay.phylumNameWorms }}</h2>
+        {% for singleSpecies in phylumToDisplay.species %}
+            <article>
+                <h4><i>{{ singleSpecies.speciesNameWorms }}</i></h4>
+                <img src="http://placehold.it/300x200" alt="">
+                <a href="{{ path('species_details', {'idSpecies' : singleSpecies.id}) }}" class="btn btn-primary">Details</a>
+                <a href="{{ path('occurrences_list', {'idSpecies': singleSpecies.id}) }}" class="btn btn-primary">Occurrences</a>
+            </article>
+
+        {% endfor %}
+    {% endif %}
+
+
+
+{% endblock %}
