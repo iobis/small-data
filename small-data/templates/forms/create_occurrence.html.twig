@@ -23,21 +23,26 @@
 
     {{ form_row(formCreateOccurrence.eventDate) }}
 
-    <div class="row">
-        <div class="col-md-10">
+
+
             <div id="map_for_occurrence" style="height: 400px; width: 800px;"></div>
-        </div>
-        <div class="col-md-2" >
+
+
+
+
             <div style="border-style: solid">
-            <p>To help you finding the exact coordinates of the record, please use the zoom options and drag the symbol and copy the coordinates below</p>
-             <span>Latitude:</span>
+                <p><i>Geolocator helper:</i> please insert approximate coordinates</p>
+                <p>Latitude: <input type="text" style="width:60px;" name="lat" id="lat"/>
+                    &nbsp;Longitude: <input type="text" style="width:60px;" name="lng" id="lng"/>
+                    <input type="button" onclick="zoomTo()" value="Locate"/></p>
+                <p>Drag the blue pointer to the accurate location (map or satellite option) and copy the values below in the form</p>
+                <span>Latitude:</span>
                 <span id="getLatitude">0</span>
                 <br>
-            <span>Longitude: </span><span id="getLongitude">0</span>
-            </div>
-        </div>
+                <span>Longitude: </span><span id="getLongitude">0</span>
+         </div>
 
-    </div>
+
 
 
 
@@ -88,24 +93,30 @@
         L.control.layers(baseLayers).addTo(mapForOccurrence);
 
 
-        var myMarker = L.marker([50, 0], {draggable: true}).addTo(mapForOccurrence)
-            .on('dragend', function() {
-                var coord = String(myMarker.getLatLng())                  //getLatLng produces a string e.g. 'LatLng(50.124, -0,32443)'
-                    .split(/[(),]+/);                                           //var coord is now a vector (split is either '(', ')', or ','
-            console.log(coord);
-            var lat = coord[1].trim();
-            console.log(lat);
-            var lng = coord[2].trim();
-            console.log(lng);
-            function getSingleCoordinate(latOrLng){
-                return latOrLng;
-            }
-            myMarker.bindPopup("LAT " + lat + " \nLNG " + lng );
-            document.getElementById('getLatitude').innerHTML = getSingleCoordinate(lat);
-            document.getElementById('getLongitude').innerHTML = getSingleCoordinate(lng);
+        function zoomTo() {
+            var lat = document.getElementById("lat").value;
+            var lng = document.getElementById("lng").value;
+            mapForOccurrence.setView(new L.LatLng(lat, lng), 7);
+            var myMarker = L.marker([lat, lng], {draggable: true}).addTo(mapForOccurrence)
+                .on('dragend', function() {
+                    var coord = String(myMarker.getLatLng())                  //getLatLng produces a string e.g. 'LatLng(50.124, -0,32443)'
+                        .split(/[(),]+/);                                           //var coord is now a vector (split is either '(', ')', or ','
+                    console.log(coord);
+                    var lat = coord[1].trim();
+                    console.log(lat);
+                    var lng = coord[2].trim();
+                    console.log(lng);
+                    function getSingleCoordinate(latOrLng){
+                        return latOrLng;
+                    }
+                    myMarker.bindPopup("LAT " + lat + " \nLNG " + lng );
+                    document.getElementById('getLatitude').innerHTML = getSingleCoordinate(lat);
+                    document.getElementById('getLongitude').innerHTML = getSingleCoordinate(lng);
 
-            });
+                });
 
+
+        }
     </script>
 
 

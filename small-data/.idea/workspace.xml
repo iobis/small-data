@@ -12,49 +12,6 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
-  <component name="DockManager">
-    <window id="4">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="SmallDataController.php" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/Controller/SmallDataController.php">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="15">
-                    <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
-                    <folding>
-                      <element signature="e#34#60#0#PHP" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-    <window id="5">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="occurrences.html.twig" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1071">
-                    <caret line="185" column="12" selection-start-line="185" selection-start-column="12" selection-end-line="185" selection-end-column="76" />
-                    <folding>
-                      <element signature="e#12#26#0#Twig" expanded="true" />
-                      <element signature="e#9#15#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
@@ -69,11 +26,14 @@
       <file leaf-file-name="create_occurrence.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/forms/create_occurrence.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="87" column="59" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
+            <state relative-caret-position="211">
+              <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
               <folding>
                 <element signature="e#1138#1174#0#HTML" expanded="true" />
-                <element signature="e#1246#1273#0#HTML" expanded="true" />
+                <element signature="e#1251#1278#0#HTML" expanded="true" />
+                <element signature="e#1391#1410#0#HTML" expanded="true" />
+                <element signature="e#1441#1447#0#HTML" expanded="true" />
+                <element signature="e#1477#1496#0#HTML" expanded="true" />
                 <element signature="e#9#15#0" expanded="true" />
               </folding>
             </state>
@@ -347,11 +307,11 @@
       <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="y" value="2" />
-    <option name="width" value="1378" />
-    <option name="height" value="733" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1358" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -493,12 +453,12 @@
       <workItem from="1536744815940" duration="588000" />
       <workItem from="1536830417392" duration="2413000" />
       <workItem from="1536883866003" duration="43085000" />
-      <workItem from="1537192762778" duration="44733000" />
+      <workItem from="1537192762778" duration="48270000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="809194000" />
+    <option name="totallyTimeSpent" value="812731000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -510,7 +470,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="2" width="1378" height="733" extended-state="0" />
+    <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32828283" />
@@ -518,8 +478,8 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.06554622" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20485584" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.04248366" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14392324" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.8894389" />
@@ -845,16 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/SmallDataController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
-          <folding>
-            <element signature="e#34#60#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/species_occurrences/species.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1560">
@@ -919,13 +869,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/SmallDataController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+          <folding>
+            <element signature="e#34#60#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/forms/create_occurrence.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="87" column="59" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
+        <state relative-caret-position="211">
+          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
           <folding>
             <element signature="e#1138#1174#0#HTML" expanded="true" />
-            <element signature="e#1246#1273#0#HTML" expanded="true" />
+            <element signature="e#1251#1278#0#HTML" expanded="true" />
+            <element signature="e#1391#1410#0#HTML" expanded="true" />
+            <element signature="e#1441#1447#0#HTML" expanded="true" />
+            <element signature="e#1477#1496#0#HTML" expanded="true" />
             <element signature="e#9#15#0" expanded="true" />
           </folding>
         </state>
