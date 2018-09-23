@@ -10,6 +10,7 @@ use App\Repository\OccurrenceRepository;
 use App\Repository\PhylumRepository;
 use App\Repository\SpeciesRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use http\Env\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,15 +86,55 @@ class SmallDataController extends Controller
     {
         $species = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
         $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$species], ['eventDate' => 'ASC']);
+
+        $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($species, $occurrences, $manager);
+
+        dump($intervalsWithFreqAndOccurrence);
+        return $this->render('species_occurrences/occurrences.html.twig', [
+            'controller_name' => 'SmallDataController',
+            'singleSpecies' => $species,
+            'occurrences' => $occurrences,
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
+        ]);
+
+    }
+
+
+    /**
+     * @Route("/occurrence/{idOccurrence}/details", name="occurrence_details")
+     */
+    public function occurrenceDetails($idOccurrence, ObjectManager $manager){
+        $occurrence = $this->getDoctrine()->getRepository((Occurrence::class))
+            ->findOneBy(['id'=>$idOccurrence]);
+        $singleSpecies = $occurrence->getSpecies();
+
+        $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$singleSpecies], []);
+        $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($singleSpecies, $occurrences, $manager);
+
+
+
+        return $this->render('species_occurrences/occurrence_details.html.twig', [
+            'occurrence'=>$occurrence,
+            'singleSpecies' => $singleSpecies,
+            'occurrences' => $occurrences,
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
+
+
+        ]);
+    }
+
+    public function renderOccurrenceIntervals ($species, $occurrences, ObjectManager $manager) {
+
+//        $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$species], ['eventDate' => 'ASC']);
 //        dump($species, $occurrences);
 
         $yearsOccurrences = [];
         foreach ($occurrences as $occurrence){
             if($occurrence->getIsValidated()){
 //            $yearOccurrence = [$occurrence->getId()=>$occurrence->getEventDate()->format("Y")];
-            $yearOccurrence = $occurrence->getEventDate()->format("Y");
+                $yearOccurrence = $occurrence->getEventDate()->format("Y");
 
-            array_push($yearsOccurrences, $yearOccurrence);
+                array_push($yearsOccurrences, $yearOccurrence);
             }
         }
         arsort($yearsOccurrences);
@@ -125,9 +166,9 @@ class SmallDataController extends Controller
 
                         foreach ($occurrences as $occurrence){
                             if($occurrence->getIsValidated()){
-                            if($occurrence->getEventDate()->format("Y")== $year){
+                                if($occurrence->getEventDate()->format("Y")== $year){
 
-                                array_push($arrayOccurrences, $occurrence);
+                                    array_push($arrayOccurrences, $occurrence);
                                 }
                             }
                         }
@@ -153,9 +194,9 @@ class SmallDataController extends Controller
                         $numberOfRecordsForInterval+=$frequency;
                         foreach ($occurrences as $occurrence){
                             if($occurrence->getIsValidated()){
-                            if($occurrence->getEventDate()->format("Y")== $year){
-                                array_push($arrayOccurrences, $occurrence);
-                            }
+                                if($occurrence->getEventDate()->format("Y")== $year){
+                                    array_push($arrayOccurrences, $occurrence);
+                                }
                             }
                         }
                     }
@@ -164,38 +205,10 @@ class SmallDataController extends Controller
                 array_push($intervalsWithFreqAndOccurrence, [(string)($yearLower), $numberOfRecordsForInterval, $arrayOccurrences]);
             }
         }
+        return $intervalsWithFreqAndOccurrence;
 
 
 
-
-
-//        dump($yearsOccurrences);
-        dump($intervalYears);
-        dump($freqForInterval);
-        dump($intervalsWithFreqAndOccurrence);
-        return $this->render('species_occurrences/occurrences.html.twig', [
-            'controller_name' => 'SmallDataController',
-            'singleSpecies' => $species,
-            'occurrences' => $occurrences,
-            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
-        ]);
-
-    }
-
-
-    /**
-     * @Route("/occurrence/{idOccurrence}/details", name="occurrence_details")
-     * @Route("/occurrence/{idOccurrence}/details/{slug}", name="occurrence_details_satellite")
-     */
-    public function occurrenceDetails($idOccurrence,  $slug = null){
-        $occurrence = $this->getDoctrine()->getRepository((Occurrence::class))
-            ->findOneBy(['id'=>$idOccurrence]);
-
-
-        return $this->render('species_occurrences/occurrence_details.html.twig', [
-            'occurrence'=>$occurrence,
-            'satellite'=>$slug
-        ]);
     }
 
 

@@ -13,56 +13,50 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-
-
 {% endblock %}
 
 
 {% block body %}
     <h1>Occurrences for <i>{{ singleSpecies.speciesNameWorms }}</i></h1>
     {#<a href="{{ path('occurrence_create', {'id':singleSpecies.wormsAphiaId } )}}" class="btn btn-primary">Create a new occurrence</a>#}
-    <a href="{{ path('occurrence_create', {'idSpecies':singleSpecies.id } )}}" class="btn btn-primary">Create a new occurrence</a>
+
                 {#POSITION OF THE MAP#}
                 <div id="map_for_occurrences" style="height:400px; width:700px"></div>
                   {#Position of the chart#}
-                  {#<div id="histogram" class="col" style="height:300px; width:400px;"></div>#}
-                  {#<p>Geographical and temporal distribution of records</p>#}
+                  <div id="histogram" class="col" style="height:300px; width:400px;"></div>
+                  <p>Geographical and temporal distribution of records</p>
+
+    </div>
 
 
 
+    <a href="{{ path('occurrence_create', {'idSpecies':singleSpecies.id } )}}" class="btn btn-primary">Create a new occurrence</a>
+<table>
 
-
-
-    {#<div class="table-responsive">#}
-    <table class="table-hover table-bordered display" id="mydatatable">
-    <thead>
     <tr>
-        <th>Id (#)</th>
         <th>Date  </th>
         <th>Locality  </th>
-        <th>Latitude&nbsp;&nbsp;</th>
+        <th></th>
+        <th>Latitude  </th>
         <th>Longitude  </th>
         {#<th>Species (WoRMS)</th>#}
         <th>Creation time </th>
         <th>Author</th>
         <th></th>
         <th></th>
-        <th></th>
-    </thead>
-    <tbody>
+
+
     </tr>
 
     {% for occurrence in occurrences %}
         {% if  occurrence.isValidated %}
         {% if occurrence.species == singleSpecies %}
     <tr>
-        <td><a href="#" id="id{{ occurrence.id }}" class="btn btn-primary">{{ occurrence.id }}</a></td>
         <td>{{occurrence.eventDate | date ('d/m/Y') }}</td>
         <td>{{ occurrence.locality }}</td>
-        <td>{{ occurrence.decimalLatitude | number_format(4)  }}&nbsp;</td>
-        <td>{{ occurrence.decimalLongitude | number_format(4) }}</td>
+        <td><a href="#" id="id{{ occurrence.id }}" class="btn btn-primary">Highlight</a></td>
+        <td>{{ occurrence.decimalLatitude }}</td>
+        <td>{{ occurrence.decimalLongitude }}</td>
         {#<td>{{ occurrence.species.speciesNameWorms }}</td>#}
         <td>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d H:i') }}</td>
         <td>{{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}</td>
@@ -72,46 +66,39 @@
                 <td></td>
                 {% endif %}
         <td><a href="{{ path('occurrence_details', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">More</a></td>
-        <td><a href="{{ path('occurrence_edit_gps', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">GPS</a></td>
 
     </tr>
         {% endif %}
         {% endif %}
     {% endfor %}
-    </tbody>
 </table>
-    {#</div>#}
 
-{% endblock %}
+    <script>
+        var year = [
+            {% for occurrence in occurrences %}
+            {% if occurrence.isValidated %}
+            {% if occurrence.species == singleSpecies %}
+            {% if loop.index0 != 0 %},{% endif %}
+            {{ occurrence.eventDate | date ('Y')}}
+            {% endif %}
+            {% endif %}
+            {% endfor %}
 
-{% block scripts_bottom %}
+        ];
 
-    {#<script>#}
-        {#var year = [#}
-            {#{% for occurrence in occurrences %}#}
-            {#{% if occurrence.isValidated %}#}
-            {#{% if occurrence.species == singleSpecies %}#}
-            {#{% if loop.index0 != 0 %},{% endif %}#}
-            {#{{ occurrence.eventDate | date ('Y')}}#}
-            {#{% endif %}#}
-            {#{% endif %}#}
-            {#{% endfor %}#}
+        var trace = {
+            x: year,
+            type: 'histogram'
+        };
+        var data = [trace];
+        var layout = {
+            title: "Occurrences of  {{ singleSpecies.speciesNameWorms }}",
+            xaxis:{title: "Year"},
+            yaxis:{title: "Number of occurrences"}
+        };
+        Plotly.newPlot('histogram', data, layout);
 
-        {#];#}
-
-        {#var trace = {#}
-            {#x: year,#}
-            {#type: 'histogram'#}
-        {#};#}
-        {#var data = [trace];#}
-        {#var layout = {#}
-            {#title: "Occurrences of  {{ singleSpecies.speciesNameWorms }}",#}
-            {#xaxis:{title: "Year"},#}
-            {#yaxis:{title: "Number of occurrences"}#}
-        {#};#}
-        {#Plotly.newPlot('histogram', data, layout);#}
-
-    {#</script>#}
+    </script>
 
     <script>
 
@@ -149,7 +136,7 @@
             {% if occurrence.isValidated %}
             {% if occurrence.species == singleSpecies %}
             var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}", icon:{{ nameForIcon}} })
-                .bindPopup("<p>{{ occurrence.locality }}</br>{{ occurrence.eventDate | date ('Y')}}</br># {{ occurrence.id }}</p>")
+                .bindPopup("<p>{{ occurrence.locality }}</p><p>{{ occurrence.eventDate | date ('Y')  }}</p>")
                 .addTo({{ nameForLayerGroup }});
             markers.push (marker);
             {% endif %}
@@ -199,7 +186,47 @@
             L.control.layers(baseLayers, overlays).addTo(mapForOccurrences);
 
 
+            // var mapForOccurrences = L.map('map_for_occurrences', optionsMap);
+            // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            //     maxZoom: 20,
+            //     id: 'mapbox.streets',
+            //     accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A'
+            // }).addTo(mapForOccurrences);
 
+
+
+
+
+
+
+            {#{% for intervalWithFreqAndOccurrences in intervalsWithFreqAndOccurrences %}#}
+            {#var arrayIntervals = [];#}
+            {#{% for occurrence in intervalWithFreqAndOccurrences.2 %}#}
+
+            {#var latitude = {{ occurrence.eventDate | date ("Y") }};#}
+                {#arrayIntervals.push(latitude);#}
+
+            {#{% endfor %}#}
+            {#console.log(arrayIntervals);#}
+            {#{% endfor %}#}
+
+
+            // WORKING BIT
+            {#var markers = [];#}
+            {#{% for occurrence in occurrences %}#}
+            {#{% if occurrence.isValidated %}#}
+            {#{% if occurrence.species == singleSpecies %} //https://stackoverflow.com/questions/12149233/concatenate-a-dynamic-variable-name-in-javascript#}
+
+            {#var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}", icon:myIcon})#}
+                {#.addTo(mapForOccurrences)#}
+                {#.bindPopup("<p>{{ occurrence.locality }}</p><p>{{ occurrence.eventDate | date ('Y')  }}</p>");#}
+
+            {#markers.push (marker);#}
+            {#{% endif %}#}
+            {#{% endif %}#}
+            {#{% endfor %}#}
+            {#// console.log(markers);#}
 
             function markerFunction(id){
                 for (var i in markers){
@@ -229,38 +256,10 @@
 
 
     </script>
-    {#https://datatables.net/manual/options#}
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#mydatatable').DataTable ({
-                scrollY: 400,
-                buttons: [
-                    {
-                        extend: 'csv',
-                        text: 'Copy all data',
-                        exportOptions: {
-                            modifier: {
-                                search: 'none'
-                            }
-                        }
-                    }
-                ]
-            } );
-
-
-
-        });
-    </script>
 
 
 
 {% endblock %}
-
-
-
-
 
 
 

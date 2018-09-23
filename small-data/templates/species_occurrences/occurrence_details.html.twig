@@ -23,12 +23,8 @@
 
     <h5>Date: {{ occurrence.eventDate | date('d/m/Y') }}</h5>
 
-    <div id="mapid" style="height: 300px; width: 500px ; "></div>
-    {% if not satellite %}
-        <a href="{{ path('occurrence_details_satellite',{'slug':'satellite', 'idOccurrence':occurrence.id}) }}" class="btn btn-primary">Satellite view</a>
-    {% else %}
-        <a href="{{ path('occurrence_details',{'idOccurrence':occurrence.id}) }}" class="btn btn-primary">Map view</a>
-    {% endif %}
+    <div id="map_for_occurrence" style="height: 300px; width: 500px ; "></div>
+
 
     <h5><p id="toDMS"></p>
     <p>Decimal latitude: {{ occurrence.decimalLatitude }} ; decimal longitude: {{ occurrence.decimalLongitude }}</p>
@@ -42,16 +38,87 @@
 
 
     <script>
-        var mymap = L.map('mapid').setView([{{ occurrence.decimalLatitude}}, {{ occurrence.decimalLongitude }}], 4);
 
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-        {% if satellite %} id: 'mapbox.satellite',{% else %}id: 'mapbox.streets', {% endif %}
-            accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A'
-        }).addTo(mymap);
+        var intervalLayer0 = L.layerGroup();
+        var intervalLayer1 = L.layerGroup();
+        var intervalLayer2 = L.layerGroup();
+        var intervalLayer3 = L.layerGroup();
+        var intervalLayer4 = L.layerGroup();
+        var intervalLayer5 = L.layerGroup();
+        var intervalLayer6 = L.layerGroup();
+        var intervalLayer7 = L.layerGroup();
 
-        var marker = L.marker([{{ occurrence.decimalLatitude}}, {{ occurrence.decimalLongitude }}]).addTo(mymap);
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize:     [10, 10],
+                iconAnchor:   [4, 9],
+                popupAnchor:  [9, 2]
+            }
+        });
+        //See http://colorbrewer2.org/#type=diverging&scheme=RdYlGn&n=8
+        var icon0 = new LeafIcon({iconUrl: '{{ asset('images/cb0.png') }}'}),
+            icon1 = new LeafIcon({iconUrl: '{{ asset('images/cb1.png') }}'}),
+            icon2 = new LeafIcon({iconUrl: '{{ asset('images/cb2.png') }}'}),
+            icon3 = new LeafIcon({iconUrl: '{{ asset('images/cb3.png') }}'}),
+            icon4 = new LeafIcon({iconUrl: '{{ asset('images/cb4.png') }}'}),
+            icon5 = new LeafIcon({iconUrl: '{{ asset('images/cb5.png') }}'}),
+            icon6 = new LeafIcon({iconUrl: '{{ asset('images/cb6.png') }}'}),
+            icon7 = new LeafIcon({iconUrl: '{{ asset('images/cb7.png') }}'});
+
+        var markers = [];
+        {% for intervalWithFreqAndOccurrences in intervalsWithFreqAndOccurrences %}
+        {% set nameForIcon = 'icon' ~ loop.index0 %}
+        {% set nameForLayerGroup = 'intervalLayer' ~ loop.index0 %}
+        {% for occurrence in intervalWithFreqAndOccurrences.2 %}
+        {% if occurrence.isValidated %}
+        {% if occurrence.species == singleSpecies %}
+        var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}", icon:{{ nameForIcon}} })
+            .bindPopup("<p>{{ occurrence.locality }}</br>{{ occurrence.eventDate | date ('Y')}}</br># {{ occurrence.id }}</p>")
+            .addTo({{ nameForLayerGroup }});
+        markers.push (marker);
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+        var mapUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
+        var mapAttributes = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+
+        var satellite = L.tileLayer(mapUrl, {id: 'mapbox.satellite',
+            accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A',
+            attribution:mapAttributes
+        });
+        var streets = L.tileLayer(mapUrl, {id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A',
+            attribution:mapAttributes
+        });
+
+        var mapForOccurrence = L.map('map_for_occurrence',{
+            zoom:12,
+            center: [50,0],
+            layers: [satellite, streets, intervalLayer0, intervalLayer1, intervalLayer2, intervalLayer3, intervalLayer4,
+                intervalLayer5, intervalLayer6, intervalLayer7]
+        });
+        var baseLayers = {
+            "Satellite": satellite,
+            "Map": streets,
+
+        };
+
+        var overlays = {
+            {% for intervalWithFreqAndOccurrences in intervalsWithFreqAndOccurrences %}
+            {% set nameLayer = 'intervalLayer' ~ loop.index0 %}
+            {% set indexOfLoop = '' ~ loop.index0 %}
+            "<img style='vertical-align:middle; height: 10px' src='{{ asset("images/cb#{indexOfLoop}.png") }}'><div style='vertical-align:middle; display:inline;'>&nbsp; {{ intervalWithFreqAndOccurrences.0 }}</div>": {{ nameLayer }},
+            {% endfor %}
+        };
+
+        L.control.layers(baseLayers, overlays).addTo(mapForOccurrence);
+
+
+        var lat = {{ occurrence.decimalLatitude}}, lng = {{ occurrence.decimalLongitude }};
+        mapForOccurrence.setView(new L.LatLng(lat, lng), 3);
+        var marker = L.marker([lat, lng]).addTo(mapForOccurrence);
 
     </script>
     <script>

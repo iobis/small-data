@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block head_scripts %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+          integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+            integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+            crossorigin=""></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+
+{% endblock %}
+
+{% block body %}
+    {% if  (app.user  ==  occurrence.inputter) or (is_granted ('ROLE_VALIDATOR')) %}
+        <h1>Edit GPS occurrence #{{ occurrence.id }} for <i>{{ singleSpecies.speciesNameWorms }} </i></h1>
+        <p>Created by {{ occurrence.inputter.firstName }} {{ occurrence.inputter.lastName }} ({{ occurrence.inputter.username }}),
+            on {{ occurrence.occurrenceCreatedAt | date ('d/m/Y')}}
+            at {{ occurrence.occurrenceCreatedAt | date ('H:i')}}</p>
+        <div id="map_for_occurrence" style="height: 400px; width: 800px;"></div><br>
+
+        <div style="border-style: solid">
+            {#<p><i>Geolocator helper:</i> please insert approximate coordinates</p>#}
+            {#<p>Latitude: <input type="text" style="width:60px;" name="lat" id="lat"/>#}
+            {#&nbsp;Longitude: <input type="text" style="width:60px;" name="lng" id="lng"/>#}
+            {#<input type="button" onclick="zoomTo()" value="Locate"/></p>#}
+            <p>Drag the blue pointer to the accurate location (map or satellite option) to update coordinates in the form
+            <span>Coordinates DMS:&nbsp;</span>
+                <b><i><span id="toDMS"></span></i></b>
+
+            </p>
+        </div>
+
+
+
+    <form action="{{ path('occurrence_edit_gps', {'idOccurrence': occurrence.id}) }}" class="form-inline" method="POST">
+        <label for="text">Decimal latitude</label>
+        <input type="text" class="form-control" name="latitude_gps" id="getLatitudePlaceholder" value="{{ occurrence.decimalLatitude }}"><br>
+        <label for="text">Decimal longitude</label>
+    <input type="text" class="form-control" name="longitude_gps" id="getLongitudePlaceholder" value="{{ occurrence.decimalLongitude }}"><br>
+    <button type="submit" class="btn btn-primary" name="update_gps">Update</button>
+    </form>
+
+    {% else %}
+
+        <h1>Occurrence {{ occurrence.id }} for <i>{{ singleSpecies.speciesNameWorms }} </i></h1>
+        <p>Created by {{ occurrence.inputter.firstName }} {{ occurrence.inputter.lastName }} ({{ occurrence.inputter.username }}),
+            on {{ occurrence.occurrenceCreatedAt | date ('d/m/Y')}}
+            at {{ occurrence.occurrenceCreatedAt | date ('H:i')}}</p>
+        <br>
+        <h4>As you are not the creator of this record, please notice that you are not authorized to edit it.</h4>
+        <h4>Please contact the administrator to become a validator</h4>
+
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts_bottom %}
+    <script>
+        function degreeToDMS(decimalDegrees){
+            var absDecDegrees = Math.abs(decimalDegrees);
+            var deg = Math.floor(absDecDegrees);
+            var decMinutes = (absDecDegrees - deg)*60;
+            var min = Math.floor(decMinutes);
+            var decSeconds = (decMinutes-min)*60;
+            var sec = (Math.round(decSeconds * 100))/100;
+            if(sec==60){min++; sec=0;}
+            if (min==60){deg++; min=0; }
+
+            return deg +"º "+min+"' "+sec +"'' ";
+        }
+
+        function convertDMS(lat, lng) {
+            var latitude = degreeToDMS(lat);
+            var latitudeCardinal = Math.sign(lat) >= 0 ? "N" : "S";
+
+            var longitude = degreeToDMS(lng);
+            var longitudeCardinal = Math.sign(lng) >= 0 ? "E" : "W";
+
+            return latitude + " " + latitudeCardinal + "\n" + longitude + " " + longitudeCardinal;
+        }
+
+
+
+
+
+        var mapUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
+    var mapAttributes = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+
+    var satellite = L.tileLayer(mapUrl, {id: 'mapbox.satellite',
+    accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A',
+    attribution:mapAttributes
+    });
+    var streets = L.tileLayer(mapUrl, {id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoiZm1pbmV1ciIsImEiOiJjamwzdGk3ZzYwaGY4M3dtcTFvcmpzNWt0In0.eDKRO3APxmefQb1H-gaT2A',
+    attribution:mapAttributes
+    });
+
+    var mapForOccurrence = L.map('map_for_occurrence',{
+    zoom:12,
+    center: [50,0],
+    layers: [satellite, streets]
+    });
+    var baseLayers = {
+        "Satellite": satellite,
+        "Map": streets,
+    };
+
+    L.control.layers(baseLayers).addTo(mapForOccurrence);
+
+    var lat = {{ occurrence.decimalLatitude }};
+    var lng = {{ occurrence.decimalLongitude }};
+    document.getElementById('getLatitudePlaceholder').innerHTML = lat;
+    document.getElementById('getLongitudePlaceholder').innerHTML = lng;
+    console.log (lat);
+
+    mapForOccurrence.setView(new L.LatLng(lat, lng), 12);
+    var myMarker = L.marker([lat, lng], {draggable: true}).addTo(mapForOccurrence)
+        .on('dragend', function() {
+            var coord = String(myMarker.getLatLng())                  //getLatLng produces a string e.g. 'LatLng(50.124, -0,32443)'
+                .split(/[(),]+/);                                           //var coord is now a vector (split is either '(', ')', or ','
+            console.log(coord);
+            var lat = coord[1].trim();
+            console.log(lat);
+            var lng = coord[2].trim();
+            console.log(lng);
+            function getSingleCoordinate(latOrLng){
+                return latOrLng;
+            }
+            myMarker.bindPopup("LAT " + lat + " \nLNG " + lng );
+            document.getElementById('toDMS').innerHTML = convertDMS(getSingleCoordinate(lat), getSingleCoordinate(lng));
+            // document.getElementById('getLatitude').innerHTML = getSingleCoordinate(lat);
+            //
+            //
+            // document.getElementById('getLongitude').innerHTML = getSingleCoordinate(lng);
+            document.getElementById('getLatitudePlaceholder').value = getSingleCoordinate(lat);
+            document.getElementById('getLongitudePlaceholder').value = getSingleCoordinate(lng);
+
+        })
+
+    ;
+
+
+    </script>
+
+{% endblock %}

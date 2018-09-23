@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\SmallDataController;
 use App\Entity\Occurrence;
 use App\Entity\Species;
 use App\Form\OccurrenceCreateType;
@@ -12,6 +13,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class FormsController extends Controller
@@ -57,6 +59,9 @@ class FormsController extends Controller
 
     }
 
+
+/*CHECK FOR STANDARD FORM EDIT GOS*/
+//https://stackoverflow.com/questions/23569972/symfony-twig-forms-submitting-through-html-form-action-path
     /**
      *@Route("/occurrence/{idOccurrence}/editFields", name="occurrence_edit")
      */
@@ -67,9 +72,10 @@ class FormsController extends Controller
         $occurrence = $this->getDoctrine()->getRepository(Occurrence::class)
             ->findOneBy(['id'=>$idOccurrence]);
 
-        $speciesName = $occurrence->getSpecies()->getSpeciesNameWorms();
-        $speciesPhylum = $occurrence->getSpecies()->getPhylum();
-
+        $species = $occurrence->getSpecies();
+        $occurrences = $species->getOccurrences();
+        $intervalsWithFreqAndOccurrence = $this->container->get('App\Controller\SmallDataController')->renderOccurrenceIntervals($species, $occurrences, $objectManager);
+        dump($intervalsWithFreqAndOccurrence);
 
         $form = $this->createForm(OccurrenceType::class, $occurrence);
         $form ->add('species', EntityType::class, [
@@ -85,6 +91,7 @@ class FormsController extends Controller
             },
             'choice_label'=> 'speciesNameWorms'
         ]);
+
 
         $form->handleRequest($request);
 
@@ -104,13 +111,50 @@ class FormsController extends Controller
         return $this->render('forms/edit_occurrence.html.twig', [
             'formEditOccurrence'=>$form->createView(),
             'singleSpecies'=>$occurrence->getSpecies(),
-            'occurrence'=>$occurrence
+            'occurrence'=>$occurrence,
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
         ]);
     }
 
 //    public function addSpecies(Request $request){
 //      See AdminController
 //    }
+
+
+
+
+
+
+    /**
+     * @Route("/occurrence/{idOccurrence}/editGPS", name="occurrence_edit_gps")
+     */
+    public function formEditOccurrenceGPS (Request $request, ObjectManager $manager, $idOccurrence){
+//        https://stackoverflow.com/questions/23569972/symfony-twig-forms-submitting-through-html-form-action-path
+//        https://symfony.com/doc/current/introduction/http_fundamentals.html
+
+        $occurrence = $manager->getRepository(Occurrence::class)->findOneBy(['id'=>$idOccurrence]);
+
+        if(isset($_POST['update_gps'])){
+//            $latitude= $request->query->get($_POST['latitude_gps']);
+            $latitude= $_POST['latitude_gps'];
+            dump($latitude);
+//            $longitude= $request->query->get($_POST['longitude_gps']);
+            $longitude= $_POST['longitude_gps'];
+            $occurrence->setDecimalLatitude($latitude);
+            $occurrence->setDecimalLongitude($longitude);
+            $manager->persist($occurrence);
+            $manager->flush();
+            return $this->redirectToRoute('occurrence_details',
+                ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(), 'idOccurrence'=>$occurrence->getId()]);
+        }
+
+
+        return $this->render ('forms/edit_occurrence_GPS.html.twig', [
+            'occurrence'=>$occurrence,
+            'singleSpecies'=>$occurrence->getSpecies(),
+        ]);
+
+    }
 
 
 }
