@@ -23,23 +23,38 @@
 
     {{ form_row(formCreateOccurrence.eventDate) }}
 
-
-
             <div id="map_for_occurrence" style="height: 400px; width: 800px;"></div>
-
-
-
 
             <div style="border-style: solid">
                 <p><i>Geolocator helper:</i> please insert approximate coordinates</p>
-                <p>Latitude: <input type="text" style="width:60px;" name="lat" id="lat"/>
-                    &nbsp;Longitude: <input type="text" style="width:60px;" name="lng" id="lng"/>
+                Lat.: <input type="text" style="width:30px;" value="0" id="latDeg"/>deg
+                <input type="text" style="width:50px;" value="0" id="latMin"/>min
+                <input type="text" style="width:50px;" value="0" id="latSec"/>sec
+                <select  id="latCard">
+                    <option value="N">N</option>
+                    <option value="S">S</option>
+                </select>
+                &nbsp;Long.: <input type="text" style="width:60px;" value="0" id="lngDeg"/>deg
+                <input type="text" style="width:50px;" value="0" id="lngMin"/>min
+                <input type="text" style="width:50px;" value="0" id="lngSec"/>sec
+                <select  id="lngCard">
+                    <option value="E">E</option>
+                    <option value="W">W</option>
+                </select>
+
+
+
+
+                <input type="button" onclick="zoomToDMS()" value="Locate"/></p>
+
+                <p>Latitude: <input type="text" style="width:60px;" value="0" name="lat" id="lat"/>
+                    &nbsp;Longitude: <input type="text" style="width:60px;" value= "0" name="lng" id="lng"/>
                     <input type="button" onclick="zoomTo()" value="Locate"/></p>
-                <p>Drag the blue pointer to the accurate location (map or satellite option) and copy the values below in the form</p>
-                <span>Latitude:</span>
-                <span id="getLatitude">0</span>
-                <br>
-                <span>Longitude: </span><span id="getLongitude">0</span>
+                <p>Drag the blue pointer to the accurate location (map or satellite option) and copy the decimal values below to the form</p>
+                <p id="toDMS"></p>
+                <span>Lat:</span>
+                <span id="getLatitude">&nbsp;</span>
+                <span>Lng:</span><span id="getLongitude">&nbsp;</span>
          </div>
 
 
@@ -67,6 +82,7 @@
 
     {{ form_end(formCreateOccurrence) }}
 
+    <script src="{{ asset('js/DMS.js') }}"></script>
     <script>
         var mapUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
         var mapAttributes = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
@@ -98,6 +114,43 @@
             var lng = document.getElementById("lng").value;
             mapForOccurrence.setView(new L.LatLng(lat, lng), 7);
             var myMarker = L.marker([lat, lng], {draggable: true}).addTo(mapForOccurrence)
+                .on('dragend', function() {                               //https://stackoverflow.com/questions/27609294/how-to-remove-marker-from-leaflet-map
+                    var coord = String(myMarker.getLatLng())                  //getLatLng produces a string e.g. 'LatLng(50.124, -0,32443)'
+                        .split(/[(),]+/);                                           //var coord is now a vector (split is either '(', ')', or ','
+                    console.log(coord);
+                    var lat = coord[1].trim();
+                    console.log(lat);
+                    var lng = coord[2].trim();
+                    console.log(lng);
+                    function getSingleCoordinate(latOrLng){
+                        return latOrLng;
+                    }
+                    myMarker.bindPopup("lat " + lat + " lng " + lng );
+                    document.getElementById('getLatitude').innerHTML = getSingleCoordinate(lat);
+                    document.getElementById('getLongitude').innerHTML = getSingleCoordinate(lng);
+
+                });
+        };
+        function zoomToDMS() {
+            var latDeg = parseFloat(document.getElementById("latDeg").value);
+            var latMin = document.getElementById("latMin").value;
+            var latSec = document.getElementById("latSec").value;
+            var latCard = document.getElementById("latCard").value;
+            var lngDeg = parseFloat(document.getElementById("lngDeg").value);
+            var lngMin = document.getElementById("lngMin").value;
+            var lngSec = document.getElementById("lngSec").value;
+            var lngCard = document.getElementById("lngCard").value;
+            var lat = latDeg + (latMin/60)+(latSec/3600);
+            console.log(latCard);
+            if (latCard == 'S') {lat = -lat;};
+            var lng = lngDeg +(lngMin/60)+(lngSec/3600);
+            if (lngCard == 'W') {lng = -lng;};
+            console.log(latDeg);
+            console.log(lat);
+
+
+            mapForOccurrence.setView(new L.LatLng(lat, lng), 7);
+            var myMarker = L.marker([lat, lng], {draggable: true}).addTo(mapForOccurrence)
                 .on('dragend', function() {
                     var coord = String(myMarker.getLatLng())                  //getLatLng produces a string e.g. 'LatLng(50.124, -0,32443)'
                         .split(/[(),]+/);                                           //var coord is now a vector (split is either '(', ')', or ','
@@ -109,14 +162,14 @@
                     function getSingleCoordinate(latOrLng){
                         return latOrLng;
                     }
-                    myMarker.bindPopup("LAT " + lat + " \nLNG " + lng );
+                    myMarker.bindPopup("lat " + lat + " lng " + lng );
                     document.getElementById('getLatitude').innerHTML = getSingleCoordinate(lat);
                     document.getElementById('getLongitude').innerHTML = getSingleCoordinate(lng);
+                    document.getElementById('toDMS').innerHTML = convertDMS(getSingleCoordinate(lat), getSingleCoordinate(lng));
 
                 });
+        };
 
-
-        }
     </script>
 
 
