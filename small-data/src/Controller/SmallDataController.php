@@ -66,6 +66,12 @@ class SmallDataController extends Controller
     public function detailSpecies(ObjectManager $manager, $idSpecies) // $wormsAphiaId
     {
             $species = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
+            $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$species],[]);
+
+        $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($species, $occurrences, $manager);
+
+
+
 //        $species = $speciesRepository->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
 //        $species = $this->getDoctrine()->getRepository(Species::class)
 //                        ->findOneBy(['wormsAphiaId'=> $wormsAphiaId]);
@@ -73,7 +79,9 @@ class SmallDataController extends Controller
 
     return $this->render('species_occurrences/species_details.html.twig', [
             'controller_name' => 'SmallDataController',
-            'singleSpecies' => $species
+            'singleSpecies' => $species,
+            'occurrences' => $occurrences,
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
         ]);
     }
 

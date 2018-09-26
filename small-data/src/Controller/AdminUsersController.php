@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Inputter;
 use App\Entity\Phylum;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -12,19 +13,22 @@ class AdminUsersController extends Controller
 {
     /**
      * @Route("/admin/users", name="admin_users")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function displayAllUsers(ObjectManager $manager)
     {
         $inputters = $manager->getRepository(Inputter::class)->findBy([],['lastName'=>'ASC']);
-
+        $phyla = $manager->getRepository(Phylum::class)->findBy([], ['phylumNameWorms'=>'ASC']);
 
         return $this->render('admin_users/admin_users.html.twig', [
-            'inputters'=>$inputters
+            'inputters'=>$inputters,
+            'phyla'=>$phyla
         ]);
     }
 
     /**
      * @Route("admin/users_expertise/{idInputter}/", name="edit_users_expertise")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
 
     public function editExpertise (ObjectManager $manager, $idInputter)
@@ -42,6 +46,7 @@ class AdminUsersController extends Controller
 
     /**
      * @Route("admin/users_expertise/{idInputter}/{idPhylum}/{mode}/", name="edit_user_phylum")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function addRemoveFieldOfExpertise (ObjectManager $manager, $idInputter, $idPhylum, $mode)
     {

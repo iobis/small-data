@@ -15,6 +15,7 @@ class SpeciesImageType extends AbstractType
         $builder
             ->add('speciesImageName', FileType::class, ['label'=>'Upload the image for the species'])
             ->add('isForDisplay')
+            ->add('isMain')
 //            ->add('species')
         ;
     }

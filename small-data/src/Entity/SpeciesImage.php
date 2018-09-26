@@ -43,6 +43,11 @@ class SpeciesImage
      */
     private $isForDisplay;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isMain;
+
 
 
 
@@ -85,6 +90,18 @@ class SpeciesImage
     public function setIsForDisplay(?bool $isForDisplay): self
     {
         $this->isForDisplay = $isForDisplay;
+
+        return $this;
+    }
+
+    public function getIsMain(): ?bool
+    {
+        return $this->isMain;
+    }
+
+    public function setIsMain(?bool $isMain): self
+    {
+        $this->isMain = $isMain;
 
         return $this;
     }

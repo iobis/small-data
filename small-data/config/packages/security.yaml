@@ -34,6 +34,8 @@ security:
 #        - { path: ^/.*/editFields, roles: ROLE_INPUTTER }
         - { path: ^/.*/create_occurrence, roles: ROLE_INPUTTER}
         - { path: ^/.*/editSpecies, roles: ROLE_VALIDATOR }
+        - { path: ^/.*/admin_users, roles: ROLE_ADMINISTRATOR}
+
 
             # activate different ways to authenticate
 

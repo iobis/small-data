@@ -10,6 +10,7 @@ use App\Form\OccurrenceEditType;
 use App\Form\OccurrenceType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +22,7 @@ class FormsController extends Controller
 
     /**
      * @Route("/{idSpecies}/create_occurrence", name="occurrence_create")
+     * @Security("has_role('ROLE_INPUTTER')")
      */
     public function formCreateOccurrence($idSpecies, Request $request, ObjectManager $objectManager){
         $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
@@ -64,6 +66,7 @@ class FormsController extends Controller
 //https://stackoverflow.com/questions/23569972/symfony-twig-forms-submitting-through-html-form-action-path
     /**
      *@Route("/occurrence/{idOccurrence}/editFields", name="occurrence_edit")
+     *@Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function formEditOccurrence($idOccurrence , Request $request, ObjectManager $objectManager){
 //        $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
@@ -127,6 +130,7 @@ class FormsController extends Controller
 
     /**
      * @Route("/occurrence/{idOccurrence}/editGPS", name="occurrence_edit_gps")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function formEditOccurrenceGPS (Request $request, ObjectManager $manager, $idOccurrence){
 //        https://stackoverflow.com/questions/23569972/symfony-twig-forms-submitting-through-html-form-action-path

@@ -9,6 +9,7 @@ use App\Form\SpeciesImageType;
 use App\Form\SpeciesType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Proxies\__CG__\App\Entity\Phylum;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,7 @@ class AdministrationController extends Controller
 {
     /**
      * @Route("/admin_species", name="admin_species")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function ManageSpecies(ObjectManager $manager)
     {
@@ -43,6 +45,7 @@ class AdministrationController extends Controller
 
     /**
      * @Route("/removeSpecies/{idSpecies}", name = "warning_remove_singleSpecies")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function warningRemoveSingleSpecies(ObjectManager $manager, $idSpecies)
     {
@@ -54,6 +57,7 @@ class AdministrationController extends Controller
 
     /**
      * @Route("admin_species/remove_{idSpecies}", name="remove_singleSpecies")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function removeSingleSpecies(ObjectManager $manager, $idSpecies)
     {
@@ -88,6 +92,7 @@ class AdministrationController extends Controller
 
     /**
      * @Route("admin_species/create_csv_occurrences{idSpecies}", name = "csv_species_occurrences")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function createCsvOccurrences (ObjectManager $manager, $idSpecies)
     {
@@ -129,6 +134,7 @@ class AdministrationController extends Controller
     /**
      * @Route ("admin_species/add", name="add_species")
      * @Route ("admin_species/{idSpecies}", name="edit_species")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function addEditSpecies (Request $request, ObjectManager $manager, $idSpecies = null)
     {
@@ -162,6 +168,7 @@ class AdministrationController extends Controller
 
     /**
      * @Route ("admin_species/image_manager/{idSpecies}", name = "manage_images_species")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
 
     public function addSpeciesImage (Request $request, ObjectManager $manager, $idSpecies)
@@ -203,14 +210,15 @@ class AdministrationController extends Controller
 
     /**
      * @Route ("admin_species/Image/{idImageSpecies}/{display}", name = "editForDisplay_image_species")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function editDisplayImageSpecies (ObjectManager $manager, $idImageSpecies, $display){
         $speciesImageToEdit = $manager->getRepository(SpeciesImage::class)->findOneBy(['id'=>$idImageSpecies]);
         $idSpecies= $speciesImageToEdit->getSpecies()->getId();
         if ($display == 'yes'){
-            $speciesImageToEdit->setIsForDisplay(false);
-        } else {
             $speciesImageToEdit->setIsForDisplay(true);
+        } else {
+            $speciesImageToEdit->setIsForDisplay(false);
         }
         $manager->persist($speciesImageToEdit);
         $manager->flush();
@@ -221,8 +229,32 @@ class AdministrationController extends Controller
             );
     }
 
+
+    /**
+     * @Route("admin_species/Image/Main/{idImageSpecies}/{main}/", name="editmain_image_species")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
+     */
+    public function editMainStatusImage (ObjectManager $manager, $idImageSpecies, $main){
+        $speciesImageToEdit = $manager->getRepository(SpeciesImage::class)->findOneBy(['id'=>$idImageSpecies]);
+        $idSpecies = $speciesImageToEdit->getSpecies()->getId();
+        if($main == 'yes'){
+            $speciesImageToEdit->setIsMain(true);
+        } elseif ($main == 'no') {
+            $speciesImageToEdit->setIsMain(false);
+        }
+        $manager->persist($speciesImageToEdit);
+        $manager->flush();
+        return $this->redirectToRoute('manage_images_species', [
+            'idSpecies'=>$idSpecies
+        ]);
+
+
+
+    }
+
     /**
      * @Route("admin_species/image_remove/{idImageSpecies}", name="remove_image_species")
+     * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function removeImageSpecies (ObjectManager $manager, $idImageSpecies){
         $speciesImage = $manager->getRepository(SpeciesImage::class)->findOneBy(['id'=>$idImageSpecies]);
@@ -241,6 +273,7 @@ class AdministrationController extends Controller
 
 
     }
+
 
 
 

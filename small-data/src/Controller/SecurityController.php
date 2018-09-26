@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Inputter;
 use App\Form\RegistrationType;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -72,6 +73,7 @@ class SecurityController extends Controller
 
     /**
      * @Route("/security/changePassword/{idInputter}/", name="change_password")
+     * @Security()
      */
     public function changePassword(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, $idInputter){
 

@@ -8,6 +8,7 @@ use App\Entity\Species;
 use App\Repository\PhylumRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -16,6 +17,7 @@ class ValidationController extends Controller
     /**
      * @Route("/validation/{idPhylum}/{wormsAphiaId}/{mode}", name="non_valid_list_for_phylum_with_details_one_species")
      * @Route("/validation/{idPhylum}", name="non_valid_list_for_phylum")
+     * @Security("has_role('ROLE_INPUTTER')")
      */
     public function showNonValid(ObjectManager $manager, $idPhylum = null, $wormsAphiaId = null, $mode = null)
     {
@@ -40,6 +42,7 @@ class ValidationController extends Controller
     //!!!! WEIRD problems happens when "{idOccurrence}" is not followed by a slash bar or not at the end of the route.....
     /**
      * @Route("/validation/validate/{idOccurrence}/", name="validate_occurrence")
+     * @Security("has_role('ROLE_VALIDATOR')")
      */
     public function validateOccurrence(ObjectManager $manager, $idOccurrence=null)
     {

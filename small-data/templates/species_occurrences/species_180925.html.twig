@@ -66,25 +66,13 @@
         {% for singleSpecies in phylumToDisplay.species %}
             <div class="row">
                 <div class="col-4">
-                    {% if singleSpecies.speciesImages is not empty   %}
-                        {% set numberOfImagesForMain  = 0 %}
-
-                        {% for image in singleSpecies.speciesImages if image.isMain %}
-                            {#{% if image.isForDisplay and image.isMain %}#}
+                    {% if singleSpecies.speciesImages is not empty %}
+                        {% for image in singleSpecies.speciesImages if image.isForDisplay %}
                             <div  style="max-height: 200px; max-width: 200px">
                                 <img src="{{ asset('uploads/images_species/' ~ image.speciesImageName) }}"
-                                     style="max-height:100%; max-width: 100%;" alt="">
-                            </div>
-                            {% set numberOfImagesForMain  = numberOfImagesForMain +1 %}
-                        {% endfor %}
-                        {% if numberOfImagesForMain == 0 %}
-                            <div  style="max-height: 200px; max-width: 200px">
-                                <img src="{{ asset('images/placeholders/SeaweedPlaceholder.JPG') }}"
                                      style="max-height:100%; max-width: 100%" alt="">
                             </div>
-                        {% endif %}
-
-
+                        {% endfor %}
                     {% else %}
                         <div  style="max-height: 200px; max-width: 200px">
                             <img src="{{ asset('images/placeholders/SeaweedPlaceholder.JPG') }}"
@@ -99,11 +87,6 @@
                     <a href="{{ path('species_details', {'idSpecies' : singleSpecies.id}) }}" class="btn btn-primary">Details</a>
                     <a href="{{ path('occurrences_list', {'idSpecies': singleSpecies.id}) }}" class="btn btn-primary">Occurrences</a>
                 </div>
-
-
-
-
-
             </div>
             <hr>
 
