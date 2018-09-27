@@ -13,15 +13,35 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="DockManager">
-    <window id="12">
+    <window id="1">
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="ValidationController.php" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/Controller/ValidationController.php">
+            <file leaf-file-name="home.html.twig" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/templates/species_occurrences/home.html.twig">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1040">
-                    <caret line="63" column="16" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="16" />
+                  <state relative-caret-position="635">
+                    <caret line="49" column="47" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="47" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="nonvalidoccurrences.html.twig" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/templates/validation/nonvalidoccurrences.html.twig">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state>
+                    <folding>
+                      <element signature="e#12#26#0#Twig" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="base180927.html.twig" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/templates/base180927.html.twig">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="295">
+                    <caret line="59" column="109" selection-start-line="59" selection-start-column="94" selection-end-line="59" selection-end-column="109" />
                   </state>
                 </provider>
               </entry>
@@ -36,8 +56,28 @@
       <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="75" selection-start-line="71" selection-end-line="75" />
+            <state relative-caret-position="156">
+              <caret line="80" column="36" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/forms/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="species.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/species_occurrences/species.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="58" column="92" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="92" />
             </state>
           </provider>
         </entry>
@@ -45,7 +85,7 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-600">
+            <state relative-caret-position="2240">
               <caret line="112" selection-start-line="112" selection-end-line="112" />
             </state>
           </provider>
@@ -54,11 +94,8 @@
       <file leaf-file-name="occurrences.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3706">
+            <state relative-caret-position="4840">
               <caret line="242" column="46" selection-start-line="242" selection-start-column="46" selection-end-line="242" selection-end-column="46" />
-              <folding>
-                <element signature="e#9#15#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -74,7 +111,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dump</find>
       <find>loop.index0</find>
       <find>{% if</find>
       <find>findBy</find>
@@ -104,6 +140,7 @@
       <find>plotly</find>
       <find>markerFu</find>
       <find>objectmanager</find>
+      <find>app.user</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -160,13 +197,13 @@
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/templates/admin_users/admin_users.html.twig" />
         <option value="$PROJECT_DIR$/public/css/main.css" />
-        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/SmallDataController.php" />
         <option value="$PROJECT_DIR$/src/Controller/AdministrationController.php" />
         <option value="$PROJECT_DIR$/src/Controller/AdminUsersController.php" />
         <option value="$PROJECT_DIR$/src/Controller/FormsController.php" />
         <option value="$PROJECT_DIR$/src/Controller/SecurityController.php" />
         <option value="$PROJECT_DIR$/src/Controller/ValidationController.php" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
       </list>
     </option>
   </component>
@@ -294,7 +331,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -362,12 +398,19 @@
               <item name="small-data" type="b2602c69:ProjectViewProjectNode" />
               <item name="small-data" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="species_occurrences" type="462c0819:PsiDirectoryNode" />
+              <item name="trial" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="small-data" type="b2602c69:ProjectViewProjectNode" />
+              <item name="small-data" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="validation" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -379,15 +422,15 @@
     <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\src\Migrations\MigrationsMySQL" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\templates" />
       <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\templates\species_occurrences" />
       <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\templates\forms" />
       <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\public\images" />
       <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\src\Form" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\src\Migrations\MigrationsMySQL" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -437,12 +480,13 @@
       <workItem from="1536883866003" duration="43085000" />
       <workItem from="1537192762778" duration="48270000" />
       <workItem from="1537469279903" duration="19588000" />
-      <workItem from="1537632841118" duration="117564000" />
+      <workItem from="1537632841118" duration="117696000" />
+      <workItem from="1538053241291" duration="7690000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="949883000" />
+    <option name="totallyTimeSpent" value="957705000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -460,16 +504,16 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32828283" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.108843535" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31288344" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18788344" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.8894389" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -481,22 +525,22 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21242331" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32828283" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.8894389" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,23 +555,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/administration/add_edit_species.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/security/registration.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/OccurrenceType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/SpeciesRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="43">
@@ -592,13 +619,7 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/forms/create_occurrence180920.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#9#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences_180921.html.twig">
       <provider selected="true" editor-type-id="text-editor">
@@ -667,17 +688,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="50" column="87" selection-start-line="50" selection-start-column="87" selection-end-line="50" selection-end-column="87" />
-          <folding>
-            <element signature="e#1328#1347#0#HTML" expanded="true" />
-            <element signature="e#1370#1389#0#HTML" expanded="true" />
-            <element signature="e#1451#1470#0#HTML" expanded="true" />
-            <element signature="e#1411#1430#0#HTML" expanded="true" />
-            <element signature="e#1774#1793#0#HTML" expanded="true" />
-            <element signature="e#1847#1866#0#HTML" expanded="true" />
-            <element signature="e#2232#2251#0#HTML" expanded="true" />
-            <element signature="e#2330#2349#0#HTML" expanded="true" />
-            <element signature="e#9#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -685,9 +695,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="784">
           <caret line="115" column="45" selection-start-line="115" selection-start-column="45" selection-end-line="115" selection-end-column="45" />
-          <folding>
-            <element signature="e#9#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -716,13 +723,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="104" column="39" selection-start-line="104" selection-start-column="39" selection-end-line="104" selection-end-column="39" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#85#113#0#Twig" expanded="true" />
-            <element signature="e#302#327#0#HTML" expanded="true" />
-            <element signature="e#545#588#0#HTML" expanded="true" />
-            <element signature="e#693#734#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -730,26 +730,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="59" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/home.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-40">
-          <caret line="22" column="47" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/species.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
-          <folding>
-            <element signature="e#1423#1466#0#HTML" expanded="true" />
-            <element signature="e#1580#1621#0#HTML" expanded="true" />
-            <element signature="e#2029#2069#0#HTML" expanded="true" />
-            <element signature="e#2274#2314#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -764,19 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="149" column="84" selection-start-line="149" selection-start-column="84" selection-end-line="149" selection-end-column="84" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#539#582#0#HTML" expanded="true" />
-            <element signature="e#712#753#0#HTML" expanded="true" />
-            <element signature="e#1131#1171#0#HTML" expanded="true" />
-            <element signature="e#1411#1454#0#HTML" expanded="true" />
-            <element signature="e#1466#1506#0#HTML" expanded="true" />
-            <element signature="e#2360#2394#0#HTML" expanded="true" />
-            <element signature="e#3479#3512#0#HTML" expanded="true" />
-            <element signature="e#2002#2023#0#HTML" expanded="true" />
-            <element signature="e#2002#2009#1#HTML" expanded="true" />
-            <element signature="e#9#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -817,7 +784,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-600">
+        <state relative-caret-position="2240">
           <caret line="112" selection-start-line="112" selection-end-line="112" />
         </state>
       </provider>
@@ -834,11 +801,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3706">
+        <state relative-caret-position="4840">
           <caret line="242" column="46" selection-start-line="242" selection-start-column="46" selection-end-line="242" selection-end-column="46" />
-          <folding>
-            <element signature="e#9#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -890,10 +854,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/species.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="58" column="92" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/forms/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base180927.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="59" column="109" selection-start-line="59" selection-start-column="94" selection-end-line="59" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/validation/nonvalidoccurrences.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/home.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="635">
+          <caret line="49" column="47" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="75" selection-start-line="71" selection-end-line="75" />
+        <state relative-caret-position="156">
+          <caret line="80" column="36" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
         </state>
       </provider>
     </entry>

@@ -73,18 +73,9 @@
                 
                 {% if app.user and 'ROLE_VALIDATOR' in app.user.roles %}
                     <li class="nav-item dropdown">
-                        <a href="" class="nav-link dropdown-toggle" id="navbarDropdwon" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Validation</a>
+                        <a href="" class="nav-link dropdown-toggle" id="navbarDropdwon">Validation</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {#<li><a href="" class="dropdown-item">Your expertise</a></li>#}
-
-                            {% for expertise in app.user.phylumOfExpertise %}
-                                <li ><a href="{{ path('non_valid_list_for_phylum', {'idPhylum': expertise.id}) }}" class="dropdown-item ">{{ expertise.phylumNameWorms }}</a>
-
-
-
-                                </li>
-                            {% endfor %}
-
+                            <li><a href="" class="dropdown-item">Your expertise</a></li>
                         </ul>
                     </li>
                 {% endif %}
@@ -92,7 +83,7 @@
 
                 {% if app.user and 'ROLE_ADMINISTRATOR' in app.user.roles %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li ><a href="{{ path('admin_species') }}" class="dropdown-item ">Species</a></li>
