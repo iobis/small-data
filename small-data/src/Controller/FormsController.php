@@ -72,7 +72,7 @@ class FormsController extends Controller
 //https://stackoverflow.com/questions/23569972/symfony-twig-forms-submitting-through-html-form-action-path
     /**
      *@Route("/occurrence/{idOccurrence}/editFields", name="occurrence_edit")
-     *@Security("has_role('ROLE_ADMINISTRATOR')")
+     *@Security("has_role('ROLE_INPUTTER')")
      */
     public function formEditOccurrence($idOccurrence , Request $request, ObjectManager $objectManager){
 //        $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
@@ -117,6 +117,7 @@ class FormsController extends Controller
 
             return $this->redirectToRoute('occurrence_details',
                 ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(),
+                    'idSpecies'=>$occurrence->getSpecies()->getId(),
                     'idOccurrence'=>$occurrence->getId(),
                     'phyla'=>$phyla
                 ]);
@@ -142,7 +143,7 @@ class FormsController extends Controller
 
     /**
      * @Route("/occurrence/{idOccurrence}/editGPS", name="occurrence_edit_gps")
-     * @Security("has_role('ROLE_ADMINISTRATOR')")
+     * @Security("has_role('ROLE_INPUTTER')")
      */
     public function formEditOccurrenceGPS (Request $request, ObjectManager $manager, $idOccurrence){
 //        https://stackoverflow.com/questions/23569972/symfony-twig-forms-submitting-through-html-form-action-path
@@ -159,6 +160,11 @@ class FormsController extends Controller
             $longitude= $_POST['longitude_gps'];
             $occurrence->setDecimalLatitude($latitude);
             $occurrence->setDecimalLongitude($longitude);
+
+            $user = $this->getUser();  //getUser shortcut... see https://symfony.com/blog/new-in-symfony-3-2-user-value-resolver-for-controllers
+            $occurrence->setLastModifiedAt(new \DateTime());
+            $occurrence->setLastModifier($user);
+
             $manager->persist($occurrence);
             $manager->flush();
             return $this->redirectToRoute('occurrence_details',

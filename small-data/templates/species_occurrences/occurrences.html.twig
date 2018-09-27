@@ -73,7 +73,9 @@
                 <td></td>
                 {% endif %}
         <td><a href="{{ path('occurrence_details', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">More</a></td>
-        <td><a href="{{ path('occurrence_edit_gps', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">GPS</a></td>
+            {% if  (app.user  ==  occurrence.inputter) or (is_granted ('ROLE_VALIDATOR')) %}
+        <td><a href="{{ path('occurrence_edit_gps', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">GeoEdit</a></td>
+                {% else %} <td></td> {% endif %}
 
     </tr>
         {% endif %}

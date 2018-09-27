@@ -10,13 +10,10 @@
         {% endfor %}
 
         {% if newOccurrencesForSpecies|length > 0 %}
-           <h5><i>{{ singleSpecies.speciesNameWorms }}</i>: {{ newOccurrencesForSpecies|length }} new records
-            <a href="{{ path('non_valid_list_for_phylum_with_details_one_species', {'idPhylum':singleSpecies.phylum.id, 'idSpecies': singleSpecies.id, 'mode' : "show_list" } )}}" class="btn btn-primary">View</a>
-            </h5>{#<a href="" class="btn btn-primary">View</a>#}
-            {% if mode == 'show_list' and idSpeciesForDetails == singleSpecies.id %}
-                <div style="border-style: solid; border-width: thin; padding: 10px">
-                <table class="table-hover table-bordered display" id="mydatatable">
-                    <thead>
+           <h3><i>{{ singleSpecies.speciesNameWorms }}</i>: {{ newOccurrencesForSpecies|length }} new records</h3>
+            <a href="{{ path('non_valid_list_for_phylum_with_details_one_species', {'idPhylum':singleSpecies.phylum.id, 'wormsAphiaId': singleSpecies.wormsAphiaId, 'mode' : "show_list" } )}}" class="btn btn-primary">View</a>
+            {% if mode == 'show_list' and wormsAphiaIdForDetails == singleSpecies.wormsAphiaId %}
+                <table>
                     <tr>
                         <th>Date</th>
                         <th>Locality</th>
@@ -26,11 +23,9 @@
                         <th>Author</th>
                         <th>Last modified by</th>
                         <th></th>
-                        <th></th>
 
                     </tr>
-                    </thead>
-                    <tbody>
+
                 {% for occurrence in newOccurrencesForSpecies %}
 
                     <tr>
@@ -40,39 +35,16 @@
                         <td>{{ occurrence.decimalLongitude }}</td>
                         <td>{{ occurrence.occurrenceRemarks }}</td>
                         <td>{{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}<br>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d') }}</td>
-                        <td>{{ occurrence.lastModifier.lastName }}<br>{{ occurrence.lastModifiedAt | date ('Y/m/d') }}</td>
-                        <td><a href="{{ path('validation_occurrence_edit', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">check</a></td>
+                        <td>{{ occurrence.lastModifier.lastName }}</td>
                         <td><a href="{{ path('validate_occurrence', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">validate</a></td>
                     </tr>
                 {% endfor %}
-                    </tbody>
                 </table>
-                </div>
                 {% endif %}
 
         {% endif %}
 
     {% endfor %}
-
-{% endblock %}
-
-{% block scripts_bottom %}
-
-        {#https://datatables.net/manual/options#}
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#mydatatable').DataTable ({
-                scrollY: 200,
-
-            } );
-
-
-
-        });
-    </script>
-
 
 {% endblock %}
 
