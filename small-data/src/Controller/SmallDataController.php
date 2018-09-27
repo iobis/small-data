@@ -32,16 +32,19 @@ class SmallDataController extends Controller
     {
         $occurrences = $manager->getRepository(Occurrence::class)->findBy([]);
         $occurrencesNonValid = $manager->getRepository(Occurrence::class)->findBy(['isValidated'=>false]);
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
+
 
         return $this->render('species_occurrences/home.html.twig', [
             'occurrences'=>$occurrences,
-            'occurrencesNonValid'=>$occurrencesNonValid
+            'occurrencesNonValid'=>$occurrencesNonValid,
+            'phyla'=>$phyla
         ]);
     }
 
     /**
-     * @Route("/species", name="index_species")
-     * @Route("/species/{idPhylum}", name="index_species_per_phylum")
+     * @Route("/phylum", name="index_species")
+     * @Route("/phylum/{idPhylum}", name="index_species_per_phylum")
      */
     public function indexSpecies($idPhylum = null, ObjectManager $manager)
     {
@@ -65,7 +68,8 @@ class SmallDataController extends Controller
      */
     public function detailSpecies(ObjectManager $manager, $idSpecies) // $wormsAphiaId
     {
-            $species = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
+        $species = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
             $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$species],[]);
 
         $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($species, $occurrences, $manager);
@@ -81,7 +85,8 @@ class SmallDataController extends Controller
             'controller_name' => 'SmallDataController',
             'singleSpecies' => $species,
             'occurrences' => $occurrences,
-            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence,
+            'phyla'=>$phyla
         ]);
     }
 
@@ -92,6 +97,7 @@ class SmallDataController extends Controller
 
     public function occurrencesSpecies( ObjectManager $manager, $idSpecies)
     {
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
         $species = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
         $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$species], ['eventDate' => 'ASC']);
 
@@ -102,7 +108,8 @@ class SmallDataController extends Controller
             'controller_name' => 'SmallDataController',
             'singleSpecies' => $species,
             'occurrences' => $occurrences,
-            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence,
+            'phyla'=>$phyla
         ]);
 
     }
@@ -112,6 +119,7 @@ class SmallDataController extends Controller
      * @Route("/occurrence/{idOccurrence}/details", name="occurrence_details")
      */
     public function occurrenceDetails($idOccurrence, ObjectManager $manager){
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
         $occurrence = $this->getDoctrine()->getRepository((Occurrence::class))
             ->findOneBy(['id'=>$idOccurrence]);
         $singleSpecies = $occurrence->getSpecies();
@@ -125,7 +133,8 @@ class SmallDataController extends Controller
             'occurrence'=>$occurrence,
             'singleSpecies' => $singleSpecies,
             'occurrences' => $occurrences,
-            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence,
+            'phyla'=>$phyla
 
 
         ]);

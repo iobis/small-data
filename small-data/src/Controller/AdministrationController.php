@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Occurrence;
+use App\Entity\Phylum;
 use App\Entity\Species;
 use App\Entity\SpeciesImage;
 use App\Form\SpeciesImageType;
 use App\Form\SpeciesType;
 use Doctrine\Common\Persistence\ObjectManager;
-use Proxies\__CG__\App\Entity\Phylum;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
@@ -49,9 +49,11 @@ class AdministrationController extends Controller
      */
     public function warningRemoveSingleSpecies(ObjectManager $manager, $idSpecies)
     {
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
         $singleSpecies = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
         return $this->render('administration/remove_species.html.twig', [
-            'singleSpecies'=>$singleSpecies
+            'singleSpecies'=>$singleSpecies,
+            'phyla'=>$phyla
         ]);
     }
 
@@ -61,6 +63,7 @@ class AdministrationController extends Controller
      */
     public function removeSingleSpecies(ObjectManager $manager, $idSpecies)
     {
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
         $singleSpecies = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
         $occurrencesForSingleSpecies = $manager->getRepository(Occurrence::class)->findBy(['species'=>$singleSpecies]);
 
@@ -85,7 +88,9 @@ class AdministrationController extends Controller
             'notice_remove_species',
             'The species has been removed from the system'
         );
-        return $this->redirectToRoute('admin_species');
+        return $this->redirectToRoute('admin_species', [
+            'phyla'=>$phyla
+        ]);
     }
 
 
@@ -138,7 +143,7 @@ class AdministrationController extends Controller
      */
     public function addEditSpecies (Request $request, ObjectManager $manager, $idSpecies = null)
     {
-
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
             if ($idSpecies){
                 $singleSpecies = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
                 $mode = 'edit';
@@ -156,11 +161,13 @@ class AdministrationController extends Controller
                 $manager->persist($singleSpecies);
                 $manager->flush();
              return $this->redirectToRoute('admin_species',[
+                 'phyla'=>$phyla
                 ]);
             }
             return $this->render('administration/add_edit_species.html.twig',[
                 'formAddEditSpecies'=>$form->createView(),
-                    'mode'=>$mode
+                    'mode'=>$mode,
+                    'phyla'=>$phyla
                 ]
                 );
 
@@ -173,6 +180,7 @@ class AdministrationController extends Controller
 
     public function addSpeciesImage (Request $request, ObjectManager $manager, $idSpecies)
     {
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
         $singleSpecies = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
 
         $speciesImage = new SpeciesImage();
@@ -193,7 +201,8 @@ class AdministrationController extends Controller
         $manager->persist($speciesImage);
         $manager->flush();
         return $this->redirectToRoute('manage_images_species', [
-            'idSpecies'=>$idSpecies
+            'idSpecies'=>$idSpecies,
+            'phyla'=>$phyla
         ]);
         }
 
@@ -202,7 +211,8 @@ class AdministrationController extends Controller
 
         return $this->render('administration/image_species.html.twig', [
             'formImageSpecies'=>$form->createView(),
-            'singleSpecies'=>$singleSpecies
+            'singleSpecies'=>$singleSpecies,
+            'phyla'=>$phyla
 
         ]);
 
@@ -213,6 +223,7 @@ class AdministrationController extends Controller
      * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function editDisplayImageSpecies (ObjectManager $manager, $idImageSpecies, $display){
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
         $speciesImageToEdit = $manager->getRepository(SpeciesImage::class)->findOneBy(['id'=>$idImageSpecies]);
         $idSpecies= $speciesImageToEdit->getSpecies()->getId();
         if ($display == 'yes'){
@@ -224,7 +235,8 @@ class AdministrationController extends Controller
         $manager->flush();
 
         return $this->redirectToRoute('manage_images_species', [
-            'idSpecies'=>$idSpecies
+            'idSpecies'=>$idSpecies,
+                'phyla'=>$phyla
             ]
             );
     }
@@ -235,6 +247,7 @@ class AdministrationController extends Controller
      * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function editMainStatusImage (ObjectManager $manager, $idImageSpecies, $main){
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
         $speciesImageToEdit = $manager->getRepository(SpeciesImage::class)->findOneBy(['id'=>$idImageSpecies]);
         $idSpecies = $speciesImageToEdit->getSpecies()->getId();
         if($main == 'yes'){
@@ -245,7 +258,8 @@ class AdministrationController extends Controller
         $manager->persist($speciesImageToEdit);
         $manager->flush();
         return $this->redirectToRoute('manage_images_species', [
-            'idSpecies'=>$idSpecies
+            'idSpecies'=>$idSpecies,
+            'phyla'=>$phyla
         ]);
 
 
@@ -257,6 +271,7 @@ class AdministrationController extends Controller
      * @Security("has_role('ROLE_ADMINISTRATOR')")
      */
     public function removeImageSpecies (ObjectManager $manager, $idImageSpecies){
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
         $speciesImage = $manager->getRepository(SpeciesImage::class)->findOneBy(['id'=>$idImageSpecies]);
         dump($speciesImage);
         $idSpecies = $speciesImage->getSpecies()->getId();
@@ -268,7 +283,8 @@ class AdministrationController extends Controller
         $manager->remove($speciesImage);
         $manager->flush();
         return $this->redirectToRoute('manage_images_species', [
-            'idSpecies'=>$idSpecies
+            'idSpecies'=>$idSpecies,
+            'phyla'=>$phyla
         ]);
 
 

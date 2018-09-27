@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\SmallDataController;
 use App\Entity\Occurrence;
 use App\Entity\Species;
+use App\Entity\Phylum;
 use App\Form\OccurrenceCreateType;
 use App\Form\OccurrenceEditType;
 use App\Form\OccurrenceType;
@@ -25,6 +26,7 @@ class FormsController extends Controller
      * @Security("has_role('ROLE_INPUTTER')")
      */
     public function formCreateOccurrence($idSpecies, Request $request, ObjectManager $objectManager){
+        $phyla = $objectManager->getRepository(Phylum::class)->findBy([],[]);
         $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
             ->findOneBy(['id'=>$idSpecies]);
 
@@ -49,13 +51,17 @@ class FormsController extends Controller
             $objectManager->flush();
 
             return $this->redirectToRoute('occurrence_details',
-                ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(), 'idOccurrence'=>$occurrence->getId()]);
+                ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(),
+                    'idOccurrence'=>$occurrence->getId(),
+                    'phyla'=>$phyla
+                ]);
         }
 
         return $this->render('forms/create_occurrence.html.twig', [
             'formCreateOccurrence' =>$form->createView(),
             'singleSpecies'=> $singleSpecies,
-            'occurrence'=>$occurrence
+            'occurrence'=>$occurrence,
+            'phyla'=>$phyla
 
         ]);
 
@@ -71,6 +77,8 @@ class FormsController extends Controller
     public function formEditOccurrence($idOccurrence , Request $request, ObjectManager $objectManager){
 //        $singleSpecies = $this->getDoctrine()->getRepository(Species::class)
 //            ->findOneBy(['wormsAphiaId'=>$wormsAphiaId]);
+        $phyla = $objectManager->getRepository(Phylum::class)->findBy([],[]);
+
 
         $occurrence = $this->getDoctrine()->getRepository(Occurrence::class)
             ->findOneBy(['id'=>$idOccurrence]);
@@ -108,14 +116,18 @@ class FormsController extends Controller
             $objectManager->flush();
 
             return $this->redirectToRoute('occurrence_details',
-                ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(), 'idOccurrence'=>$occurrence->getId()]);
+                ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(),
+                    'idOccurrence'=>$occurrence->getId(),
+                    'phyla'=>$phyla
+                ]);
         }
 
         return $this->render('forms/edit_occurrence.html.twig', [
             'formEditOccurrence'=>$form->createView(),
             'singleSpecies'=>$occurrence->getSpecies(),
             'occurrence'=>$occurrence,
-            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence,
+            'phyla'=>$phyla
         ]);
     }
 
@@ -137,6 +149,7 @@ class FormsController extends Controller
 //        https://symfony.com/doc/current/introduction/http_fundamentals.html
 
         $occurrence = $manager->getRepository(Occurrence::class)->findOneBy(['id'=>$idOccurrence]);
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
 
         if(isset($_POST['update_gps'])){
 //            $latitude= $request->query->get($_POST['latitude_gps']);
@@ -149,13 +162,18 @@ class FormsController extends Controller
             $manager->persist($occurrence);
             $manager->flush();
             return $this->redirectToRoute('occurrence_details',
-                ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(), 'idOccurrence'=>$occurrence->getId()]);
+                ['wormsAphiaId'=>$occurrence->getSpecies()->getWormsAphiaId(),
+                    'idOccurrence'=>$occurrence->getId(),
+                    'phyla'=>$phyla
+
+                ]);
         }
 
 
         return $this->render ('forms/edit_occurrence_GPS.html.twig', [
             'occurrence'=>$occurrence,
             'singleSpecies'=>$occurrence->getSpecies(),
+            'phyla'=>$phyla
         ]);
 
     }

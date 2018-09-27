@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Inputter;
+use App\Entity\Phylum;
 use App\Form\RegistrationType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -20,6 +21,7 @@ class SecurityController extends Controller
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
         $inputter = new Inputter();
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
 
         $form = $this->createForm(RegistrationType::class, $inputter);
         $form->handleRequest($request);
@@ -30,13 +32,16 @@ class SecurityController extends Controller
 
             $manager->persist($inputter);
             $manager->flush();
-           return $this->redirectToRoute('security_login');
+           return $this->redirectToRoute('security_login', [
+               'phyla'=>$phyla
+           ]);
 
         }
 
         return $this->render('security/registration.html.twig', [
 //            'controller_name' => 'SecurityController',
-            'formRegistration'=>$form->createView()
+            'formRegistration'=>$form->createView(),
+            'phyla'=>$phyla
         ]);
     }
 
@@ -45,11 +50,13 @@ class SecurityController extends Controller
     /**
      * @Route ("/login", name="security_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils){
+    public function login(AuthenticationUtils $authenticationUtils, ObjectManager $manager){
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
 
         $error = $authenticationUtils->getLastAuthenticationError();
         return $this->render('security/login.html.twig', [
-            'error'=>$error
+            'error'=>$error,
+            'phyla'=>$phyla
         ]);
     }
 
@@ -64,9 +71,12 @@ class SecurityController extends Controller
     /**
      * @Route("/security", name="security_index")
      */
-    public function index(){
+    public function index(ObjectManager $manager){
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
+
         return $this->render('security/index.html.twig', [
-            'controller_name' => 'SecurityController'
+            'controller_name' => 'SecurityController',
+            'phyla'=>$phyla
         ]);
     }
 
@@ -78,6 +88,8 @@ class SecurityController extends Controller
     public function changePassword(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, $idInputter){
 
         $inputter = $manager->getRepository(Inputter::class)->findOneBy(['id'=>$idInputter]);
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
+
 
         $form = $this->createForm(RegistrationType::class, $inputter);
         $form->handleRequest($request);
@@ -88,11 +100,14 @@ class SecurityController extends Controller
 
             $manager->persist($inputter);
             $manager->flush();
-            return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('security_login', [
+                'phyla'=>$phyla
+            ]);
         }
 
         return $this->render ('security/change_password.html.twig', [
-            'formChangePassword'=>$form->createView()
+            'formChangePassword'=>$form->createView(),
+            'phyla'=>$phyla
             ]);
     }
 

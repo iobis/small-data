@@ -51,6 +51,7 @@ class AdminUsersController extends Controller
     public function addRemoveFieldOfExpertise (ObjectManager $manager, $idInputter, $idPhylum, $mode)
     {
         $inputter = $manager->getRepository(Inputter::class)->findOneBy(['id'=>$idInputter]);
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
 
         $phylum = $manager->getRepository(Phylum::class)->findOneBy(['id'=>$idPhylum]);
         dump($phylum);
@@ -76,7 +77,8 @@ class AdminUsersController extends Controller
 
 
         return $this->redirectToRoute('edit_users_expertise', [
-                'idInputter'=>$inputter->getId()
+                'idInputter'=>$inputter->getId(),
+            'phyla'=>$phyla
             ]);
 
 

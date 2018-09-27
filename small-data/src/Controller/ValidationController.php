@@ -21,6 +21,8 @@ class ValidationController extends Controller
      */
     public function showNonValid(ObjectManager $manager, $idPhylum = null, $wormsAphiaId = null, $mode = null)
     {
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
+
         if($mode = 'show_list'){
             $singleSpeciesToDisplay = $manager->getRepository(Species::class)->findBy(['wormsAphiaId'=>$wormsAphiaId]);
 
@@ -34,7 +36,8 @@ class ValidationController extends Controller
             'occurrencesNonValid'=>$occurrencesNonValid,
             'singleSpeciesToDisplay'=>$singleSpeciesToDisplay,
             'mode'=>$mode,
-            'wormsAphiaIdForDetails' => $wormsAphiaId
+            'wormsAphiaIdForDetails' => $wormsAphiaId,
+            'phyla'=>$phyla
         ]);
     }
 
@@ -46,6 +49,7 @@ class ValidationController extends Controller
      */
     public function validateOccurrence(ObjectManager $manager, $idOccurrence=null)
     {
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
         $occurrence = $manager->getRepository(Occurrence::class)->findOneBy(['id' => $idOccurrence]);
         $wormsAphiaId = $occurrence->getSpecies()->getWormsAphiaId();
         $idPhylum = $occurrence->getSpecies()->getPhylum()->getId();
@@ -56,7 +60,8 @@ class ValidationController extends Controller
         return $this->redirectToRoute('non_valid_list_for_phylum_with_details_one_species', [
                 'idPhylum'=>$idPhylum,
                 'wormsAphiaId'=>$wormsAphiaId,
-                'mode'=>'show_list'
+                'mode'=>'show_list',
+                'phyla'=>$phyla
         ]);
 
     }
