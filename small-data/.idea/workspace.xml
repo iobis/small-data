@@ -20,8 +20,8 @@
             <file leaf-file-name="ValidationController.php" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/Controller/ValidationController.php">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="3028">
-                    <caret line="170" column="78" selection-start-line="170" selection-start-column="78" selection-end-line="170" selection-end-column="78" />
+                  <state relative-caret-position="208">
+                    <caret line="50" column="79" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="79" />
                     <folding>
                       <element signature="e#34#60#0#PHP" expanded="true" />
                       <element signature="e#5036#5089#0#PHP" expanded="true" />
@@ -84,19 +84,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit_occurrence_for_validation.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="edit_occurrence_for_validation.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/validation/edit_occurrence_for_validation.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="26" column="165" selection-start-line="26" selection-start-column="165" selection-end-line="26" selection-end-column="165" />
+            <state relative-caret-position="180">
+              <caret line="27" column="78" selection-start-line="27" selection-start-column="78" selection-end-line="27" selection-end-column="78" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
-                <element signature="e#1825#1831#0#HTML" expanded="true" />
-                <element signature="e#1671#1690#0#HTML" expanded="true" />
-                <element signature="e#1729#1735#0#HTML" expanded="true" />
-                <element signature="e#1765#1784#0#HTML" expanded="true" />
-                <element signature="e#3580#3614#0#HTML" expanded="true" />
+                <element signature="e#1951#1957#0#HTML" expanded="true" />
+                <element signature="e#2275#2294#0#HTML" expanded="true" />
+                <element signature="e#2333#2339#0#HTML" expanded="true" />
+                <element signature="e#2369#2388#0#HTML" expanded="true" />
+                <element signature="e#4190#4224#0#HTML" expanded="true" />
                 <element signature="e#9#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/trial/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -176,7 +188,6 @@
         <option value="$PROJECT_DIR$/src/Entity/Occurrence.php" />
         <option value="$PROJECT_DIR$/src/Repository/OccurrenceRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/InputterRepository.php" />
-        <option value="$PROJECT_DIR$/templates/trial/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/TrialController.php" />
         <option value="$PROJECT_DIR$/src/DataFixtures/OccurrencesSpeciesFixtures.php" />
         <option value="$PROJECT_DIR$/templates/security/login.html.twig" />
@@ -218,6 +229,7 @@
         <option value="$PROJECT_DIR$/templates/validation/validation_edit_occurrence_GPS.html.twig" />
         <option value="$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig" />
         <option value="$PROJECT_DIR$/templates/validation/edit_occurrence_for_validation.html.twig" />
+        <option value="$PROJECT_DIR$/templates/trial/index.html.twig" />
       </list>
     </option>
   </component>
@@ -507,12 +519,12 @@
       <workItem from="1537192762778" duration="48270000" />
       <workItem from="1537469279903" duration="19588000" />
       <workItem from="1537632841118" duration="117696000" />
-      <workItem from="1538053241291" duration="28075000" />
+      <workItem from="1538053241291" duration="29402000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="978090000" />
+    <option name="totallyTimeSpent" value="979417000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -533,7 +545,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.108843535" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12346626" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.36273006" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.8894389" />
@@ -581,13 +593,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Inputter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1958">
-          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/images/green-dot.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -924,8 +929,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ValidationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3028">
-          <caret line="170" column="78" selection-start-line="170" selection-start-column="78" selection-end-line="170" selection-end-column="78" />
+        <state relative-caret-position="208">
+          <caret line="50" column="79" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="79" />
           <folding>
             <element signature="e#34#60#0#PHP" expanded="true" />
             <element signature="e#5036#5089#0#PHP" expanded="true" />
@@ -936,16 +941,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/validation/edit_occurrence_for_validation.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="26" column="165" selection-start-line="26" selection-start-column="165" selection-end-line="26" selection-end-column="165" />
+        <state relative-caret-position="180">
+          <caret line="27" column="78" selection-start-line="27" selection-start-column="78" selection-end-line="27" selection-end-column="78" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#1825#1831#0#HTML" expanded="true" />
-            <element signature="e#1671#1690#0#HTML" expanded="true" />
-            <element signature="e#1729#1735#0#HTML" expanded="true" />
-            <element signature="e#1765#1784#0#HTML" expanded="true" />
-            <element signature="e#3580#3614#0#HTML" expanded="true" />
+            <element signature="e#1951#1957#0#HTML" expanded="true" />
+            <element signature="e#2275#2294#0#HTML" expanded="true" />
+            <element signature="e#2333#2339#0#HTML" expanded="true" />
+            <element signature="e#2369#2388#0#HTML" expanded="true" />
+            <element signature="e#4190#4224#0#HTML" expanded="true" />
             <element signature="e#9#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/trial/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>
