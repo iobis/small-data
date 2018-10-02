@@ -89,7 +89,17 @@ public function formEditOccurrenceValidation($idOccurrence , Request $request, O
 
     $species = $occurrence->getSpecies();
     $occurrences = $species->getOccurrences();
-    $intervalsWithFreqAndOccurrence = $this->container->get('App\Controller\SmallDataController')->renderOccurrenceIntervals($species, $occurrences, $objectManager);
+
+
+    if ($occurrences) {
+        $intervalsWithFreqAndOccurrence = $this->container->get('App\Controller\SmallDataController')->renderOccurrenceIntervals($species, $occurrences, $objectManager);
+
+    } else {
+        $intervalsWithFreqAndOccurrence = null;
+    }
+
+
+
     dump($intervalsWithFreqAndOccurrence);
 
     $form = $this->createForm(OccurrenceType::class, $occurrence);

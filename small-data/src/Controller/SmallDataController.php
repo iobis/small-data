@@ -43,7 +43,7 @@ class SmallDataController extends Controller
     }
 
     /**
-     * @Route("/phylum", name="index_species")
+     * @Route("/species/", name="index_species")
      * @Route("/phylum/{idPhylum}", name="index_species_per_phylum")
      */
     public function indexSpecies($idPhylum = null, ObjectManager $manager)
@@ -54,6 +54,7 @@ class SmallDataController extends Controller
 
         $phylumToDisplay = $manager->getRepository(Phylum::class)->findOneBy(['id'=>$idPhylum]);
         dump ($phyla);
+        dump($species);
         return $this->render('species_occurrences/species.html.twig', [
 //            'controller_name' => 'SmallDataController',
             'species' => $species,
@@ -72,7 +73,15 @@ class SmallDataController extends Controller
         $species = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
             $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$species],[]);
 
-        $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($species, $occurrences, $manager);
+
+        if ($occurrences) {
+            $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($species, $occurrences, $manager);
+
+        } else {
+            $intervalsWithFreqAndOccurrence = null;
+        }
+
+
 
 
 
@@ -101,8 +110,14 @@ class SmallDataController extends Controller
         $species = $manager->getRepository(Species::class)->findOneBy(['id'=>$idSpecies]);
         $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$species], ['eventDate' => 'ASC']);
 
-        $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($species, $occurrences, $manager);
+        if ($occurrences) {
+            $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($species, $occurrences, $manager);
 
+        } else {
+            $intervalsWithFreqAndOccurrence = null;
+        }
+
+        dump($occurrences);
         dump($intervalsWithFreqAndOccurrence);
         return $this->render('species_occurrences/occurrences.html.twig', [
             'controller_name' => 'SmallDataController',
@@ -125,7 +140,15 @@ class SmallDataController extends Controller
         $singleSpecies = $occurrence->getSpecies();
 
         $occurrences = $manager->getRepository(Occurrence::class)->findBy(['species'=>$singleSpecies], []);
-        $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($singleSpecies, $occurrences, $manager);
+
+        if ($occurrences) {
+            $intervalsWithFreqAndOccurrence = $this->renderOccurrenceIntervals($singleSpecies, $occurrences, $manager);
+
+        } else {
+            $intervalsWithFreqAndOccurrence = null;
+        }
+
+
 
 
 
