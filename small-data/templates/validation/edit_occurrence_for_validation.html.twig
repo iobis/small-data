@@ -27,6 +27,7 @@
         <a href="{{ path('non_valid_list_for_phylum_with_details_one_species', {'idSpecies': singleSpecies.id, 'idPhylum': singleSpecies.phylum.id, 'mode':'show_list'}) }}" class="btn btn-primary">Back to list</a>
         <a href="{{ path('validate_occurrence', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">Validate</a>
             <a href="{{ path('validation_occurrence_edit_gps', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">Quick GeoEdit</a>
+            <a href="{{ path('warning_remove_occurrence', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">Remove</a>
         </p>
 
 

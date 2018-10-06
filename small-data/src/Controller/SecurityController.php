@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Inputter;
 use App\Entity\Phylum;
+use App\Form\ChangePasswordType;
 use App\Form\RegistrationType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -83,15 +84,15 @@ class SecurityController extends Controller
 
     /**
      * @Route("/security/changePassword/{idInputter}/", name="change_password")
-     * @Security()
+
      */
     public function changePassword(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, $idInputter){
 
         $inputter = $manager->getRepository(Inputter::class)->findOneBy(['id'=>$idInputter]);
         $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
-
-
-        $form = $this->createForm(RegistrationType::class, $inputter);
+//
+//
+        $form = $this->createForm(ChangePasswordType::class, $inputter);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){

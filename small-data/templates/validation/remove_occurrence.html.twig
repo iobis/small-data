@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h3>You are about to remove occurrence # {{ occurrence.id }} for <i>{{ occurrence.species.speciesNameWorms }}</i>  </h3>
+    <h3>Are you sure you want to proceed?</h3>
+    <a href="{{ path('validation_occurrence_edit', {'idOccurrence':occurrence.id  }) }}" class="btn btn-primary" >Back</a>
+    <a href="{{ path('remove_occurrence' , {'idOccurrence':occurrence.id  })}}" class="btn btn-primary" >Remove occurrence</a>
+
+
+
+
+{% endblock %}

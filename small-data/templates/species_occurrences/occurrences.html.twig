@@ -50,32 +50,41 @@
         <th></th>
         <th></th>
         <th></th>
+
     </tr>
     </thead>
     <tbody>
 
 
     {% for occurrence in occurrences %}
-        {% if  occurrence.isValidated %}
+        {% if  (occurrence.isValidated) or ((not occurrence.isValidated) and (occurrence.inputter == app.user)) %}
         {% if occurrence.species == singleSpecies %}
     <tr>
-        <td><a href="#" id="id{{ occurrence.id }}" class="btn btn-primary">{{ occurrence.id }}</a></td>
+        <td><a href="#" id="id{{ occurrence.id }}" class="btn btn-primary">{{ occurrence.id }}</a>
+            {%  if not occurrence.isValidated %}<br>not validated {% endif %}
+        </td>
+
         <td>{{occurrence.eventDate | date ('d/m/Y') }}</td>
         <td>{{ occurrence.locality }}</td>
         <td>{{ occurrence.decimalLatitude | number_format(4)  }}&nbsp;</td>
         <td>{{ occurrence.decimalLongitude | number_format(4) }}</td>
         {#<td>{{ occurrence.species.speciesNameWorms }}</td>#}
         <td>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d H:i') }}</td>
-        <td>{{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}</td>
-            {% if  (app.user  ==  occurrence.inputter) or (is_granted ('ROLE_VALIDATOR')) %}
+        <td>{{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}
+
+
+        </td>
+            {% if  (app.user  ==  occurrence.inputter) or ((is_granted ('ROLE_VALIDATOR')) and (occurrence.species.phylum in app.user.phylumOfExpertise)) or (is_granted ('ROLE_ADMINISTRATOR')) %}
         <td><a href="{{ path('occurrence_edit', {'idOccurrence':occurrence.id } )}}" class="btn btn-primary">Edit</a></td>
             {% else %}
                 <td></td>
                 {% endif %}
         <td><a href="{{ path('occurrence_details', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">More</a></td>
-            {% if  (app.user  ==  occurrence.inputter) or (is_granted ('ROLE_VALIDATOR')) %}
+        {% if  (app.user  ==  occurrence.inputter) or ((is_granted ('ROLE_VALIDATOR')) and (occurrence.species.phylum in app.user.phylumOfExpertise)) or (is_granted ('ROLE_ADMINISTRATOR')) %}
         <td><a href="{{ path('occurrence_edit_gps', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">GeoEdit</a></td>
                 {% else %} <td></td> {% endif %}
+
+
 
     </tr>
         {% endif %}
@@ -150,15 +159,35 @@
             {% set nameForLayerGroup = 'intervalLayer' ~ loop.index0 %}
             {% for occurrence in intervalWithFreqAndOccurrences.2 %}
             {% if occurrence.isValidated %}
-            {% if occurrence.species == singleSpecies %}
+            {#{% if occurrence.species == singleSpecies %}#}
             var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}", icon:{{ nameForIcon}} })
                 .bindPopup("<p>{{ occurrence.locality }}</br>{{ occurrence.eventDate | date ('Y')}}</br># {{ occurrence.id }}</p>")
                 .addTo({{ nameForLayerGroup }});
             markers.push (marker);
-            {% endif %}
+            {#{% endif %}#}
+
             {% endif %}
             {% endfor %}
             {% endfor %}
+
+
+            var nonValidLayer = L.layerGroup();
+
+            var markersNonValid =[];
+            {% for occurrence in occurrences %}
+            {% if not occurrence.isValidated %}
+            {% if occurrence.inputter == app.user %}
+            {% if occurrence.species == singleSpecies %}
+            var markerNonValid = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}" })
+            .bindPopup("<p>{{ occurrence.locality }}</br>{{ occurrence.eventDate | date ('Y')}}</br># {{ occurrence.id }}</p>")
+            .addTo(nonValidLayer);
+            markersNonValid.push (markerNonValid);
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            // console.log(markersNonValid);
+
 
             var mapUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
             var mapAttributes = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
@@ -182,7 +211,7 @@
                 zoom:3,
                 center: [50,0],
                 layers: [satellite, streets,intervalLayer0, intervalLayer1, intervalLayer2, intervalLayer3, intervalLayer4,
-                    intervalLayer5, intervalLayer6, intervalLayer7]
+                    intervalLayer5, intervalLayer6, intervalLayer7, nonValidLayer]
             });
 
 
@@ -197,7 +226,10 @@
             {% set indexOfLoop = '' ~ loop.index0 %}
                 "<img style='vertical-align:middle; height: 10px' src='{{ asset("images/cb#{indexOfLoop}.png") }}'><div style='vertical-align:middle; display:inline;'>&nbsp; {{ intervalWithFreqAndOccurrences.0 }}</div>": {{ nameLayer }},
             {% endfor %}
+                "non valid": nonValidLayer
             };
+
+
 
             L.control.layers(baseLayers, overlays).addTo(mapForOccurrences);
 
@@ -239,17 +271,10 @@
         $(document).ready(function(){
             $('#mydatatable').DataTable ({
                 scrollY: 400,
-                buttons: [
-                    {
-                        extend: 'csv',
-                        text: 'Copy all data',
-                        exportOptions: {
-                            modifier: {
-                                search: 'none'
-                            }
-                        }
-                    }
+                "colunDefs":[
+                    {"width": "20em", "targets":2}
                 ]
+
             } );
 
 

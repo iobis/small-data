@@ -18,6 +18,7 @@
             <th>Validator</th>
             <th>Expertise</th>
             <th>Administrator</th>
+            {#<th></th>#}
 
         </tr>
         </thead>
@@ -46,6 +47,11 @@
 
             </td>
             <td>{% if 'ROLE_ADMINISTRATOR' in inputter.roles %}Yes {% else %}No {% endif %}</td>
+
+            {#<td>{% if not (inputter == app.user) %}#}
+                {#<a href="#" class="btn btn-primary">Remove</a>#}
+            {#{% endif %} </td>#}
+
         </tr>
     {% endfor %}
         </tbody>
@@ -74,11 +80,6 @@
 
     });
 </script>
-            } );
 
-
-
-        });
-    </script>
 
 {% endblock %}

@@ -26,7 +26,7 @@
                         <th>Author</th>
                         <th>Last modified by</th>
                         <th></th>
-                        <th></th>
+                        {#<th></th>#}
 
                     </tr>
                     </thead>
@@ -42,7 +42,7 @@
                         <td>{{ occurrence.inputter.firstName | striptags |first }}. {{ occurrence.inputter.lastName }}<br>{{ occurrence.occurrenceCreatedAt | date ('Y/m/d') }}</td>
                         <td>{{ occurrence.lastModifier.lastName }}<br>{{ occurrence.lastModifiedAt | date ('Y/m/d') }}</td>
                         <td><a href="{{ path('validation_occurrence_edit', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">check</a></td>
-                        <td><a href="{{ path('validate_occurrence', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">validate</a></td>
+                        {#<td><a href="{{ path('validate_occurrence', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">validate</a></td>#}
                     </tr>
                 {% endfor %}
                     </tbody>

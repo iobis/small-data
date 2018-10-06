@@ -196,6 +196,43 @@ public function formEditOccurrenceValidation($idOccurrence , Request $request, O
 
     }
 
+    /**
+     * @Route("/validation/removeWarning/{idOccurrence}/", name = "warning_remove_occurrence")
+     * @Security("has_role('ROLE_VALIDATOR')")
+     */
+    public function warningRemoveOccurrence(ObjectManager $manager, $idOccurrence){
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
+        $occurrence = $manager->getRepository(Occurrence::class)->findOneBy(['id'=>$idOccurrence]);
+        dump($occurrence);
+        return $this->render('validation/remove_occurrence.html.twig', [
+            'occurrence'=>$occurrence,
+            'phyla'=>$phyla
+        ]);
+    }
+
+//@Route("/validation/{idPhylum}/{idSpecies}/{mode}", name="non_valid_list_for_phylum_with_details_one_species")
+
+    /**
+     * @Route("validation/remove/{idOccurrence}/", name="remove_occurrence")
+     * @Security("has_role('ROLE_VALIDATOR')")
+     */
+    public function removeOccurrence(ObjectManager $manager, $idOccurrence){
+        $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
+
+        $occurrence = $manager->getRepository(Occurrence::class)->findOneBy(['id'=>$idOccurrence]);
+
+
+        $manager->remove($occurrence);
+        $manager->flush();
+        $this->addFlash('notive_remove_occurrence',
+            'The occurrence has been removed from the system');
+        return $this->redirectToRoute('non_valid_list_for_phylum_with_details_one_species', [
+            'phyla'=>$phyla,
+            'idPhylum'=>$occurrence->getSpecies()->getPhylum()->getId(),
+            'idSpecies'=>$occurrence->getSpecies()->getId(),
+            'mode'=>'show_list'
+        ]);
+    }
 
 
 
