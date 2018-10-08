@@ -34,7 +34,7 @@
 
     <a href="{{ path('occurrences_list',{'idOccurrence':occurrence.id,'idSpecies': occurrence.species.id}) }}" class="btn btn-primary">Full list</a>
     <a href="{{ path('occurrence_edit', {'idOccurrence':occurrence.id} )}}" class="btn btn-primary">Edit</a>
-
+    <a href="{{ path('occurrence_edit_gps', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">Quick GeoEdit</a>
 
 
     <script>
@@ -117,7 +117,7 @@
 
 
         var lat = {{ occurrence.decimalLatitude}}, lng = {{ occurrence.decimalLongitude }};
-        mapForOccurrence.setView(new L.LatLng(lat, lng), 8);
+        mapForOccurrence.setView(new L.LatLng(lat, lng), 15);
         var marker = L.marker([lat, lng]).addTo(mapForOccurrence);
 
     </script>
