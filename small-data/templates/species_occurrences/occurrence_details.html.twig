@@ -117,7 +117,7 @@
 
 
         var lat = {{ occurrence.decimalLatitude}}, lng = {{ occurrence.decimalLongitude }};
-        mapForOccurrence.setView(new L.LatLng(lat, lng), 3);
+        mapForOccurrence.setView(new L.LatLng(lat, lng), 8);
         var marker = L.marker([lat, lng]).addTo(mapForOccurrence);
 
     </script>
