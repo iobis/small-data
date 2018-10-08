@@ -22,7 +22,9 @@
         <p>Created by {{ occurrence.inputter.firstName }} {{ occurrence.inputter.lastName }} ({{ occurrence.inputter.username }}),
             on {{ occurrence.occurrenceCreatedAt | date ('d/m/Y')}}
             at {{ occurrence.occurrenceCreatedAt | date ('H:i')}}</p>
-
+        <p>
+            <a href="{{ path('occurrence_edit_gps', {'idOccurrence': occurrence.id}) }}" class="btn btn-primary">Quick GeoEdit</a>
+        </p>
 
 
         {% form_theme formEditOccurrence 'bootstrap_4_layout.html.twig' %}

@@ -26,9 +26,7 @@
     <a href="{{ path('occurrence_create', {'idSpecies':singleSpecies.id } )}}" class="btn btn-primary">Create a new occurrence</a>
                 {#POSITION OF THE MAP#}
                 <div id="map_for_occurrences" style="height:400px; width:700px"></div>
-                  {#Position of the chart#}
-                  {#<div id="histogram" class="col" style="height:300px; width:400px;"></div>#}
-                  {#<p>Geographical and temporal distribution of records</p>#}
+
 
 
 
@@ -98,32 +96,7 @@
 
 {% block scripts_bottom %}
 
-    {#<script>#}
-        {#var year = [#}
-            {#{% for occurrence in occurrences %}#}
-            {#{% if occurrence.isValidated %}#}
-            {#{% if occurrence.species == singleSpecies %}#}
-            {#{% if loop.index0 != 0 %},{% endif %}#}
-            {#{{ occurrence.eventDate | date ('Y')}}#}
-            {#{% endif %}#}
-            {#{% endif %}#}
-            {#{% endfor %}#}
 
-        {#];#}
-
-        {#var trace = {#}
-            {#x: year,#}
-            {#type: 'histogram'#}
-        {#};#}
-        {#var data = [trace];#}
-        {#var layout = {#}
-            {#title: "Occurrences of  {{ singleSpecies.speciesNameWorms }}",#}
-            {#xaxis:{title: "Year"},#}
-            {#yaxis:{title: "Number of occurrences"}#}
-        {#};#}
-        {#Plotly.newPlot('histogram', data, layout);#}
-
-    {#</script>#}
 
     <script>
 

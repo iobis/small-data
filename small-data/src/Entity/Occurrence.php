@@ -36,11 +36,23 @@ class Occurrence
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Range(
+     *     min=-180,
+     *     max= 180,
+     *     minMessage="Longitude must be at least -180 degree",
+     *     maxMessage="Longitude must be less than 180 degree"
+     * )
      */
     private $decimalLongitude;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Range(
+     *     min=-90,
+     *     max= 90,
+     *     minMessage="Latitude must be at least -90 degree",
+     *     maxMessage="Latitude must be less than 90 degree"
+     * )
      */
     private $decimalLatitude;
 
