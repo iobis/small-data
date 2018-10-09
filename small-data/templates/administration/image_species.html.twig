@@ -35,29 +35,29 @@
 
             {% if image.isForDisplay %}
             <tr>
-                <td>Image set for display:</td>
-                <td><a href="{{ path('editForDisplay_image_species', {'idImageSpecies':image.id, 'display':'no'}) }}" class="btn btn-primary" >Unset from display</a></td>
+                <td>Image set for details page:</td>
+                <td><a href="{{ path('editForDisplay_image_species', {'idImageSpecies':image.id, 'display':'no'}) }}" class="btn btn-primary" >Unset from details</a></td>
             </tr>
             {% else %}
              <tr>
-                <td>Image NOT set for display:</td>
-             <td><a href="{{ path('editForDisplay_image_species', {'idImageSpecies':image.id, 'display':'yes'}) }}" class="btn btn-primary" >Set to display</a></td>
+                <td>Image NOT set for details page:</td>
+             <td><a href="{{ path('editForDisplay_image_species', {'idImageSpecies':image.id, 'display':'yes'}) }}" class="btn btn-primary" >Set to details</a></td>
              </tr>
                  {% endif %}
 
-             {% if image.isForDisplay %}
+             {#{% if image.isForDisplay %}#}
              {% if image.isMain %}
                  <tr>
-                     <td>Image is set for main</td>
-                     <td><a href="{{ path('editmain_image_species', {'idImageSpecies':image.id, 'main':'no'}) }}" class="btn btn-primary" >Unset from main</a></td>
+                     <td>Image is set for list:</td>
+                     <td><a href="{{ path('editmain_image_species', {'idImageSpecies':image.id, 'main':'no'}) }}" class="btn btn-primary" >Unset from list</a></td>
                  </tr>
              {% else %}
                  <tr>
-                     <td>Image NOT set for main:</td>
-                     <td><a href="{{ path('editmain_image_species', {'idImageSpecies':image.id, 'main':'yes'}) }}" class="btn btn-primary" >Set to main</a></td>
+                     <td>Image NOT set for list:</td>
+                     <td><a href="{{ path('editmain_image_species', {'idImageSpecies':image.id, 'main':'yes'}) }}" class="btn btn-primary" >Set to list</a></td>
                  </tr>
              {% endif %}
-             {% endif %}
+             {#{% endif %}#}
 
              <tr>
                  <td>Image in database:</td>
