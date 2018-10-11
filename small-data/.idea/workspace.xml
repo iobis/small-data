@@ -14,14 +14,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="occurrences.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
+      <file leaf-file-name="edit_occurrence.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/forms/edit_occurrence.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+            <state relative-caret-position="-2006">
+              <caret line="25" column="130" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="130" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit_occurrence_for_validation.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/validation/edit_occurrence_for_validation.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="116" column="16" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="16" />
+              <folding>
+                <element signature="e#12#26#0#Twig" expanded="true" />
+                <element signature="e#1980#2008#0#Twig" expanded="true" />
+                <element signature="e#9#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="species_details.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/species_occurrences/species_details.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="171" column="37" lean-forward="true" selection-start-line="171" selection-start-column="37" selection-end-line="171" selection-end-column="37" />
               <folding>
                 <element signature="e#9#15#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FormsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/FormsController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-227">
+              <caret line="94" selection-start-line="94" selection-end-line="94" />
             </state>
           </provider>
         </entry>
@@ -37,7 +69,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>toolbar: true</find>
       <find>species_details</find>
       <find>occurrence_create</find>
       <find>occurrence_edit</find>
@@ -60,13 +91,14 @@
       <find>Aphia</find>
       <find>interval</find>
       <find>interva</find>
-      <find>inter</find>
       <find>$this-&gt;getDoctrine()</find>
       <find>change</find>
       <find>security_index</find>
       <find>orphanremoval</find>
       <find>console</find>
       <find>bcrypt</find>
+      <find>inter</find>
+      <find>iconAnchor</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -77,6 +109,7 @@
       <dir>C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\src\Controller</dir>
       <dir>C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\src\Entity</dir>
       <dir>C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\config</dir>
+      <dir>C:\Users\Fred\Documents\_small_data_matters\small-data\small-data\templates</dir>
     </dirStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -103,19 +136,16 @@
         <option value="$PROJECT_DIR$/templates/administration/admin_species.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/AdministrationSpeciesController.php" />
         <option value="$PROJECT_DIR$/templates/admin_users/admin_users_expertise.html.twig" />
-        <option value="$PROJECT_DIR$/templates/species_occurrences/home.html.twig" />
         <option value="$PROJECT_DIR$/templates/forms/edit_occurrence.html.twig" />
         <option value="$PROJECT_DIR$/templates/forms/edit_occurrence_GPS.html.twig" />
         <option value="$PROJECT_DIR$/public/js/DMS.js" />
         <option value="$PROJECT_DIR$/src/Form/SpeciesImageType.php" />
         <option value="$PROJECT_DIR$/templates/species_occurrences/species.html.twig" />
-        <option value="$PROJECT_DIR$/templates/species_occurrences/species_details.html.twig" />
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/public/css/main.css" />
         <option value="$PROJECT_DIR$/src/Controller/AdministrationController.php" />
         <option value="$PROJECT_DIR$/src/Controller/AdminUsersController.php" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
-        <option value="$PROJECT_DIR$/templates/validation/validation_edit_occurrence_GPS.html.twig" />
         <option value="$PROJECT_DIR$/templates/trial/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/FormsController.php" />
         <option value="$PROJECT_DIR$/src/Controller/SmallDataController.php" />
@@ -124,15 +154,18 @@
         <option value="$PROJECT_DIR$/templates/security/change_password.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin_users/admin_users.html.twig" />
         <option value="$PROJECT_DIR$/templates/validation/nonvalidoccurrences.html.twig" />
-        <option value="$PROJECT_DIR$/templates/validation/edit_occurrence_for_validation.html.twig" />
         <option value="$PROJECT_DIR$/templates/validation/remove_occurrence.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/ValidationController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Occurrence.php" />
         <option value="$PROJECT_DIR$/src/Entity/Inputter.php" />
         <option value="$PROJECT_DIR$/templates/forms/create_occurrence.html.twig" />
-        <option value="$PROJECT_DIR$/templates/species_occurrences/occurrence_details.html.twig" />
         <option value="$PROJECT_DIR$/templates/administration/image_species.html.twig" />
+        <option value="$PROJECT_DIR$/templates/species_occurrences/home.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/ValidationController.php" />
+        <option value="$PROJECT_DIR$/templates/species_occurrences/occurrence_details.html.twig" />
+        <option value="$PROJECT_DIR$/templates/validation/edit_occurrence_for_validation.html.twig" />
         <option value="$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig" />
+        <option value="$PROJECT_DIR$/templates/validation/validation_edit_occurrence_GPS.html.twig" />
+        <option value="$PROJECT_DIR$/templates/species_occurrences/species_details.html.twig" />
       </list>
     </option>
   </component>
@@ -302,6 +335,12 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="species_occurrences" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="small-data" type="b2602c69:ProjectViewProjectNode" />
+              <item name="small-data" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="validation" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -386,12 +425,12 @@
       <workItem from="1539038259407" duration="666000" />
       <workItem from="1539046587866" duration="826000" />
       <workItem from="1539090754767" duration="3669000" />
-      <workItem from="1539278916349" duration="1002000" />
+      <workItem from="1539278916349" duration="7037000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1082503000" />
+    <option name="totallyTimeSpent" value="1088538000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -404,17 +443,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31089258" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32828283" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.11551155" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31089258" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.8894389" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.5858086" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -423,7 +464,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.8894389" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -459,20 +499,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/doctrine/common/lib/Doctrine/Common/Persistence/ObjectManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="29" column="10" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/OccurrenceRepository.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -669,31 +695,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/home.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="30" column="58" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/validation/validation_edit_occurrence_GPS.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3180">
-          <caret line="159" column="71" selection-start-line="159" selection-start-column="71" selection-end-line="159" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/administration/remove_species.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/validation/edit_occurrence_for_validation.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="29" column="89" selection-start-line="29" selection-start-column="89" selection-end-line="29" selection-end-column="89" />
         </state>
       </provider>
     </entry>
@@ -711,13 +716,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/ValidationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="202" column="43" selection-start-line="202" selection-start-column="20" selection-end-line="202" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -798,31 +796,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/FormsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="52" column="54" selection-start-line="52" selection-start-column="54" selection-end-line="52" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrence_create_edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/forms/edit_occurrence.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="25" column="130" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="130" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrence_details.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="36" column="122" selection-start-line="36" selection-start-column="122" selection-end-line="36" selection-end-column="122" />
         </state>
       </provider>
     </entry>
@@ -840,10 +817,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/home.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/FormsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-227">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ValidationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="94" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
+          <folding>
+            <element signature="e#34#60#0#PHP" expanded="true" />
+            <element signature="e#1398#1440#0#PHP" expanded="true" />
+            <element signature="e#5557#5610#0#PHP" expanded="true" />
+            <element signature="e#7838#7891#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrence_details.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+          <folding>
+            <element signature="e#9#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+        <state relative-caret-position="305">
+          <caret line="114" column="20" selection-start-line="114" selection-start-column="20" selection-end-line="114" selection-end-column="20" />
+          <folding>
+            <element signature="e#9#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/validation/validation_edit_occurrence_GPS.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
+          <folding>
+            <element signature="e#9#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/forms/edit_occurrence.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2006">
+          <caret line="25" column="130" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/occurrences_180918.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="127" column="16" selection-start-line="127" selection-start-column="16" selection-end-line="127" selection-end-column="16" />
+          <folding>
+            <element signature="e#9#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/validation/edit_occurrence_for_validation.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="116" column="16" selection-start-line="116" selection-start-column="16" selection-end-line="116" selection-end-column="16" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#1980#2008#0#Twig" expanded="true" />
+            <element signature="e#9#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/species_occurrences/species_details.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="171" column="37" lean-forward="true" selection-start-line="171" selection-start-column="37" selection-end-line="171" selection-end-column="37" />
           <folding>
             <element signature="e#9#15#0" expanded="true" />
           </folding>

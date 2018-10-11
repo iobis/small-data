@@ -159,8 +159,12 @@ public function formEditOccurrenceValidation($idOccurrence , Request $request, O
         $occurrences = $species->getOccurrences();
 //
         $phyla = $manager->getRepository(Phylum::class)->findBy([],[]);
-        $intervalsWithFreqAndOccurrence = $this->container->get('App\Controller\SmallDataController')->renderOccurrenceIntervals($species, $occurrences, $manager);
 
+        if($occurrences){
+        $intervalsWithFreqAndOccurrence = $this->container->get('App\Controller\SmallDataController')->renderOccurrenceIntervals($species, $occurrences, $manager);
+        } else {
+            $intervalsWithFreqAndOccurrence = null;
+        }
 
         if(isset($_POST['update_gps'])){
 
