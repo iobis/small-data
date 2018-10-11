@@ -57,10 +57,21 @@ class FormsController extends Controller
                 ]);
         }
 
+        $occurrences = $singleSpecies->getOccurrences();
+        if ($occurrences) {
+            $intervalsWithFreqAndOccurrence = $this->container->get('App\Controller\SmallDataController')->renderOccurrenceIntervals($singleSpecies, $occurrences, $objectManager);
+
+        } else {
+            $intervalsWithFreqAndOccurrence = null;
+        }
+
+
+
         return $this->render('forms/create_occurrence.html.twig', [
             'formCreateOccurrence' =>$form->createView(),
             'singleSpecies'=> $singleSpecies,
             'occurrence'=>$occurrence,
+            'intervalsWithFreqAndOccurrences'=> $intervalsWithFreqAndOccurrence,
             'phyla'=>$phyla
 
         ]);

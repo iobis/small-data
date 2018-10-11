@@ -93,6 +93,49 @@
 {% block scripts_bottom %}
 
     <script>
+
+        var intervalLayer0 = L.layerGroup();
+        var intervalLayer1 = L.layerGroup();
+        var intervalLayer2 = L.layerGroup();
+        var intervalLayer3 = L.layerGroup();
+        var intervalLayer4 = L.layerGroup();
+        var intervalLayer5 = L.layerGroup();
+        var intervalLayer6 = L.layerGroup();
+        var intervalLayer7 = L.layerGroup();
+
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize:     [10, 10],
+                iconAnchor:   [5, 8],
+                popupAnchor:  [0, -5]
+            }
+        });
+        var icon0 = new LeafIcon({iconUrl: '{{ asset('images/cb0.png') }}'}),
+            icon1 = new LeafIcon({iconUrl: '{{ asset('images/cb1.png') }}'}),
+            icon2 = new LeafIcon({iconUrl: '{{ asset('images/cb2.png') }}'}),
+            icon3 = new LeafIcon({iconUrl: '{{ asset('images/cb3.png') }}'}),
+            icon4 = new LeafIcon({iconUrl: '{{ asset('images/cb4.png') }}'}),
+            icon5 = new LeafIcon({iconUrl: '{{ asset('images/cb5.png') }}'}),
+            icon6 = new LeafIcon({iconUrl: '{{ asset('images/cb6.png') }}'}),
+            icon7 = new LeafIcon({iconUrl: '{{ asset('images/cb7.png') }}'});
+
+        var markers = [];
+        {% for intervalWithFreqAndOccurrences in intervalsWithFreqAndOccurrences %}
+        {% set nameForIcon = 'icon' ~ loop.index0 %}
+        {% set nameForLayerGroup = 'intervalLayer' ~ loop.index0 %}
+        {% for occurrence in intervalWithFreqAndOccurrences.2 %}
+        {% if occurrence.isValidated %}
+        {#{% if occurrence.species == singleSpecies %}#}
+        var marker = L.marker([{{ occurrence.decimalLatitude }}, {{ occurrence.decimalLongitude }}], {title: "id{{ occurrence.id }}", icon:{{ nameForIcon}} })
+            .bindPopup("<p>{{ occurrence.locality }}</br>{{ occurrence.eventDate | date ('Y')}}</br># {{ occurrence.id }}</p>")
+            .addTo({{ nameForLayerGroup }});
+        markers.push (marker);
+        {#{% endif %}#}
+
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
         var mapUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}';
         var mapAttributes = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
 
@@ -116,7 +159,16 @@
             "Satellite": satellite,
         };
 
-        L.control.layers(baseLayers).addTo(mapForOccurrence);
+        var overlays = {
+            {% for intervalWithFreqAndOccurrences in intervalsWithFreqAndOccurrences %}
+            {% set nameLayer = 'intervalLayer' ~ loop.index0 %}
+            {% set indexOfLoop = '' ~ loop.index0 %}
+            "<img style='vertical-align:middle; height: 10px' src='{{ asset("images/cb#{indexOfLoop}.png") }}'><div style='vertical-align:middle; display:inline;'>&nbsp; {{ intervalWithFreqAndOccurrences.0 }}</div>": {{ nameLayer }},
+            {% endfor %}
+
+        };
+
+        L.control.layers(baseLayers, overlays).addTo(mapForOccurrence);
 
 
 
